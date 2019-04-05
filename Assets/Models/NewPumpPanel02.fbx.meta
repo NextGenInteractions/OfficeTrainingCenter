@@ -1,0 +1,368 @@
+fileFormatVersion: 2
+guid: a76f526b0f0f78e419a6f447bf4cc6d9
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Button
+    100002: Button 1
+    100004: ButtonBase
+    100006: ButtonBase 1
+    100008: FirecellSample1:Bladder
+    100010: FirecellSample1:ButtonBase
+    100012: FirecellSample1:Dial_Holder
+    100014: FirecellSample1:FoamNozzle
+    100016: FirecellSample1:GaugeMaster2
+    100018: FirecellSample1:Glass2
+    100020: FirecellSample1:Needle
+    100022: Gauge
+    100024: Gauge1
+    100026: Gauge1 1
+    100028: GaugeMaster1
+    100030: GaugeMaster2
+    100032: Glass2
+    100034: Glass2 1
+    100036: MasterGauges
+    100038: Needle
+    100040: Needle 1
+    100042: //RootNode
+    100044: Panel:AirBladder
+    100046: Panel:arrowpointer
+    100048: Panel:arrowpointer 1
+    100050: Panel:arrowpointer 2
+    100052: Panel:base
+    100054: Panel:BaseBackboard
+    100056: Panel:BaseSign01
+    100058: Panel:BaseSign02
+    100060: Panel:BladderHolder
+    100062: Panel:Cube
+    100064: Panel:Cube 1
+    100066: Panel:Cube 2
+    100068: Panel:Cube_1
+    100070: Panel:Cube_1 1
+    100072: Panel:Cube_2
+    100074: Panel:Cube_3
+    100076: Panel:Cube_4
+    100078: Panel:Cylinder
+    100080: Panel:Cylinder 1
+    100082: Panel:Cylinder 2
+    100084: Panel:Green_Button
+    100086: Panel:Plunger
+    100088: Panel:PlungerBase
+    100090: Panel:PlungerBracket
+    100092: Panel:PlungerBracket1
+    100094: Panel:PlungerGauge
+    100096: Panel:PlungerHolder
+    100098: Panel:PlungerRod
+    100100: Panel:Red_Button
+    100102: Panel:SideBoard
+    100104: Panel:Slot_1
+    100106: Panel:Slot_2
+    100108: Panel:Slot_3
+    100110: Panel:StripLight2
+    100112: Panel:TopBoard
+    100114: Panel:TopBoardStripLight
+    400000: Button
+    400002: Button 1
+    400004: ButtonBase
+    400006: ButtonBase 1
+    400008: FirecellSample1:Bladder
+    400010: FirecellSample1:ButtonBase
+    400012: FirecellSample1:Dial_Holder
+    400014: FirecellSample1:FoamNozzle
+    400016: FirecellSample1:GaugeMaster2
+    400018: FirecellSample1:Glass2
+    400020: FirecellSample1:Needle
+    400022: Gauge
+    400024: Gauge1
+    400026: Gauge1 1
+    400028: GaugeMaster1
+    400030: GaugeMaster2
+    400032: Glass2
+    400034: Glass2 1
+    400036: MasterGauges
+    400038: Needle
+    400040: Needle 1
+    400042: //RootNode
+    400044: Panel:AirBladder
+    400046: Panel:arrowpointer
+    400048: Panel:arrowpointer 1
+    400050: Panel:arrowpointer 2
+    400052: Panel:base
+    400054: Panel:BaseBackboard
+    400056: Panel:BaseSign01
+    400058: Panel:BaseSign02
+    400060: Panel:BladderHolder
+    400062: Panel:Cube
+    400064: Panel:Cube 1
+    400066: Panel:Cube 2
+    400068: Panel:Cube_1
+    400070: Panel:Cube_1 1
+    400072: Panel:Cube_2
+    400074: Panel:Cube_3
+    400076: Panel:Cube_4
+    400078: Panel:Cylinder
+    400080: Panel:Cylinder 1
+    400082: Panel:Cylinder 2
+    400084: Panel:Green_Button
+    400086: Panel:Plunger
+    400088: Panel:PlungerBase
+    400090: Panel:PlungerBracket
+    400092: Panel:PlungerBracket1
+    400094: Panel:PlungerGauge
+    400096: Panel:PlungerHolder
+    400098: Panel:PlungerRod
+    400100: Panel:Red_Button
+    400102: Panel:SideBoard
+    400104: Panel:Slot_1
+    400106: Panel:Slot_2
+    400108: Panel:Slot_3
+    400110: Panel:StripLight2
+    400112: Panel:TopBoard
+    400114: Panel:TopBoardStripLight
+    2100000: Panel_DarkBlue
+    2100002: Panel_EmissiveWhite
+    2100004: Panel_EmissiveBlue
+    2100006: MasterSheet
+    2100008: FirecellSample1_MetalDiamond
+    2100010: Glass
+    2100012: Panel_EmissiveOrange
+    2100014: Black
+    2100016: Button_red
+    2100018: Button_White_emissive
+    2100020: Button_green
+    2100022: lambert1
+    2100024: FirecellSample1_PumpPanel
+    2100026: FirecellSample1_Panel_EmissiveOrange
+    2300000: Button
+    2300002: Button 1
+    2300004: ButtonBase
+    2300006: ButtonBase 1
+    2300008: FirecellSample1:Bladder
+    2300010: FirecellSample1:ButtonBase
+    2300012: FirecellSample1:Dial_Holder
+    2300014: FirecellSample1:FoamNozzle
+    2300016: FirecellSample1:Glass2
+    2300018: FirecellSample1:Needle
+    2300020: Gauge
+    2300022: Gauge1
+    2300024: Gauge1 1
+    2300026: Glass2
+    2300028: Glass2 1
+    2300030: Needle
+    2300032: Needle 1
+    2300034: Panel:AirBladder
+    2300036: Panel:arrowpointer
+    2300038: Panel:arrowpointer 1
+    2300040: Panel:arrowpointer 2
+    2300042: Panel:base
+    2300044: Panel:BaseBackboard
+    2300046: Panel:BaseSign01
+    2300048: Panel:BaseSign02
+    2300050: Panel:Cube
+    2300052: Panel:Cube 1
+    2300054: Panel:Cube 2
+    2300056: Panel:Cube_1
+    2300058: Panel:Cube_1 1
+    2300060: Panel:Cube_2
+    2300062: Panel:Cube_3
+    2300064: Panel:Cube_4
+    2300066: Panel:Cylinder
+    2300068: Panel:Cylinder 1
+    2300070: Panel:Cylinder 2
+    2300072: Panel:Plunger
+    2300074: Panel:PlungerBase
+    2300076: Panel:PlungerBracket
+    2300078: Panel:PlungerBracket1
+    2300080: Panel:PlungerHolder
+    2300082: Panel:PlungerRod
+    2300084: Panel:SideBoard
+    2300086: Panel:Slot_1
+    2300088: Panel:Slot_2
+    2300090: Panel:Slot_3
+    2300092: Panel:TopBoard
+    3300000: Button
+    3300002: Button 1
+    3300004: ButtonBase
+    3300006: ButtonBase 1
+    3300008: FirecellSample1:Bladder
+    3300010: FirecellSample1:ButtonBase
+    3300012: FirecellSample1:Dial_Holder
+    3300014: FirecellSample1:FoamNozzle
+    3300016: FirecellSample1:Glass2
+    3300018: FirecellSample1:Needle
+    3300020: Gauge
+    3300022: Gauge1
+    3300024: Gauge1 1
+    3300026: Glass2
+    3300028: Glass2 1
+    3300030: Needle
+    3300032: Needle 1
+    3300034: Panel:AirBladder
+    3300036: Panel:arrowpointer
+    3300038: Panel:arrowpointer 1
+    3300040: Panel:arrowpointer 2
+    3300042: Panel:base
+    3300044: Panel:BaseBackboard
+    3300046: Panel:BaseSign01
+    3300048: Panel:BaseSign02
+    3300050: Panel:Cube
+    3300052: Panel:Cube 1
+    3300054: Panel:Cube 2
+    3300056: Panel:Cube_1
+    3300058: Panel:Cube_1 1
+    3300060: Panel:Cube_2
+    3300062: Panel:Cube_3
+    3300064: Panel:Cube_4
+    3300066: Panel:Cylinder
+    3300068: Panel:Cylinder 1
+    3300070: Panel:Cylinder 2
+    3300072: Panel:Plunger
+    3300074: Panel:PlungerBase
+    3300076: Panel:PlungerBracket
+    3300078: Panel:PlungerBracket1
+    3300080: Panel:PlungerHolder
+    3300082: Panel:PlungerRod
+    3300084: Panel:SideBoard
+    3300086: Panel:Slot_1
+    3300088: Panel:Slot_2
+    3300090: Panel:Slot_3
+    3300092: Panel:TopBoard
+    4300000: Panel:TopBoard
+    4300002: Panel:Cube
+    4300004: Panel:Cube_1
+    4300006: Panel:Cube_2
+    4300008: Panel:Cube_3
+    4300010: Panel:Cube_4
+    4300012: Panel:SideBoard
+    4300014: Panel:Cube
+    4300016: Panel:Cube_1
+    4300018: Panel:base
+    4300020: Panel:BaseBackboard
+    4300022: Panel:BaseSign02
+    4300024: Panel:BaseSign01
+    4300026: Needle
+    4300028: Gauge1
+    4300030: Glass2
+    4300032: Needle
+    4300034: Gauge1
+    4300036: Glass2
+    4300038: Panel:Cube
+    4300040: Panel:AirBladder
+    4300042: Panel:Slot_1
+    4300044: Panel:arrowpointer
+    4300046: Panel:Cylinder
+    4300048: Panel:Slot_2
+    4300050: Panel:arrowpointer
+    4300052: Panel:Cylinder
+    4300054: Panel:Slot_3
+    4300056: Panel:arrowpointer
+    4300058: Panel:Cylinder
+    4300060: Panel:PlungerHolder
+    4300062: ButtonBase
+    4300064: Button
+    4300066: ButtonBase
+    4300068: Button
+    4300070: Panel:PlungerBase
+    4300072: FirecellSample1:Glass2
+    4300074: FirecellSample1:Needle
+    4300076: Gauge
+    4300078: Panel:PlungerBracket
+    4300080: Panel:Plunger
+    4300082: Panel:PlungerRod
+    4300084: Panel:PlungerBracket1
+    4300086: FirecellSample1:Dial_Holder
+    4300088: FirecellSample1:Bladder
+    4300090: FirecellSample1:ButtonBase
+    4300092: FirecellSample1:FoamNozzle
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: 8140cf4b4fd6bed4a8ef2afa53446c66, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MasterSheet
+    second: {fileID: 2100000, guid: f06cc3526921c734ebceaf7549c5089b, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

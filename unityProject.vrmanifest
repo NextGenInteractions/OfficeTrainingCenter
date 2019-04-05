@@ -1,0 +1,16 @@
+{
+  "source": "Unity",
+  "applications": [
+    {
+      "app_key": "application.generated.unity.nextgenenviro.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "C:\\Data\\Dev\\Repos\\JasonJerald\\NISTPSCR\\OfficeTrainingCenter\\actions.json",
+      "strings": {
+        "en_us": {
+          "name": "NextGenEnviro [Testing]"
+        }
+      }
+    }
+  ]
+}
