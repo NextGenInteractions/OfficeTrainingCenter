@@ -10,11 +10,11 @@ namespace Uduino {
     public class UduinoDevice_DesktopSerial : UduinoDevice
     {
 
-
 #if UDUINO_READY
         //Serial status
         public SerialPort serial = null;
         private string _port;
+        private int _baudrate = 9600;
         private int _writeTimeout = 50;
         private int _readTimeout = 50;
 
@@ -88,8 +88,9 @@ namespace Uduino {
                 serial.DiscardInBuffer();
                 serial.DiscardOutBuffer();
                 serial.BaseStream.Flush();
+                serial.DtrEnable = true;                  // Won't read from Leonardo without this
                 boardStatus = BoardStatus.Open;
-           //     serial.NewLine = "\r\n";
+                //     serial.NewLine = "\r\n";
                 Log.Info("Opening stream on port <color=#2196F3>[" + _port + "]</color>");
             }
             catch (Exception e)
@@ -100,6 +101,12 @@ namespace Uduino {
                     Log.Info("Error on port <color=#2196F3>[" + _port + "]</color> : " + e);
                 Close();
             }
+        }
+
+        public override void UduinoFound()
+        {
+            base.UduinoFound();
+            Interface.Instance.AddDeviceButton(name);
         }
 
         #region Public functions
@@ -137,13 +144,13 @@ namespace Uduino {
                     {
                         serial.WriteLine(message);
                         serial.BaseStream.Flush();
-                        Log.Info("<color=#4CAF50>" + message + "</color> sent to <color=#2196F3>[" + _port + "]</color>", true);
+                        Log.Info("<color=#4CAF50>" + message + "</color> sent to <color=#2196F3>[" + (name != "" ? name : _port) + "]</color>", true);
                     }
                     catch (Exception e)
                     {
                         writeQueue.Enqueue(message);
-                        Log.Warning("Impossible to send the message <color=#4CAF50>" + message + "</color> to <color=#2196F3>[" + _port + "]</color>: " + e, true);
-                        if(e.GetType() == typeof(System.IO.IOException))
+                        Log.Warning("Impossible to send the message <color=#4CAF50>" + message + "</color> to <color=#2196F3>[" + (name != "" ? name : _port) + "]</color>: " + e, true);
+                        if(e.GetType() == typeof(System.IO.IOException) && boardStatus == BoardStatus.Found)
                         {
                             errorsTries++;
                             if(errorsTries > 5)
@@ -156,7 +163,7 @@ namespace Uduino {
                 }
                 catch (Exception e)
                 {
-                    Log.Error("Error on port <color=#2196F3>[" + _port + "]</color>: " + e, true);
+                    Log.Error("Error on port <color=#2196F3>[" + (name != "" ? name : _port) + "]</color>: " + e, true);
                     // Close();
                     return false;
                 }
@@ -210,7 +217,6 @@ namespace Uduino {
                     }
                     return true;
                     /*
-
                     int lineCount = 0;
                     string tempBuffer = "";
                     for (int i=0; i <150;i++)
@@ -237,7 +243,7 @@ namespace Uduino {
                 catch (TimeoutException e)
                 {
                     if (boardStatus == BoardStatus.Found)
-                        Log.Debug("ReadTimeout. Are you sure someting is written in the serial of the board ? \n" + e);
+                        Log.Debug("ReadTimeout. Are you sure something is written in the Serial of the board? \n" + e);
                 }
             }
             catch (Exception e)
@@ -249,7 +255,10 @@ namespace Uduino {
                 else
                     Log.Error(e);
 
-                UduinoManager.Instance.CloseDevice(this);
+                UduinoManager.Instance.InvokeAsync(() =>
+                {
+                    UduinoManager.Instance.CloseDevice(this);
+                });
 
                 if (UduinoManager.Instance.autoReconnect)
                     UduinoManager.Instance.shouldReconnect = true;

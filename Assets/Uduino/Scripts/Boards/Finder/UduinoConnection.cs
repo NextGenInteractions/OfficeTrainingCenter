@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Threading;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,18 +16,32 @@ namespace Uduino
             UduinoConnection connection = null;
 #if UNITY_EDITOR || UNITY_STANDALONE //IF it's on the editor
             if (manager.activeExtentionsMap.ContainsValue(true))
-                connection = new UduinoConnection_DesktopSerial();
+            {
+                if (manager.ExtensionIsPresentAndActive("UduinoDevice_DesktopBluetoothLE"))
+                    connection = System.Reflection.Assembly.GetExecutingAssembly().CreateInstance("Uduino.UduinoConnection_DesktopBluetoothLE") as UduinoConnection;
+                else if (manager.ExtensionIsPresentAndActive("UduinoDevice_Wifi"))
+                    connection = System.Reflection.Assembly.GetExecutingAssembly().CreateInstance("Uduino.UduinoConnection_Wifi") as UduinoConnection;
+                else
+                    connection = new UduinoConnection_DesktopSerial();
+            } else
+            {
+                return null;
+            }
 
 #elif UNITY_ANDROID //Get the  Android Serial Plugin
             if(manager.ExtensionIsPresentAndActive("UduinoDevice_AndroidBluetoothLE")) {
               connection = new UduinoConnection_AndroidBluetoothLE();
             } else if(manager.ExtensionIsPresentAndActive("UduinoDevice_AndroidSerial")){
               connection = new UduinoConnection_AndroidSerial();
-            } else {
-                Log.Error("Uduino for Android is not active ! Activate it in the Inspector Panel.");
+            } else if (manager.ExtensionIsPresentAndActive("UduinoDevice_Wifi"))
+              connection = new UduinoConnection_Wifi();
+            }else {
+              Log.Error("Uduino for Android is not active ! Activate it in the Inspector Panel.");
             }
 #else
 #endif
+
+            Log.Debug("Starting Uduino with type: " + connection.GetType());
 
             return connection;
         }
@@ -41,6 +56,7 @@ namespace Uduino
         public virtual void FindBoards(UduinoManager manager)
         {
             _manager = manager;
+            Interface.Instance.SetConnection(this);
         }
 
         public virtual UduinoDevice OpenUduinoDevice(string id = null)
@@ -49,13 +65,12 @@ namespace Uduino
             return null;
         }
 
-
         public virtual void DetectUduino(UduinoDevice uduinoDevice)
         {
             if (uduinoDevice.boardStatus == BoardStatus.Closed)
                 return;
 
-            if (_manager.ReadOnThread && Application.isPlaying)
+            if (_manager.ReadingMethod == HardwareReading.Thread && Application.isPlaying)
             {
                 try
                 {
@@ -80,7 +95,7 @@ namespace Uduino
         public void DetectUduinoThread(UduinoDevice uduinoDevice)
         {
 #if UNITY_ANDROID
-            if (_manager.ReadOnThread)
+            if (_manager.ReadingMethod == HardwareReading.Thread)
                 AndroidJNI.AttachCurrentThread(); // Sepcific android related code
 #endif
             uduinoDevice.boardStatus = BoardStatus.Finding;
@@ -89,17 +104,16 @@ namespace Uduino
             do
             {
                 if (TryToFind(uduinoDevice, true))
-                {
                     return;
-                }
                 Thread.Sleep(100);
                 //Wait one frame. Todo : use yield return new WaitForSeconds(0.5f); ?
                 // yield return null;    //Wait one frame. Todo : use yield return new WaitForSeconds(0.5f); ?
-            } while (uduinoDevice.getStatus() != BoardStatus.Found && tries++ < _manager.DiscoverTries);
+            } while (uduinoDevice.getStatus() != BoardStatus.Found && tries++ < _manager.DiscoverTries-1 && !_manager.isApplicationQuiting);
 
             BoardNotFound(uduinoDevice);
         }
 
+        
         /// <summary>
         /// Find a board connected to a specific port
         /// </summary>
@@ -126,6 +140,7 @@ namespace Uduino
             {
                 string reading = uduinoDevice.ReadFromArduino("identity", instant: true);
                 Log.Debug("Trying to get name on <color=#2196F3>[" + uduinoDevice.identity + "]</color>.", true);
+                if (reading == null) reading = uduinoDevice.lastRead;
                 if (reading != null && reading.Split(new char[0])[0] == "uduinoIdentity")
                 {
                     string name = reading.Split(new char[0])[1];
@@ -143,7 +158,6 @@ namespace Uduino
                         uduinoDevice.UduinoFound();
                         _manager.AddUduinoBoard(name, uduinoDevice);
                     }
-
                     BoardFound(name);
                     return true;
                 }
@@ -159,7 +173,7 @@ namespace Uduino
         {
             if (uduinoDevice.getStatus() != BoardStatus.Found)
             {
-                Log.Warning("Impossible to get name on <color=#2196F3>[" + uduinoDevice.identity + "]</color>. Closing.");
+                Log.Debug("Impossible to get name on <color=#2196F3>[" + uduinoDevice.identity + "]</color>. Closing.");
                 uduinoDevice.Close();
                 uduinoDevice = null;
                 return false;
@@ -170,15 +184,23 @@ namespace Uduino
         }
 
         public virtual void BoardFound(string name) { }
-
+        public virtual void ScanForDevices() { Log.Debug("Should not be here"); }
         public virtual void Discover() { }
         public virtual void PluginReceived(string message) { }
         public virtual void PluginWrite(string message) { }
+        public virtual bool ConnectPeripheral(string uuid, string name) { return false; }
+
+        public virtual bool Disconnect() { Log.Debug("Disconnect."); return false; }
+        public virtual void Stop() {  }
 
         public virtual void CloseDevices()
         {
+
             if (connectedDevice != null)
+            {
                 UduinoManager.Instance.CloseDevice(connectedDevice);
+                connectedDevice = null;
+            }
         }
 
         public void CreateDebugCanvas()
@@ -190,5 +212,7 @@ namespace Uduino
                 debugCanvas.AddComponent<UduinoDebugCanvas>();
             }
         }
+
+   
     }
 }

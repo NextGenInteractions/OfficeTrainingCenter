@@ -29,10 +29,11 @@ namespace Uduino
         public bool alwaysRead = true;
         public bool readAfterCommand = false;
 
-        public int _baudrate = 9600;
         public string identity = ""; // serial port name 
 
         public bool commandhasBeenSent = false;
+
+        public UduinoConnection _connection;
 
 #if UNITY_EDITOR
         virtual public int writeTimeout { get; set; }
@@ -79,12 +80,13 @@ namespace Uduino
         #endregion
 
         #region Init & Open
-        public UduinoDevice(int baudrate = 9600, int boardType = 0)
+        public UduinoDevice(int boardType = -1)
         {
-            _baudrate = baudrate;
-            _boardType = boardType;
+            if (boardType == -1)
+                _boardType = UduinoManager.Instance.defaultArduinoBoardType;
             readQueue = Queue.Synchronized(new Queue());
             writeQueue = Queue.Synchronized(new Queue());
+            maxQueueLength = UduinoManager.Instance.messageQueueLength;
         }
 
         public virtual void Open()
@@ -98,6 +100,7 @@ namespace Uduino
 #if UNITY_EDITOR
             if (Application.isPlaying) EditorUtility.SetDirty(UduinoManager.Instance);
 #endif
+
             if (OnBoardFound != null)
                 OnBoardFound();
         }
@@ -201,7 +204,6 @@ namespace Uduino
 
             AddToArduinoWriteQueue(message);
          
-
             if (instant && message != null)
             {
                 ReadFromArduinoLoop(true);
@@ -253,6 +255,8 @@ namespace Uduino
 
         public virtual bool AddToArduinoWriteQueue(string message)
         {
+           // Debug.Log("Writing " + message);
+            // Debug.Log("Queue " + writeQueue.Count);
             if (message == null)
                 return false;
 
@@ -264,24 +268,19 @@ namespace Uduino
                 message += "\r\n";
                 if (!writeQueue.Contains(message)) // Skip the message if it's already in the queue 
                 {
-                    if(writeQueue.Count < maxQueueLength)
-                    writeQueue.Enqueue(message);
+                    if (writeQueue.Count < maxQueueLength)
+                        writeQueue.Enqueue(message);
+                    else Log.Debug("The queue is full. Send less frequently or increase queue length.");
                 }
             }
 
-/*
-                if (message == "disconnected")
-                {
-                    writeQueue.Clear();
-                    writeQueue.Enqueue(message);
-                    instant = true;
-                }*/
            return false;
         }
         #region Callbacks
         /* Reading / Writing success */
         public virtual void MessageReceived(string message)
         {
+            // if(message == "\r" ||message == "\r\n" ||message == "\n") return;
             ReadingSuccess(message);
 
             if (message != null && readQueue.Count < maxQueueLength)
@@ -314,7 +313,7 @@ namespace Uduino
                     #endif
                 });
 
-                if (UduinoManager.Instance.IsRunning() == false && UduinoManager.Instance.ReadOnThread == true && callback != null)
+                if (UduinoManager.Instance.IsRunning() == false && UduinoManager.Instance.ReadingMethod == HardwareReading.Thread && callback != null)
                 {
                     if(System.Threading.Thread.CurrentThread != UduinoManager.Instance._thread)
                         callback(message);
@@ -337,11 +336,11 @@ namespace Uduino
                 OnBoardClosed();
                 OnBoardClosed = null;
             }
-
             ClearQueues();
             boardStatus = BoardStatus.Closed;
+            if(_connection != null)
+                _connection.Disconnect();
         }
-
 
         /// Specal Handler when application quit;
         private bool isApplicationQuitting = false;

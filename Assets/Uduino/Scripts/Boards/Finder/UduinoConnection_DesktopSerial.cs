@@ -40,12 +40,15 @@ namespace Uduino
 
             if (p == 4 || p == 128 || p == 6)
             {
-                string[] tty = System.IO.Directory.GetFiles("/dev/", "tty.*");
-                foreach (string dev in tty)
+               // if (!_manager.useCuPort)
                 {
-                    if (dev.StartsWith("/dev/tty.usb") || dev.StartsWith("/dev/tty.wchusb"))
-                    { // TODO : Test if (portName.StartsWith ("/dev/tty.usb") || portName.StartsWith ("/dev/ttyUSB"))
-                        serial_ports.Add(dev);
+                    string[] tty = System.IO.Directory.GetFiles("/dev/", "tty.*");
+                    foreach (string dev in tty)
+                    {
+                        if (dev.StartsWith("/dev/tty.usb") || dev.StartsWith("/dev/tty.wchusb"))
+                        { // TODO : Test if (portName.StartsWith ("/dev/tty.usb") || portName.StartsWith ("/dev/ttyUSB"))
+                            serial_ports.Add(dev);
+                        }
                     }
                 }
                 if (serial_ports.Count == 0 && _manager.useCuPort)
