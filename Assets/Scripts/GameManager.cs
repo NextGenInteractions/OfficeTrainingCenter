@@ -410,10 +410,10 @@ public class GameManager : MonoBehaviour {
                     voiceOverPlayer.PlayOneShot(successSound, dingVolume);
                     dischargeArrow.SetActive(false);
 
-                    //ParticleSystem waterParticles = water.GetComponent<ParticleSystem>();
-                    //var emission = waterParticles.emission;
-                    //emission.rateOverTime = 0.7f;
-                    //waterParticles.Play();
+                    ParticleSystem waterParticles = water.GetComponent<ParticleSystem>();
+                    var emission = waterParticles.emission;
+                    emission.rateOverTime = 0.7f;
+                    waterParticles.Play();
 
 
                     Debug.Log("Water Flowing");
@@ -448,10 +448,10 @@ public class GameManager : MonoBehaviour {
                     SetGaugeRotation(GetGaugeRotation(masterDischarge), discharge); //Match the master intake gauge
                     currentGameState++;
 
-                    //ParticleSystem waterParticles = water.GetComponent<ParticleSystem>();
-                    //var emission = waterParticles.emission;
-                    //emission.rateOverTime = 36.5f;
-                    //waterParticles.Play();
+                    ParticleSystem waterParticles = water.GetComponent<ParticleSystem>();
+                    var emission = waterParticles.emission;
+                    emission.rateOverTime = 36.5f;
+                    waterParticles.Play();
 
                     Debug.Log("More water flows out");
                     // Needs to be updated here
@@ -539,8 +539,8 @@ public class GameManager : MonoBehaviour {
                     voiceOverPlayer.PlayOneShot(successSound, dingVolume);
 
                     currentGameState++;
-                    //ParticleSystem foamParticles = foam.GetComponent<ParticleSystem>();
-                    //foamParticles.Play();
+                    ParticleSystem foamParticles = foam.GetComponent<ParticleSystem>();
+                    foamParticles.Play();
                     // Needs to be updated here
                     stateDone = false;
                     greenButtonArrow.SetActive(false);
@@ -560,10 +560,10 @@ public class GameManager : MonoBehaviour {
 
                     fireLight.GetComponent<Light>().enabled = false;
 
-                    //ParticleSystem fireParticles = fire.GetComponent<ParticleSystem>();
-                    //var fireEmission = fireParticles.emission;
-                    //fireEmission.rateOverTime = 0.1f;
-                    //fireParticles.Stop();
+                    ParticleSystem fireParticles = fire.GetComponent<ParticleSystem>();
+                    var fireEmission = fireParticles.emission;
+                    fireEmission.rateOverTime = 0.1f;
+                    fireParticles.Stop();
 
                     // Needs to be updated here
                     stateDone = true;
