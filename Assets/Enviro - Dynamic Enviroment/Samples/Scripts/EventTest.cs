@@ -6,7 +6,7 @@ public class EventTest : MonoBehaviour {
 
 	void Start ()
 	{
-		EnviroSky.instance.OnWeatherChanged += (EnviroWeatherPreset type) =>
+            EnviroSkyMgr.instance.OnWeatherChanged += (EnviroWeatherPreset type) =>
 		{
             DoOnWeatherChange(type);
 
@@ -14,7 +14,7 @@ public class EventTest : MonoBehaviour {
 		};
 
 
-         EnviroSky.instance.OnZoneChanged += (EnviroZone z) =>
+            EnviroSkyMgr.instance.OnZoneChanged += (EnviroZone z) =>
           {
               DoOnZoneChange(z);
 
@@ -22,21 +22,21 @@ public class EventTest : MonoBehaviour {
           };
 
 
-       EnviroSky.instance.OnSeasonChanged += (EnviroSeasons.Seasons season) =>
+       EnviroSkyMgr.instance.OnSeasonChanged += (EnviroSeasons.Seasons season) =>
 		{
 			Debug.Log("Season changed");
 		};
 
-		EnviroSky.instance.OnHourPassed += () =>
+            EnviroSkyMgr.instance.OnHourPassed += () =>
 		{
 			Debug.Log("Hour Passed!");
 		};
 
-		EnviroSky.instance.OnDayPassed += () =>
+            EnviroSkyMgr.instance.OnDayPassed += () =>
 		{
 			Debug.Log("New Day!");
 		};
-		EnviroSky.instance.OnYearPassed += () =>
+            EnviroSkyMgr.instance.OnYearPassed += () =>
 		{
 			Debug.Log("New Year!");
 		};

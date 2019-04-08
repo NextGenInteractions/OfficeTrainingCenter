@@ -17,7 +17,7 @@ public class EnviroSeasonObjectSwitcher : MonoBehaviour {
 	{
 		SwitchSeasonObject ();
 
-		EnviroSky.instance.OnSeasonChanged += (EnviroSeasons.Seasons season) =>
+        EnviroSkyMgr.instance.OnSeasonChanged += (EnviroSeasons.Seasons season) =>
 		{
 			SwitchSeasonObject ();
 		};
@@ -51,7 +51,7 @@ public class EnviroSeasonObjectSwitcher : MonoBehaviour {
 
 	void SwitchSeasonObject ()
 	{
-		switch (EnviroSky.instance.Seasons.currentSeasons)
+		switch (EnviroSkyMgr.instance.GetCurrentSeason())
 		{
 		case EnviroSeasons.Seasons.Spring:
 			SummerObject.SetActive(false);

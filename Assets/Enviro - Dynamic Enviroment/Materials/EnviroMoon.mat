@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: EnviroMoon
-  m_Shader: {fileID: 4800000, guid: bd369c0007c490e4ead5bd6ebb8d8da8, type: 3}
+  m_Shader: {fileID: 4800000, guid: 7481c14c0b941d3429624c6a42077e9e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -27,10 +27,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - <noninit>: 5
-    - _Brightness: 3.08
+    - _Brightness: 1
     - _InvFade: 1
     - _lightIntensity: 1
     m_Colors:
     - <noninit>: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.39705884, g: 0.39705884, b: 0.39705884, a: 1}
     - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}

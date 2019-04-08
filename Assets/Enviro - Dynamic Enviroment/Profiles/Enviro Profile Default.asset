@@ -3,15 +3,16 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4beab60d43552cb4d89247b229ee1117, type: 3}
   m_Name: Enviro Profile Default
   m_EditorClassIdentifier: 
-  version: 2.0.5
+  version: 2.1.0
   lightSettings:
     LightColor:
       serializedVersion: 2
@@ -45,78 +46,108 @@ MonoBehaviour:
     directLightSunIntensity:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 2
+      - serializedVersion: 3
         time: 0
         value: 0.0043419194
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.42
         value: 0.0043419194
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.48750305
         value: 0.72829515
         inSlope: 5
         outSlope: 5
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 1
         value: 1.504342
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
     directLightMoonIntensity:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 2
+      - serializedVersion: 3
         time: 0
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.42
         value: 0.001
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.49583435
         value: 0.6231171
         inSlope: 2
         outSlope: 2
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 1
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
     shadowIntensity:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 2
+      - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.7983856
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 1
-        value: 1
+        value: 0.7983856
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
@@ -125,18 +156,24 @@ MonoBehaviour:
     ambientIntensity:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 2
+      - serializedVersion: 3
         time: 0
         value: 0.750625
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 1
         value: 0.750625
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
@@ -235,14 +272,14 @@ MonoBehaviour:
     Resolution: 1
     dirVolumeLighting: 1
     SampleCount: 8
-    ScatteringCoef: 0.085
+    ScatteringCoef: 0.025
     ExtinctionCoef: 0.09
-    Anistropy: 0.55
-    MaxRayLength: 10
-    directLightNoise: 0
-    noiseIntensity: 1
-    noiseIntensityOffset: 0.315
-    noiseScale: 0.01
+    Anistropy: 0.7
+    MaxRayLength: 50
+    directLightNoise: 1
+    noiseIntensity: 0.303
+    noiseIntensityOffset: 0.4
+    noiseScale: 0.0254
     noiseVelocity: {x: 3, y: 1.5}
   skySettings:
     skyboxMode: 0
@@ -257,30 +294,42 @@ MonoBehaviour:
     scatteringCurve:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 2
+      - serializedVersion: 3
         time: 0
         value: -25
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.5
         value: -10
         inSlope: 55
         outSlope: 55
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.52
         value: 6.5
         inSlope: 35
         outSlope: 35
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 1
         value: 11
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -348,31 +397,40 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
     renderMoon: 1
     moonPhaseMode: 1
-    moonTexture: {fileID: 2800000, guid: a1ecb87143451c742941779d0eb2e32f, type: 3}
-    moonColor: {r: 0.8014706, g: 0.8014706, b: 0.8014706, a: 1}
-    moonBrightness: 2
-    moonSize: 10
+    moonTexture: {fileID: 2800000, guid: f9f2b9bdb35cab546957d4d1bd0fb807, type: 3}
+    moonColor: {r: 0.7352941, g: 0.7352941, b: 0.7352941, a: 1}
+    moonBrightness: 1.7
+    moonSize: 6.02
     moonGlow:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 2
+      - serializedVersion: 3
         time: 0
-        value: 0.2
+        value: 0.20057984
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.65
-        value: 0
+        value: 0.000579834
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 1
-        value: 0
+        value: 0.000579834
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
@@ -381,54 +439,75 @@ MonoBehaviour:
     skyLuminence:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
+      - serializedVersion: 3
+        time: -0.0041656494
+        value: 0.0009460449
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
-        time: 0.26559836
-        value: 0.32253987
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.4287148
+        value: 0.028274119
         inSlope: 0.2257807
         outSlope: 0.2257807
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.5
-        value: 0.14452556
+        value: 0.15003398
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.62
         value: 0.105
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 1
         value: 0.1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
     skyColorPower:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 2
+      - serializedVersion: 3
         time: 0
         value: 1.5
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 1
         value: 1.25
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -437,30 +516,42 @@ MonoBehaviour:
     starsIntensity:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 2
+      - serializedVersion: 3
         time: 0
         value: 0.3
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.5
         value: 0.015
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.6
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 1
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -468,52 +559,64 @@ MonoBehaviour:
     galaxyIntensity:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 2
+      - serializedVersion: 3
         time: 0
         value: 0.4
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.5
         value: 0.015
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.6
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 1
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     noiseScale: 10
-    noiseIntensity: 0.25
+    noiseIntensity: 1.5
   cloudsSettings:
-    reprojectionPixelSize: 2
+    reprojectionPixelSize: 1
     cloudsQuality: 2
-    cloudsWorldScale: 120000
-    bottomCloudHeight: 2000
-    topCloudHeight: 4500
+    cloudsWorldScale: 20000
+    bottomCloudHeight: 3000
+    topCloudHeight: 6000
     useWindZoneDirection: 1
     cloudsTimeScale: 1
     cloudsWindStrengthModificator: 0.005
     cloudsWindDirectionX: 0
     cloudsWindDirectionY: -1
-    raymarchSteps: 100
-    stepsInDepthModificator: 0.7
+    raymarchSteps: 200
+    stepsInDepthModificator: 0.5
     cloudsRenderResolution: 1
     hgPhase: 0.4
-    primaryAttenuation: 15
-    secondaryAttenuation: 20
+    primaryAttenuation: 10
+    secondaryAttenuation: 10
     volumeCloudsColor:
       serializedVersion: 2
       key0: {r: 0, g: 0, b: 0, a: 1}
@@ -575,78 +678,105 @@ MonoBehaviour:
     directLightIntensity:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 2
+      - serializedVersion: 3
         time: -0.008333334
         value: 0.036597714
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.38022348
         value: 0.030045863
         inSlope: -0.05137701
         outSlope: -0.05137701
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.47889876
         value: -0.00044329406
         inSlope: -0.00418248
         outSlope: -0.00418248
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.5250003
         value: 0.14368314
         inSlope: 0.046046156
         outSlope: 0.046046156
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 1
         value: 0.15
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
     ambientLightIntensity:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 2
+      - serializedVersion: 3
         time: 0
         value: 0.017
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
-        time: 0.46
-        value: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.4019098
+        value: 0.0008544922
         inSlope: -0.00041219013
         outSlope: -0.00041219013
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.6421312
         value: 0.29800567
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.9958191
         value: 0.26910096
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
     tonemapping: 0
     cloudsExposure: 1.5
     lodDistance: 0.5
-    weatherMapTiling: 7
+    weatherMapTiling: 9
     customWeatherMap: {fileID: 0}
     locationOffset: {x: 0, y: 0}
-    weatherAnimSpeedScale: 0.333
-    baseNoiseUV: 35
-    detailNoiseUV: 50
+    weatherAnimSpeedScale: 0.5
+    baseNoiseUV: 30
+    detailNoiseUV: 70
     detailQuality: 0
     globalCloudCoverage: 1
     cirrusCloudsTexture: {fileID: 2800000, guid: 724998a51cd1bcf438cdc5ca572beef4,
@@ -716,9 +846,9 @@ MonoBehaviour:
     flatCloudsScale: 1.55
     flatCloudsNoiseOctaves: 5
     flatCloudsAltitude: 59.9
-    flatCloudsMorphingSpeed: 0.2
+    flatCloudsMorphingSpeed: 0.207
     shadowIntensity: 0
-    shadowCookieSize: 10000
+    shadowCookieSize: 6452
   weatherSettings:
     useTag: 0
     wetnessAccumulationSpeed: 0.05
@@ -730,7 +860,7 @@ MonoBehaviour:
     effectTransitionSpeed: 1
     audioTransitionSpeed: 0.1
     lightningEffect: {fileID: 1573907201630640, guid: 044a06c0461cf464dbd3727572a70d42,
-      type: 2}
+      type: 3}
     lightningRange: 500
     lightningHeight: 750
   fogSettings:
@@ -742,18 +872,18 @@ MonoBehaviour:
     distanceFogIntensity: 7.07
     maximumFogDensity: 0.872
     heightFog: 1
-    height: 25
+    height: 50
     heightFogIntensity: 1
-    heightDensity: 1
+    heightDensity: 0
     noiseIntensity: 1
-    noiseIntensityOffset: 0.3
-    noiseScale: 0.001
+    noiseIntensityOffset: 0
+    noiseScale: 0.0061
     noiseVelocity: {x: 3, y: 1.5}
-    mie: 5
+    mie: 0
     g: 5
     fogDitheringScale: 240
     fogDitheringIntensity: 0.5
-    skyFogIntensity: 1.234
+    skyFogIntensity: 1
   lightshaftsSettings:
     resolution: 1
     screenBlendMode: 0
@@ -848,7 +978,7 @@ MonoBehaviour:
     thresholdColorMoon:
       serializedVersion: 2
       key0: {r: 0.17647058, g: 0.17647058, b: 0.17647058, a: 1}
-      key1: {r: 0.125, g: 0.125, b: 0.125, a: 1}
+      key1: {r: 0.38235295, g: 0.38235295, b: 0.38235295, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -895,14 +1025,14 @@ MonoBehaviour:
   satelliteSettings:
     additionalSatellites: []
   qualitySettings:
-    GlobalParticleEmissionRates: 1
+    GlobalParticleEmissionRates: 0.9
     UpdateInterval: 0.5
-  viewMode: 1
-  showPlayerSetup: 1
+  viewMode: 3
+  showPlayerSetup: 0
   showRenderingSetup: 0
   showComponentsSetup: 0
   showTimeUI: 0
-  showWeatherUI: 0
-  showAudioUI: 0
-  showEffectsUI: 0
-  modified: 0
+  showWeatherUI: 1
+  showAudioUI: 1
+  showEffectsUI: 1
+  modified: 1

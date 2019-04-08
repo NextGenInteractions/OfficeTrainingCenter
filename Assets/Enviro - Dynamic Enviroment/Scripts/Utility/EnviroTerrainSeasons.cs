@@ -56,7 +56,7 @@ public class EnviroTerrainSeasons : MonoBehaviour {
 		texturesIn = terrain.terrainData.splatPrototypes;
 		UpdateSeason ();
 
-		EnviroSky.instance.OnSeasonChanged += (EnviroSeasons.Seasons season) =>
+        EnviroSkyMgr.instance.OnSeasonChanged += (EnviroSeasons.Seasons season) =>
 		{
 			UpdateSeason ();
 		};
@@ -121,7 +121,7 @@ public class EnviroTerrainSeasons : MonoBehaviour {
 
 	void UpdateSeason ()
 	{
-		switch (EnviroSky.instance.Seasons.currentSeasons)
+		switch (EnviroSkyMgr.instance.GetCurrentSeason())
 		{
 		case EnviroSeasons.Seasons.Spring:
 			for (int i = 0 ; i < TextureChanges.Count;i++)
@@ -195,13 +195,13 @@ public class EnviroTerrainSeasons : MonoBehaviour {
 
 	void Update ()
 	{
-        if (EnviroSky.instance == null)
+        if (EnviroSkyMgr.instance == null)
             return;
 
-        if (ChangeGrassWind && EnviroSky.instance.Weather.currentActiveWeatherPreset != null) 
+        if (ChangeGrassWind && EnviroSkyMgr.instance.GetCurrentWeatherPreset() != null) 
 		{
-			terrain.terrainData.wavingGrassStrength = EnviroSky.instance.Weather.currentActiveWeatherPreset.WindStrenght * windSpeedModificator;
-			terrain.terrainData.wavingGrassSpeed = EnviroSky.instance.Weather.currentActiveWeatherPreset.WindStrenght * windSizeModificator;
+			terrain.terrainData.wavingGrassStrength = EnviroSkyMgr.instance.GetCurrentWeatherPreset().WindStrenght * windSpeedModificator;
+			terrain.terrainData.wavingGrassSpeed = EnviroSkyMgr.instance.GetCurrentWeatherPreset().WindStrenght * windSizeModificator;
 		}
 	}
 }

@@ -19,16 +19,14 @@ public class EnviroTrigger : MonoBehaviour {
 	{
 		
 	}
-
-
 	void OnTriggerEnter (Collider col)
 	{
-		if (EnviroSky.instance.weatherSettings.useTag) {
-			if (col.gameObject.tag == EnviroSky.instance.gameObject.tag) {
+		if (EnviroSkyMgr.instance.GetUseWeatherTag()) {
+			if (col.gameObject.tag == EnviroSkyMgr.instance.GetEnviroSkyTag()) {
 				EnterExit ();
 			}
 		} else {
-			if (col.gameObject.GetComponent<EnviroSky> ()) {
+			if (EnviroSkyMgr.instance.IsEnviroSkyAttached(col.gameObject)) {
 				EnterExit ();
 			}
 		}
@@ -39,16 +37,16 @@ public class EnviroTrigger : MonoBehaviour {
 
         if (myZone.zoneTriggerType == EnviroInterior.ZoneTriggerType.Zone)
         {
-            if (EnviroSky.instance.weatherSettings.useTag)
+            if (EnviroSkyMgr.instance.GetUseWeatherTag())
             {
-                if (col.gameObject.tag == EnviroSky.instance.gameObject.tag)
+                if (col.gameObject.tag == EnviroSkyMgr.instance.GetEnviroSkyTag())
                 {
                     EnterExit();
                 }
             }
             else
             {
-                if (col.gameObject.GetComponent<EnviroSky>())
+                if (EnviroSkyMgr.instance.IsEnviroSkyAttached(col.gameObject))
                 {
                     EnterExit();
                 }
@@ -61,16 +59,16 @@ public class EnviroTrigger : MonoBehaviour {
 
 	void EnterExit ()
 	{
-        if (EnviroSky.instance.lastInteriorZone != myZone)
+        if (EnviroSkyMgr.instance.lastInteriorZone != myZone)
         {
-            if (EnviroSky.instance.lastInteriorZone != null)
-                EnviroSky.instance.lastInteriorZone.StopAllFading();
+            if (EnviroSkyMgr.instance.lastInteriorZone != null)
+                EnviroSkyMgr.instance.lastInteriorZone.StopAllFading();
 
             myZone.Enter();
         }
         else
         {
-            if (!EnviroSky.instance.interiorMode)
+            if (!EnviroSkyMgr.instance.IsInterior())
                 myZone.Enter();
             else
                 myZone.Exit();

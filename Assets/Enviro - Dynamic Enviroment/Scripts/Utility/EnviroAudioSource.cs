@@ -25,6 +25,14 @@ public class EnviroAudioSource : MonoBehaviour {
 
     void Start ()
 	{
+
+        if (EnviroSkyMgr.instance == null)
+        {
+            Debug.Log("EnviroSky Manager not found. Deactivate enviro AudioSource");
+            this.enabled = false;
+            return;
+        }
+
 		if (audiosrc == null)
 		audiosrc = GetComponent<AudioSource> ();
 		
@@ -34,8 +42,8 @@ public class EnviroAudioSource : MonoBehaviour {
 			audiosrc.volume = 0f;
 		}
 
-		currentAmbientVolume = EnviroSky.instance.Audio.ambientSFXVolume;
-		currentWeatherVolume = EnviroSky.instance.Audio.weatherSFXVolume;
+		currentAmbientVolume = EnviroSkyMgr.instance.ambientAudioVolume;
+		currentWeatherVolume = EnviroSkyMgr.instance.weatherAudioVolume;
     }
 		
 	public void FadeOut () 
@@ -52,24 +60,30 @@ public class EnviroAudioSource : MonoBehaviour {
 		audiosrc.Play ();
 	}
 
+    public void PlayOneShot(AudioClip clip)
+    {
+        audiosrc.loop = false;
+        audiosrc.clip = clip;
+        audiosrc.Play();
+    }
 
-	void Update ()
+    void Update ()
 	{
-		if (!EnviroSky.instance.started || EnviroSky.instance == null)
+		if (!EnviroSkyMgr.instance.IsStarted() || EnviroSkyMgr.instance == null)
 			return;
 
-		currentAmbientVolume = Mathf.Lerp(currentAmbientVolume,EnviroSky.instance.Audio.ambientSFXVolume + EnviroSky.instance.Audio.ambientSFXVolumeMod,10f * Time.deltaTime);
-		currentWeatherVolume = Mathf.Lerp(currentWeatherVolume,EnviroSky.instance.Audio.weatherSFXVolume + EnviroSky.instance.Audio.weatherSFXVolumeMod,10 * Time.deltaTime);
+		currentAmbientVolume = Mathf.Lerp(currentAmbientVolume, EnviroSkyMgr.instance.ambientAudioVolume + EnviroSkyMgr.instance.ambientAudioVolumeModifier, 10f * Time.deltaTime);
+		currentWeatherVolume = Mathf.Lerp(currentWeatherVolume, EnviroSkyMgr.instance.weatherAudioVolume + EnviroSkyMgr.instance.weatherAudioVolumeModifier, 10 * Time.deltaTime);
 
         if (myFunction == AudioSourceFunction.Weather1 || myFunction == AudioSourceFunction.Weather2 || myFunction == AudioSourceFunction.Thunder){
 			if (isFadingIn && audiosrc.volume < currentWeatherVolume) {
-				audiosrc.volume += EnviroSky.instance.weatherSettings.audioTransitionSpeed * Time.deltaTime;
+				audiosrc.volume += EnviroSkyMgr.instance.audioTransitionSpeed * Time.deltaTime;
 			} else if (isFadingIn && audiosrc.volume >= currentWeatherVolume - 0.01f) {
 				isFadingIn = false;
 			}
 
 			if (isFadingOut && audiosrc.volume > 0f) {
-				audiosrc.volume -= EnviroSky.instance.weatherSettings.audioTransitionSpeed * Time.deltaTime;
+				audiosrc.volume -= EnviroSkyMgr.instance.audioTransitionSpeed * Time.deltaTime;
 			} else if (isFadingOut && audiosrc.volume == 0f) {
 				audiosrc.Stop ();
 				isFadingOut = false;
@@ -82,13 +96,13 @@ public class EnviroAudioSource : MonoBehaviour {
 		else if (myFunction == AudioSourceFunction.Ambient || myFunction == AudioSourceFunction.Ambient2)
 		{
 			if (isFadingIn && audiosrc.volume < currentAmbientVolume) {
-				audiosrc.volume += EnviroSky.instance.weatherSettings.audioTransitionSpeed * Time.deltaTime;
+				audiosrc.volume += EnviroSkyMgr.instance.audioTransitionSpeed * Time.deltaTime;
 			} else if (isFadingIn && audiosrc.volume >= currentAmbientVolume - 0.01f) {
 				isFadingIn = false;
 			}
 
 			if (isFadingOut && audiosrc.volume > 0f) {
-				audiosrc.volume -= EnviroSky.instance.weatherSettings.audioTransitionSpeed * Time.deltaTime;
+				audiosrc.volume -= EnviroSkyMgr.instance.audioTransitionSpeed * Time.deltaTime;
 			} else if (isFadingOut && audiosrc.volume == 0f) {
 				audiosrc.Stop ();
 				isFadingOut = false;
@@ -101,18 +115,18 @@ public class EnviroAudioSource : MonoBehaviour {
 
         else if (myFunction == AudioSourceFunction.ZoneAmbient)
         {
-            if (isFadingIn && audiosrc.volume < EnviroSky.instance.currentInteriorZoneAudioVolume)
+            if (isFadingIn && audiosrc.volume < EnviroSkyMgr.instance.interiorZoneAudioVolume)
             {
-                audiosrc.volume += EnviroSky.instance.currentInteriorZoneAudioFadingSpeed * Time.deltaTime;
+                audiosrc.volume += EnviroSkyMgr.instance.interiorZoneAudioFadingSpeed * Time.deltaTime;
             }
-            else if (isFadingIn && audiosrc.volume >= EnviroSky.instance.currentInteriorZoneAudioVolume - 0.01f)
+            else if (isFadingIn && audiosrc.volume >= EnviroSkyMgr.instance.interiorZoneAudioVolume - 0.01f)
             {
                 isFadingIn = false;
             }
 
             if (isFadingOut && audiosrc.volume > 0f)
             {
-                audiosrc.volume -= EnviroSky.instance.currentInteriorZoneAudioFadingSpeed * Time.deltaTime;
+                audiosrc.volume -= EnviroSkyMgr.instance.interiorZoneAudioFadingSpeed * Time.deltaTime;
             }
             else if (isFadingOut && audiosrc.volume == 0f)
             {
@@ -122,7 +136,7 @@ public class EnviroAudioSource : MonoBehaviour {
 
             if (audiosrc.isPlaying && !isFadingOut && !isFadingIn)
             {
-                audiosrc.volume = EnviroSky.instance.currentInteriorZoneAudioVolume;
+                audiosrc.volume = EnviroSkyMgr.instance.interiorZoneAudioVolume;
             }
         }
     }

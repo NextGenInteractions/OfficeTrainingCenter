@@ -14,7 +14,7 @@ namespace Gaia.GX.HendrikHaupt
 	/// </summary>
 	public class EnviroWithGAIA : MonoBehaviour
 	{
-		#region Generic informational methods
+#region Generic informational methods
 
 		/// <summary>
 		/// Returns the publisher name if provided. 
@@ -36,98 +36,190 @@ namespace Gaia.GX.HendrikHaupt
 			return "Enviro - Sky and Weather";
 		}
 
-		#endregion
+#endregion
 
-		#region Methods exposed by Gaia as buttons must be prefixed with GX_
+#region Methods exposed by Gaia as buttons must be prefixed with GX_
 
 		public static void GX_About()
 		{
 			EditorUtility.DisplayDialog("About Enviro - Sky and Weather", "Enviro - Sky and Weather simulates day-night cycle, clouds, weather and seasons!", "OK");
 		}
 
-		/// <summary>
-		/// Add and configure Enviro in your scene.
-		/// </summary>
-		public static void GX_AddEnviroSky()
+        /// <summary>
+        /// Add and configure Enviro in your scene.
+        /// </summary>
+#if ENVIRO_HD
+        public static void GX_AddEnviroSkyHighdefinition()
 		{
-			// Check if there already is an instance of EnviroSky.
-			if (EnviroSky.instance != null) {
-				EditorUtility.DisplayDialog("OOPS!", "You already have a EnviroSky setup in your scene!", "OK");
-				return;
-			}
-				
-			GameObject EnviroSkyPrefab = null;
-			EnviroSkyPrefab = GetAssetPrefab ("EnviroSky");
+            // Search for Camera!
+            Camera cam = Camera.main;
 
-			if (EnviroSkyPrefab == null) {
+            if (cam == null)
+            {
+                cam = FindObjectOfType<Camera>();
+            }
+
+            if (cam == null)
+            {
+                EditorUtility.DisplayDialog("OOPS!", "Could not find a camera. Please add a camera to your scene.", "OK");
+                return;
+            }
+
+            // Search for Player
+            GameObject plr = GameObject.Find("Player");
+
+            if (plr == null)
+            {
+                plr = GameObject.FindWithTag("Player");
+            }
+
+            if (plr == null)
+            {
+                plr = cam.gameObject;
+            }
+
+            // Check if there already is an instance of EnviroSky.
+            if (EnviroSkyMgr.instance != null)
+            {
+                //Add and activate an instance
+                EnviroSkyMgr.instance.CreateEnviroHDInstance();
+                EnviroSkyMgr.instance.ActivateHDInstance();
+                // Assign and start Enviro!
+                EnviroSkyMgr.instance.AssignAndStart(plr, cam);
+            }
+            else
+            {
+                GameObject EnviroSkyPrefab = null;
+                EnviroSkyPrefab = GetAssetPrefab("Enviro Sky Manager");
+
+                if (EnviroSkyPrefab == null)
+                {
 #if UNITY_EDITOR
-				EditorUtility.DisplayDialog("OOPS!", "Unable to find EnviroSky Prefab! Please reimport latest Enviro - Dynamic Environment and try again!", "OK");
-				return;
+                    EditorUtility.DisplayDialog("OOPS!", "Unable to find EnviroSky Manager prefab! Please reimport latest Enviro - Sky and Weather and try again!", "OK");
+                    return;
 #else
 Debug.LogError("Unable to find EnviroSky Prefab!");
 #endif
-			}
+                }
 
-			// Search for Camera!
-			Camera cam = Camera.main;
+                SetupScene(cam);
 
-			if (cam == null)
-			{
-				cam = FindObjectOfType<Camera>();
-			}
-
-			if (cam == null)
-			{
-				EditorUtility.DisplayDialog("OOPS!", "Could not find a camera. Please add a camera to your scene.", "OK");
-				return;
-			}
-
-			// Search for Player
-			GameObject plr = GameObject.Find ("Player");
-
-			if (plr == null) 
-			{
-				plr = GameObject.FindWithTag ("Player");
-			}
-
-			if (plr == null) {
-				EditorUtility.DisplayDialog("OOPS!", "Could not find your player. Please add a player to your scene, or assign 'Player' tag to your character.", "OK");
-				return;
-			}
-
-
-			// Remove Global Fog
-			Type fogType = Gaia.Utils.GetType("UnityStandardAssets.ImageEffects.GlobalFog");
-			if (fogType != null) {
-				DestroyImmediate(cam.gameObject.GetComponent(fogType));
-			}
-
-			// Remove SunShafts
-			Type sunShaftType = Gaia.Utils.GetType("UnityStandardAssets.ImageEffects.SunShafts");
-			if (sunShaftType != null) {
-				DestroyImmediate(cam.gameObject.GetComponent(sunShaftType));
-			}
-
-			// Deactivate Wind Zones
-			WindZone[] wz = GameObject.FindObjectsOfType<WindZone>();
-
-			for (int i = 0; i < wz.Length; i++) {
-				wz [i].gameObject.SetActive (false);
-			}
-
-			// Deactivate Directional Lights
-			Light[] lights = GameObject.FindObjectsOfType<Light>();
-			for (int i = 0; i < lights.Length; i++) {
-				if(lights [i].type == LightType.Directional)
-					lights [i].gameObject.SetActive (false);
-			}
-				
-			// Instantiate EnviroSky prefab.
-			Instantiate (EnviroSkyPrefab, Vector3.zero, Quaternion.identity);
-			EnviroSky.instance.name = "EnviroSky for GAIA";
-			// Assign and start Enviro!
-			EnviroSky.instance.AssignAndStart (plr, cam);
+                // Instantiate EnviroSky Manager prefab.
+                Instantiate(EnviroSkyPrefab, Vector3.zero, Quaternion.identity);
+                EnviroSkyMgr.instance.name = "EnviroSky Manager for GAIA";
+                       
+                //Add and activate an instance
+                EnviroSkyMgr.instance.CreateEnviroHDInstance();
+                EnviroSkyMgr.instance.ActivateHDInstance();
+                // Assign and start Enviro!
+                EnviroSkyMgr.instance.AssignAndStart(plr, cam);
+            }		
 		}
+#endif
+
+#if ENVIRO_LW
+        public static void GX_AddEnviroSkyLightweight()
+        {
+            // Search for Camera!
+            Camera cam = Camera.main;
+
+            if (cam == null)
+            {
+                cam = FindObjectOfType<Camera>();
+            }
+
+            if (cam == null)
+            {
+                EditorUtility.DisplayDialog("OOPS!", "Could not find a camera. Please add a camera to your scene.", "OK");
+                return;
+            }
+
+            // Search for Player
+            GameObject plr = GameObject.Find("Player");
+
+            if (plr == null)
+            {
+                plr = GameObject.FindWithTag("Player");
+            }
+
+            if (plr == null)
+            {
+                plr = cam.gameObject;
+            }
+
+            // Check if there already is an instance of EnviroSky.
+            if (EnviroSkyMgr.instance != null)
+            {
+                //Add and activate an instance
+                EnviroSkyMgr.instance.CreateEnviroLWInstance();
+                EnviroSkyMgr.instance.ActivateLWInstance();
+                // Assign and start Enviro!
+                EnviroSkyMgr.instance.AssignAndStart(plr, cam);
+            }
+            else
+            {
+                GameObject EnviroSkyPrefab = null;
+                EnviroSkyPrefab = GetAssetPrefab("Enviro Sky Manager");
+
+                if (EnviroSkyPrefab == null)
+                {
+#if UNITY_EDITOR
+                    EditorUtility.DisplayDialog("OOPS!", "Unable to find EnviroSky Manager prefab! Please reimport latest Enviro - Sky and Weather and try again!", "OK");
+                    return;
+#else
+Debug.LogError("Unable to find EnviroSky Prefab!");
+#endif
+                }
+
+                SetupScene(cam);
+
+                // Instantiate EnviroSky Manager prefab.
+                Instantiate(EnviroSkyPrefab, Vector3.zero, Quaternion.identity);
+                EnviroSkyMgr.instance.name = "EnviroSky Manager for GAIA";
+
+                //Add and activate an instance
+                EnviroSkyMgr.instance.CreateEnviroLWInstance();
+                EnviroSkyMgr.instance.ActivateLWInstance();
+                // Assign and start Enviro!
+                EnviroSkyMgr.instance.AssignAndStart(plr, cam);
+            }
+        }
+#endif
+
+
+
+        private static void SetupScene (Camera cam)
+        {
+            // Remove Global Fog
+            Type fogType = Gaia.Utils.GetType("UnityStandardAssets.ImageEffects.GlobalFog");
+            if (fogType != null)
+            {
+                DestroyImmediate(cam.gameObject.GetComponent(fogType));
+            }
+
+            // Remove SunShafts
+            Type sunShaftType = Gaia.Utils.GetType("UnityStandardAssets.ImageEffects.SunShafts");
+            if (sunShaftType != null)
+            {
+                DestroyImmediate(cam.gameObject.GetComponent(sunShaftType));
+            }
+
+            // Deactivate Wind Zones
+            WindZone[] wz = GameObject.FindObjectsOfType<WindZone>();
+
+            for (int i = 0; i < wz.Length; i++)
+            {
+                wz[i].gameObject.SetActive(false);
+            }
+
+            // Deactivate Directional Lights
+            Light[] lights = GameObject.FindObjectsOfType<Light>();
+            for (int i = 0; i < lights.Length; i++)
+            {
+                if (lights[i].type == LightType.Directional)
+                    lights[i].gameObject.SetActive(false);
+            }
+        }
 
 #if AQUAS_PRESENT
 		/// <summary>
@@ -169,15 +261,14 @@ Debug.LogError("Unable to find EnviroSky Prefab!");
 		public static void GX_SetToMorning()
 		{
 			// Check if there is an instance of EnviroSky.
-			if (EnviroSky.instance == null) {
+			if (EnviroSkyMgr.instance == null) {
 				EditorUtility.DisplayDialog("OOPS!", "Please add Enviro Sky first!", "OK");
 				return;
 			}
 
-			EnviroSky.instance.SetTime (1, 1, 6, 0, 0);
-			EnviroSky.instance.enabled = false;
-			EnviroSky.instance.enabled = true;
-		}
+            EnviroSkyMgr.instance.SetTimeOfDay(6f);
+            EnviroSkyMgr.instance.ReInit();
+        }
 
 		/// <summary>
 		/// Set Enviro time of day to 12:00
@@ -185,15 +276,14 @@ Debug.LogError("Unable to find EnviroSky Prefab!");
 		public static void GX_SetToNoon()
 		{
 			// Check if there is an instance of EnviroSky.
-			if (EnviroSky.instance == null) {
+			if (EnviroSkyMgr.instance == null) {
 				EditorUtility.DisplayDialog("OOPS!", "Please add Enviro Sky first!", "OK");
 				return;
 			}
 
-			EnviroSky.instance.SetTime (1, 1, 12, 0, 0);
-			EnviroSky.instance.enabled = false;
-			EnviroSky.instance.enabled = true;
-		}
+            EnviroSkyMgr.instance.SetTimeOfDay(12f);
+            EnviroSkyMgr.instance.ReInit();
+        }
 
 		/// <summary>
 		/// Set Enviro time of day to 17:00
@@ -201,15 +291,14 @@ Debug.LogError("Unable to find EnviroSky Prefab!");
 		public static void GX_SetToEvening()
 		{
 			// Check if there is an instance of EnviroSky.
-			if (EnviroSky.instance == null) {
+			if (EnviroSkyMgr.instance == null) {
 				EditorUtility.DisplayDialog("OOPS!", "Please add Enviro Sky first!", "OK");
 				return;
 			}
 
-			EnviroSky.instance.SetTime (1, 1, 17, 0, 0);
-			EnviroSky.instance.enabled = false;
-			EnviroSky.instance.enabled = true;
-		}
+            EnviroSkyMgr.instance.SetTimeOfDay(17f);
+            EnviroSkyMgr.instance.ReInit();
+        }
 			
 		/// <summary>
 		/// Set Enviro time of day to 0:00
@@ -217,20 +306,19 @@ Debug.LogError("Unable to find EnviroSky Prefab!");
 		public static void GX_SetToNight()
 		{
 			// Check if there is an instance of EnviroSky.
-			if (EnviroSky.instance == null) {
+			if (EnviroSkyMgr.instance == null) {
 				EditorUtility.DisplayDialog("OOPS!", "Please add Enviro Sky first!", "OK");
 				return;
 			}
 
-			EnviroSky.instance.SetTime (1, 1, 0, 0, 0);
-			EnviroSky.instance.enabled = false;
-			EnviroSky.instance.enabled = true;
-		}
+            EnviroSkyMgr.instance.SetTimeOfDay(0f);
+            EnviroSkyMgr.instance.ReInit();
+        }
 			
 
-		#endregion
+#endregion
 
-		#region Helper methods
+#region Helper methods
 
 		/// <summary>
 		/// Get the asset path of the first thing that matches the name
@@ -310,7 +398,7 @@ Debug.LogError("Unable to find EnviroSky Prefab!");
 			return null;
 		}
 
-		#endregion
+#endregion
 	}
 }
 

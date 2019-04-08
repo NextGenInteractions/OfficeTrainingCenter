@@ -11,8 +11,6 @@
 	float4x4 _MyLightMatrix0;
 	float4x4 _MyWorld2Shadow;
 
-	float4x4 _FrustumCornersWS;
-
 	float4x4 _LeftWorldFromView;
 	float4x4 _RightWorldFromView;
 	float4x4 _LeftViewFromScreen;

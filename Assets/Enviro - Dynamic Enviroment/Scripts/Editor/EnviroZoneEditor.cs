@@ -96,9 +96,13 @@ public class EnviroEnviroZoneEditor : Editor {
 		GUILayout.BeginVertical("", boxStyle);
 		showGeneral = EditorGUILayout.BeginToggleGroup ("General Configs", showGeneral);
 		if (showGeneral) {
-			myTarget.ExitToDefault = EditorGUILayout.Toggle("Exit to Default Zone", myTarget.ExitToDefault);
+            myTarget.useMeshZone = EditorGUILayout.Toggle("Use Custom Mesh", myTarget.useMeshZone);
+            if(myTarget.useMeshZone)
+            myTarget.zoneMesh = (Mesh)EditorGUILayout.ObjectField("Mesh", myTarget.zoneMesh,typeof(Mesh),false);
 			myTarget.zoneScale = EditorGUILayout.Vector3Field ("Zone Scale", myTarget.zoneScale);
-		}
+            GUILayout.Space(10);
+            myTarget.ExitToDefault = EditorGUILayout.Toggle("Exit to Default Zone", myTarget.ExitToDefault);
+        }
 		EditorGUILayout.EndToggleGroup ();
 		EditorGUILayout.EndVertical ();
 

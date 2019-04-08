@@ -365,19 +365,63 @@ v 2.0.4
 	* Updated pdf guides.
 	* Removed fog in edit mode on modified materials.
 		
-----------------------------------------------------------------------------------
-v 2.0.5
 
+v 2.0.5
+----------------------------------------------------------------------------------
 	* Fixed transparent fog support.
 	* Fixed temporal reprojection of volume clouds in multi-pass rendering.
-	* Fixed wrong rendering of none stereo camera while rendering in stereo mode.
-	* Fixed Volume Clouds Reflection component.
+	* Fixed wrong rendering of none stereo camera while rendering in stereo mode. 
+	* Fixed volume clouds reflection component.
 	* Send moon render texture to skybox when using custom skybox mode.
 
+----------------------------------------------------------------------------------
+v 2.1.0
 
+ATTENTION! Major Update, you NEED to delete old enviro folder before import!
 
+	General:
+	* Complete restructuring of asset. Standard and Lite(Mobile) Version are now using same core code and can be used in same project.
+	* Complete rewrite of Lite(Mobile) version.
+	* Preperation for future SRP support upgrade.
 
+	Enviro Sky Manager:
+	* A new component, the Enviro Sky Manager was added. You can add different preconfigured instaces of standard and lite version from here. You also can switch between those with one click/line of code.
+	* EnviroSky Manager has a complete API that can be used with both versions. So when switching between lite/standard you don't have to worry about your custom scripts.
+	* EnviroSKy Manager also got a new interface to manage and add third party integrations. No more manual unpacking and adding.
+	
+	Third Party Integrations:
+	* Integrations can be activated and added over the new interface in Enviro Sky Manager now.
+	* Rewrite of UBER, LUX, Relief Terrain Integration.
+	* Added Vegetation Studio Pro Integration.
+	* Added Mirror Networking Support Integration.
+	* Updated GAIA Integration.
+	* Fixes for Microsplat Integration.
+	* LUX Water out of the box support in enviro fog shaders.
 
+	Enviro Lite:
+	* Old mobile version got depricated and a new version was created based on the codebase of standard.
+	* New lite version uses same profiles and weather presets like standard version and following same interface design.
+	* New very lite skybox shader.
+	* New particle base cloud system.
+	* Fog image effect with advanced scattering or simple color modes.
+	* Lightshafts added to lite version aswell.
+	* Lite version works on GLES2.0 and up.
+	* Lite version support all third party integration like standard and can be controlled with same API.
 
-
+	Enviro Standard:
+	* New additional particle based cloud system. Can be switched on for each weather preset. For example Storm weather to enhance details.
+	* New temperature system with support for seasonal and time base temperatures. (WIP)
+	* New optional distance blur effect. (WIP)
+	* New scene view preview of all enviro effects, lighting and reflections. Can be toggled on and off for each effect individually.
+	* New weather effects particle shader that support realtime lighting.
+	* Improved volume clouds visuals with improved ambient lighting, detail sampling and distance rendering.
+	* Improved season system to be realistic.
+	* Improved night sky rendering with twinkling stars and a new rendering of moon. Instead of camera the rendering will be done completly in skybox now.
+	* Improved global reflection with new update methods and scene view compability.
+	* Improved Skybox and Fog dithering.
+	* Rewrite of lightshafts component to have both sun and moon in one component.
+	* Exposed a few more options that may could be usefull for some projects.
+	* Extensive internal code cleanups and improvements.
+	* Fixed moon glow not in right spot sometimes.
+	* Fixed some other smaller issues.
 

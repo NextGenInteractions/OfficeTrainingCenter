@@ -22,11 +22,11 @@ MonoBehaviour:
   winter: 0
   possibiltyInWinter: 100
   cloudsConfig:
-    topColor: {r: 0.2352941, g: 0.2352941, b: 0.2352941, a: 1}
-    bottomColor: {r: 0, g: 0, b: 0, a: 1}
+    ambientTopColorBrightness: 0.272
+    ambientbottomColorBrightness: 0.572
     skyBlending: 0.409
-    alphaCoef: 1.25
-    scatteringCoef: 0.141
+    alphaCoef: 1.92
+    scatteringCoef: 0.13
     density: 1.386
     coverage: 1.62
     coverageHeight: 2
@@ -40,6 +40,13 @@ MonoBehaviour:
     flatSoftness: 0.905
     flatBrightness: 0.314
     flatColorPow: 3.07
+    particleLayer1Alpha: 0.373
+    particleLayer1Brightness: 0.205
+    particleLayer1ColorPow: 2
+    particleLayer2Alpha: 0.528
+    particleLayer2Brightness: 0.177
+    particleLayer2ColorPow: 2
+    particleCloudsOverwrite: 1
   fogStartDistance: 0
   fogDistance: 0
   fogDensity: 0.0005
@@ -106,7 +113,7 @@ MonoBehaviour:
     key0: {r: 0, g: 0, b: 0, a: 1}
     key1: {r: 0, g: 0, b: 0, a: 1}
     key2: {r: 0.11764705, g: 0.11764705, b: 0.11764705, a: 0.9254902}
-    key3: {r: 0.14901961, g: 0.14901961, b: 0.14901961, a: 0.9490196}
+    key3: {r: 0.14705884, g: 0.14705884, b: 0.14705884, a: 0.9490196}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
@@ -130,12 +137,14 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 4
     m_NumAlphaKeys: 4
-  volumeLightIntensity: 1
+  volumeLightIntensity: 0.09
+  shadowIntensityMod: -1
   heightFogDensity: 2.1
-  SkyFogHeight: 0.1
-  SkyFogIntensity: 0.969
+  SkyFogHeight: 0.33
+  SkyFogIntensity: 0.5
   FogScatteringIntensity: 1
   fogSunBlocking: 0
+  moonIntensity: 0
   effectSystems:
   - prefab: {fileID: 1000010197746070, guid: 8bb020f87d2cd0e4d86ee7420259c2b2, type: 2}
     localPositionOffset: {x: 0, y: 25, z: 0}
@@ -143,6 +152,7 @@ MonoBehaviour:
   WindStrenght: 0.635
   wetnessLevel: 1
   snowLevel: 0
+  temperatureLevel: 0
   isLightningStorm: 1
   lightningInterval: 10
   weatherSFX: {fileID: 8300000, guid: f31058b86e6160c4ab736a2b8c210219, type: 3}
@@ -154,3 +164,6 @@ MonoBehaviour:
   AutumnNightAmbient: {fileID: 0}
   WinterDayAmbient: {fileID: 0}
   WinterNightAmbient: {fileID: 0}
+  blurDistance: 259
+  blurIntensity: 0.479
+  blurSkyIntensity: 0.9

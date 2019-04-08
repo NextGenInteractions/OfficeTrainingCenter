@@ -92,9 +92,9 @@ public class EnviroInteriorEditor : Editor {
 	
 		myTarget.ambientLighting = EditorGUILayout.BeginToggleGroup("Ambient Light Modifications", myTarget.ambientLighting);
 		myTarget.ambientLightingMod = EditorGUILayout.ColorField ("Ambient Sky Lighting Mod", myTarget.ambientLightingMod);
-        if (EnviroSky.instance != null)
+        if (EnviroSkyMgr.instance != null && EnviroSkyMgr.instance.IsAvailable())
         {
-            if (EnviroSky.instance.lightSettings.ambientMode == UnityEngine.Rendering.AmbientMode.Trilight)
+            if (EnviroSkyMgr.instance.LightSettings.ambientMode == UnityEngine.Rendering.AmbientMode.Trilight)
             {
                 myTarget.ambientEQLightingMod = EditorGUILayout.ColorField("Ambient Equator Lighting Mod", myTarget.ambientEQLightingMod);
                 myTarget.ambientGRLightingMod = EditorGUILayout.ColorField("Ambient Ground Lighting Mod", myTarget.ambientGRLightingMod);

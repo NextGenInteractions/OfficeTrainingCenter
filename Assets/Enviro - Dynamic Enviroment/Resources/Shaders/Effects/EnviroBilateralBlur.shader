@@ -320,6 +320,8 @@ Shader "Hidden/EnviroBilateralBlur"
 			#pragma vertex vert
 			#pragma fragment horizontalFrag
             #pragma target 3.5
+#pragma exclude_renderers gles
+
 			
 			fixed4 horizontalFrag(v2f input) : SV_Target
 			{
@@ -337,6 +339,7 @@ Shader "Hidden/EnviroBilateralBlur"
 			#pragma vertex vert
 			#pragma fragment verticalFrag
 		#pragma target 3.5
+#pragma exclude_renderers gles
 			
 			fixed4 verticalFrag(v2f input) : SV_Target
 			{
@@ -354,6 +357,7 @@ Shader "Hidden/EnviroBilateralBlur"
             #pragma vertex vert
             #pragma fragment horizontalFrag
             #pragma target 3.5
+#pragma exclude_renderers gles
 
 			fixed4 horizontalFrag(v2f input) : SV_Target
 		{
@@ -371,6 +375,7 @@ Shader "Hidden/EnviroBilateralBlur"
             #pragma vertex vert
             #pragma fragment verticalFrag
             #pragma target 3.5
+#pragma exclude_renderers gles
 
 			fixed4 verticalFrag(v2f input) : SV_Target
 		{
@@ -389,6 +394,7 @@ Shader "Hidden/EnviroBilateralBlur"
 			#pragma fragment frag
            // #pragma target gl4.1
          	 #pragma target 3.5
+#pragma exclude_renderers gles
 
 			v2fDownsample vertHalfDepth(appdata v)
 			{
@@ -413,6 +419,7 @@ Shader "Hidden/EnviroBilateralBlur"
 			#pragma vertex vertUpsampleToFull
 			#pragma fragment frag		
             #pragma target 3.5
+#pragma exclude_renderers gles
 
 			v2fUpsample vertUpsampleToFull(appdata v)
 			{
@@ -435,6 +442,7 @@ Shader "Hidden/EnviroBilateralBlur"
             #pragma fragment frag
             //#pragma target gl4.1
             #pragma target 3.5
+#pragma exclude_renderers gles
 
 			v2fDownsample vertQuarterDepth(appdata v)
 			{
@@ -458,6 +466,7 @@ Shader "Hidden/EnviroBilateralBlur"
             #pragma vertex vertUpsampleToFull
             #pragma fragment frag		
             #pragma target 3.5
+#pragma exclude_renderers gles
 
 			v2fUpsample vertUpsampleToFull(appdata v)
 			{
@@ -478,6 +487,7 @@ Shader "Hidden/EnviroBilateralBlur"
             #pragma vertex vert
             #pragma fragment horizontalFrag
             #pragma target 3.5
+			#pragma exclude_renderers gles
 
 			fixed4 horizontalFrag(v2f input) : SV_Target
 			{
@@ -494,6 +504,7 @@ Shader "Hidden/EnviroBilateralBlur"
             #pragma vertex vert
             #pragma fragment verticalFrag
             #pragma target 3.5
+#pragma exclude_renderers gles
 
 			fixed4 verticalFrag(v2f input) : SV_Target
 			{
@@ -511,6 +522,7 @@ Shader "Hidden/EnviroBilateralBlur"
 			#pragma vertex vertHalfDepth
 			#pragma fragment frag
 			#pragma target 3.5
+			#pragma exclude_renderers gles
 
 			v2fDownsample vertHalfDepth(appdata v)
 			{
@@ -532,6 +544,7 @@ Shader "Hidden/EnviroBilateralBlur"
 			#pragma vertex vertQuarterDepth
 			#pragma fragment frag
 			#pragma target 3.5
+			#pragma exclude_renderers gles
 
 			v2fDownsample vertQuarterDepth(appdata v)
 			{

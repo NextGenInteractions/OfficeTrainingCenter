@@ -21,7 +21,8 @@ Category {
 			#pragma target 3.0
 			#pragma multi_compile_particles
 			#pragma multi_compile_fog
-			 
+			#pragma exclude_renderers gles 
+
 			#include "UnityCG.cginc"
 			#include "../../Resources/Shaders/Core/EnviroFogCore.cginc"
 

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198000013442670182}
   - component: {fileID: 199000010754126056}
   m_Layer: 0
-  m_Name: Heave Snow
+  m_Name: Heave Snow HQ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +129,7 @@ ParticleSystem:
         m_RotationOrder: 0
     startSpeed:
       minMaxState: 0
-      scalar: -2
+      scalar: -8
       maxCurve:
         serializedVersion: 2
         m_Curve:

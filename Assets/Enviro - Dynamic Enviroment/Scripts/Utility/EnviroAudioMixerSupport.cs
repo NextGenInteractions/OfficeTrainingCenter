@@ -16,7 +16,7 @@ public class EnviroAudioMixerSupport : MonoBehaviour {
 
 	void Start () 
 	{
-		if(audioMixer!= null && EnviroSky.instance != null)
+		if(audioMixer!= null && EnviroSkyMgr.instance != null)
 			StartCoroutine (Setup ());
 	}
 	
@@ -24,26 +24,29 @@ public class EnviroAudioMixerSupport : MonoBehaviour {
 	IEnumerator Setup ()
 	{
 		yield return 0;
-		if (EnviroSky.instance.started) {
+		if (EnviroSkyMgr.instance.IsStarted()) {
 
 			if(ambientMixerGroup != "")
 			{
-				EnviroSky.instance.AudioSourceAmbient.audiosrc.outputAudioMixerGroup = audioMixer.FindMatchingGroups (ambientMixerGroup) [0];
-				EnviroSky.instance.AudioSourceAmbient2.audiosrc.outputAudioMixerGroup = audioMixer.FindMatchingGroups (ambientMixerGroup) [0];
-			}
+                EnviroSkyMgr.instance.AudioSettings.AudioSourceAmbient.audiosrc.outputAudioMixerGroup = audioMixer.FindMatchingGroups(ambientMixerGroup)[0];
+                EnviroSkyMgr.instance.AudioSettings.AudioSourceAmbient2.audiosrc.outputAudioMixerGroup = audioMixer.FindMatchingGroups(ambientMixerGroup)[0];
+            }
 
-			if(weatherMixerGroup != "")
+            if (weatherMixerGroup != "")
 			{
-				EnviroSky.instance.AudioSourceWeather.audiosrc.outputAudioMixerGroup = audioMixer.FindMatchingGroups (weatherMixerGroup) [0];
-				EnviroSky.instance.AudioSourceWeather2.audiosrc.outputAudioMixerGroup = audioMixer.FindMatchingGroups (weatherMixerGroup) [0];
-			}
+                EnviroSkyMgr.instance.AudioSettings.AudioSourceWeather.audiosrc.outputAudioMixerGroup = audioMixer.FindMatchingGroups(weatherMixerGroup)[0];
+                EnviroSkyMgr.instance.AudioSettings.AudioSourceWeather2.audiosrc.outputAudioMixerGroup = audioMixer.FindMatchingGroups(weatherMixerGroup)[0];
+            }
 
-			if(thunderMixerGroup != "")
+            if (thunderMixerGroup != "")
 			{
-				EnviroSky.instance.AudioSourceThunder.outputAudioMixerGroup = audioMixer.FindMatchingGroups (thunderMixerGroup) [0];
-			}
-		} else {
-			StartCoroutine (Setup ());
-		}
+				
+                EnviroSkyMgr.instance.AudioSettings.AudioSourceThunder.audiosrc.outputAudioMixerGroup = audioMixer.FindMatchingGroups(thunderMixerGroup)[0];
+            }
+        }
+            else
+            {
+			    StartCoroutine (Setup ());
+		    }
 	}
 }

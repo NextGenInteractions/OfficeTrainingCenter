@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198000010044191100}
   - component: {fileID: 199000011973445748}
   m_Layer: 0
-  m_Name: Near Snow
+  m_Name: Near Snow HQ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013790200260}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 20, z: 0}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1.0000007, z: 1.0000007}
   m_Children: []
   m_Father: {fileID: 0}
@@ -129,7 +129,7 @@ ParticleSystem:
         m_RotationOrder: 0
     startSpeed:
       minMaxState: 0
-      scalar: -2
+      scalar: -7
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2165,7 +2165,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 3
     type: 1
     collisionMode: 0

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198000013312550256}
   - component: {fileID: 199000010953832166}
   m_Layer: 0
-  m_Name: Storm Rain
+  m_Name: Storm HQ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1526,7 +1526,7 @@ ParticleSystem:
     randomizePerFrame: 0
   ExternalForcesModule:
     enabled: 1
-    multiplier: 12
+    multiplier: 4
   ClampVelocityModule:
     enabled: 0
     x:

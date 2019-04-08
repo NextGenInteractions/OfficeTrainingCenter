@@ -26,7 +26,7 @@ public class EnviroMeshSeasons : MonoBehaviour {
 
 		UpdateSeasonMaterial ();
 
-		EnviroSky.instance.OnSeasonChanged += (EnviroSeasons.Seasons season) =>
+        EnviroSkyMgr.instance.OnSeasonChanged += (EnviroSeasons.Seasons season) =>
 		{
 			UpdateSeasonMaterial ();
 		};
@@ -61,7 +61,7 @@ public class EnviroMeshSeasons : MonoBehaviour {
 
 	void UpdateSeasonMaterial ()
 	{
-		switch (EnviroSky.instance.Seasons.currentSeasons)
+		switch (EnviroSkyMgr.instance.GetCurrentSeason())
 		{
 		case EnviroSeasons.Seasons.Spring:
 			myRenderer.sharedMaterial = SpringMaterial;

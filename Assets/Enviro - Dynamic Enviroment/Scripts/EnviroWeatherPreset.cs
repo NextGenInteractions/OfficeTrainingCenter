@@ -9,10 +9,10 @@ using UnityEditor;
 
 [System.Serializable]
 public class EnviroWeatherCloudsConfig {
-	[Tooltip("Top color of clouds.")]
-	public Color topColor = Color.white;
-	[Tooltip("Bottom color of clouds.")]
-	public Color bottomColor = Color.grey;
+	[Tooltip("Ambient top color brightness of clouds.")]
+	public float ambientTopColorBrightness = 1;
+	[Tooltip("Ambient Bottom color brightness of clouds.")]
+	public float ambientbottomColorBrightness = 1;
     [Tooltip("Sky blend factor.")]
     [Range(0f, 1f)]
     public float skyBlending = 1f;
@@ -62,6 +62,30 @@ public class EnviroWeatherCloudsConfig {
     [Tooltip("Flat Clouds Color Power")]
 	[Range(0f,1f)]
 	public float flatColorPow = 2f;
+
+
+    [Tooltip("Particle Clouds Alpha")]
+    [Range(0f, 1f)]
+    public float particleLayer1Alpha = 0f;
+    [Tooltip("Particle Clouds Brightness")]
+    [Range(0f, 1f)]
+    public float particleLayer1Brightness = 0.75f;
+    [Tooltip("Particle Clouds Color Power")]
+    [Range(0f, 1f)]
+    public float particleLayer1ColorPow = 2f;
+
+    [Tooltip("Particle Clouds Alpha")]
+    [Range(0f, 1f)]
+    public float particleLayer2Alpha = 0f;
+    [Tooltip("Particle Clouds Brightness")]
+    [Range(0f, 1f)]
+    public float particleLayer2Brightness = 0.75f;
+    [Tooltip("Particle Clouds Color Power")]
+    [Range(0f, 1f)]
+    public float particleLayer2ColorPow = 2f;
+
+    [Tooltip("Use particle clouds here even when it is disabled!")]
+    public bool particleCloudsOverwrite = false;
 }
 
 [System.Serializable]
@@ -107,6 +131,9 @@ public class EnviroWeatherPreset : ScriptableObject
 	public Gradient weatherFogMod;
     [Range(0f, 2.0f)]
     public float volumeLightIntensity = 1.0f;
+    [Range(-1.0f, 1.0f)]
+    public float shadowIntensityMod = 0.0f;
+
     [Range(0f,100f)][Tooltip("The density of height based fog for this weather.")]
 	public float heightFogDensity = 1f;
 	[Range(0,2)][Tooltip("Define the height of fog rendered in sky.")]
@@ -116,10 +143,15 @@ public class EnviroWeatherPreset : ScriptableObject
 	public float SkyFogIntensity = 1f;
 	[Range(1,10)][Tooltip("Define the scattering intensity of fog.")]
 	public float FogScatteringIntensity = 1f;
-	[Range(0,1)][Tooltip("Block the sundisk with fog.")]
+
+    [Range(0,1)][Tooltip("Block the sundisk with fog.")]
 	public float fogSunBlocking = 0.25f;
 
-	[Header("Weather Settings")]
+    [Range(0, 1)]
+    [Tooltip("Block the moon with fog.")]
+    public float moonIntensity = 1f;
+
+    [Header("Weather Settings")]
 	public List<EnviroWeatherEffects> effectSystems = new List<EnviroWeatherEffects>();
 	[Range(0,1)][Tooltip("Wind intensity that will applied to wind zone.")]
 	public float WindStrenght = 0.5f;
@@ -127,7 +159,10 @@ public class EnviroWeatherPreset : ScriptableObject
 	public float wetnessLevel = 0f;
 	[Range(0,1)][Tooltip("The maximum snow level that can be reached.")]
 	public float snowLevel = 0f;
-	[Tooltip("Activate this to enable thunder and lightning.")]
+    [Range(-50f, 50f)]
+    [Tooltip("The temperature modifcation for this weather type. (Will be added or substracted)")]
+    public float temperatureLevel = 0f;
+    [Tooltip("Activate this to enable thunder and lightning.")]
 	public bool isLightningStorm;
 	[Range(0,2)][Tooltip("The Intervall of lightning in seconds. Random(lightningInterval,lightningInterval * 2). ")]
 	public float lightningInterval = 10f;
@@ -152,6 +187,11 @@ public class EnviroWeatherPreset : ScriptableObject
 	public AudioClip WinterDayAmbient;
 	[Tooltip("This sound wil be played in winter at night.(looped)")]
 	public AudioClip WinterNightAmbient;
+
+    // Postprocessing
+    public float blurDistance = 100;
+    public float blurIntensity = 1f;
+    public float blurSkyIntensity = 1f;
 }
 
 public class EnviroWeatherPresetCreation {
@@ -165,7 +205,7 @@ public class EnviroWeatherPresetCreation {
 		wpreset.weatherSkyMod = CreateGradient ();
 		wpreset.weatherLightMod = CreateGradient ();
 
-		wpreset.version = "2.0.0";
+		wpreset.version = "2.1.0";
 		// Create and save the new profile with unique name
 		string path = AssetDatabase.GetAssetPath (Selection.activeObject);
 		if (path == "") 
@@ -180,6 +220,7 @@ public class EnviroWeatherPresetCreation {
 		Selection.activeObject = wpreset;
 	}
 	#endif
+
 	public static GameObject GetAssetPrefab(string name)
 	{
 		#if UNITY_EDITOR
@@ -272,6 +313,5 @@ public class EnviroWeatherPresetCreation {
 		k.inTangent = inTangent;
 		k.outTangent = outTangent;
 		return k;
-	}
-			
+	}		
 }

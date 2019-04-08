@@ -22,8 +22,8 @@ MonoBehaviour:
   winter: 0
   possibiltyInWinter: 100
   cloudsConfig:
-    topColor: {r: 0.29411763, g: 0.29411763, b: 0.29411763, a: 1}
-    bottomColor: {r: 0.14705884, g: 0.14705884, b: 0.14705884, a: 1}
+    ambientTopColorBrightness: 1
+    ambientbottomColorBrightness: 1
     skyBlending: 1
     alphaCoef: 3.14
     scatteringCoef: 0.041
@@ -40,6 +40,13 @@ MonoBehaviour:
     flatSoftness: 0.785
     flatBrightness: 0.34
     flatColorPow: 2.41
+    particleLayer1Alpha: 0
+    particleLayer1Brightness: 0.75
+    particleLayer1ColorPow: 2
+    particleLayer2Alpha: 0
+    particleLayer2Brightness: 0.75
+    particleLayer2ColorPow: 2
+    particleCloudsOverwrite: 0
   fogStartDistance: 0
   fogDistance: 0
   fogDensity: 0.0003
@@ -136,6 +143,7 @@ MonoBehaviour:
   SkyFogIntensity: 1.15
   FogScatteringIntensity: 1
   fogSunBlocking: 0
+  moonIntensity: 1
   effectSystems:
   - prefab: {fileID: 1000010755747430, guid: 1b83b884d3cfa9e4ab51583cd8d35bd2, type: 2}
     localPositionOffset: {x: 0, y: 25, z: 0}
@@ -143,6 +151,7 @@ MonoBehaviour:
   WindStrenght: 0.5
   wetnessLevel: 0.458
   snowLevel: 0
+  temperatureLevel: 0
   isLightningStorm: 0
   lightningInterval: 10
   weatherSFX: {fileID: 8300000, guid: 66895ba947937d141b5575c203607545, type: 3}
@@ -154,3 +163,6 @@ MonoBehaviour:
   AutumnNightAmbient: {fileID: 0}
   WinterDayAmbient: {fileID: 0}
   WinterNightAmbient: {fileID: 0}
+  blurDistance: 100
+  blurIntensity: 1
+  blurSkyIntensity: 1

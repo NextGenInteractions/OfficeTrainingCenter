@@ -10,7 +10,6 @@ using UnityEditor;
 [Serializable]
 public class EnviroQualitySettings
 {
-
 	[Range(0,1)][Tooltip("Modifies the amount of particles used in weather effects.")]
 	public float GlobalParticleEmissionRates = 1f;
 	[Tooltip("How often Enviro Growth Instances should be updated. Lower value = smoother growth and more frequent updates but more perfomance hungry!")]
@@ -35,17 +34,46 @@ public class EnviroSatelliteVariables
 [Serializable]
 public class EnviroSeasonSettings
 {
-	[Tooltip("How many days in spring?")]
-	public float SpringInDays = 90f;
-	[Tooltip("How many days in summer?")]
-	public float SummerInDays = 93f;
-	[Tooltip("How many days in autumn?")]
-	public float AutumnInDays = 92f;
-	[Tooltip("How many days in winter?")]
-	public float WinterInDays = 90f;
+    [Header("Spring")]
+    [Tooltip("Start Day of Year for Spring")]
+    [Range(0,366)]
+    public int SpringStart = 60;
+    [Tooltip("End Day of Year for Spring")]
+    [Range(0, 366)]
+    public int SpringEnd = 92;
+    [Tooltip("Base Temperature in Spring")]
+    public AnimationCurve springBaseTemperature = new AnimationCurve();
+
+    [Header("Summer")]
+    [Tooltip("Start Day of Year for Summer")]
+    [Range(0, 366)]
+    public int SummerStart = 93;
+    [Tooltip("End Day of Year for Summer")]
+    [Range(0, 366)]
+    public int SummerEnd = 185;
+    [Tooltip("Base Temperature in Summer")]
+    public AnimationCurve summerBaseTemperature = new AnimationCurve();
+
+    [Header("Autumn")]
+    [Tooltip("Start Day of Year for Autumn")]
+    [Range(0, 366)]
+    public int AutumnStart = 186;
+    [Tooltip("End Day of Year for Autumn")]
+    [Range(0, 366)]
+    public int AutumnEnd = 276;
+    [Tooltip("Base Temperature in Autumn")]
+    public AnimationCurve autumnBaseTemperature = new AnimationCurve();
+
+    [Header("Winter")]
+    [Tooltip("Start Day of Year for Winter")]
+    [Range(0, 366)]
+    public int WinterStart = 277;
+    [Tooltip("End Day of Year for Winter")]
+    [Range(0, 366)]
+    public int WinterEnd = 59;
+    [Tooltip("Base Temperature in Winter")]
+    public AnimationCurve winterBaseTemperature = new AnimationCurve();
 }
-
-
 
 [Serializable]
 public class EnviroWeatherSettings 
@@ -63,7 +91,8 @@ public class EnviroWeatherSettings
 	public float snowAccumulationSpeed = 0.05f;
 	[Tooltip("Defines the speed of snow will meld when it is not snowing.")]
 	public float snowMeltingSpeed = 0.05f;
-	[Tooltip("Defines the speed of clouds will change when weather conditions changed.")]
+
+    [Tooltip("Defines the speed of clouds will change when weather conditions changed.")]
 	public float cloudTransitionSpeed = 1f;
 	[Tooltip("Defines the speed of fog will change when weather conditions changed.")]
 	public float fogTransitionSpeed = 1f;
@@ -78,6 +107,10 @@ public class EnviroWeatherSettings
     public float lightningRange = 500f;
     [Range(500f, 5000f)]
     public float lightningHeight = 750f;
+
+    [Header("Temperature:")]
+    [Tooltip("Defines the speed of temperature changes.")]
+    public float temperatureChangingSpeed = 10f;
 }
 
 [Serializable]
@@ -98,13 +131,24 @@ public class EnviroSkySettings
 	public enum SkyboxModi
 	{
 		Default,
+        Simple,
 		CustomSkybox,
 		CustomColor
 	}
-	[Header("Sky Mode:")]
+
+    public enum SkyboxModiLW
+    {
+        Simple,
+        CustomSkybox,
+        CustomColor
+    }
+
+    [Header("Sky Mode:")]
 	[Tooltip("Select if you want to use enviro skybox your custom material.")]
 	public SkyboxModi skyboxMode;
-	[Tooltip("If SkyboxMode == CustomSkybox : Assign your skybox material here!")]
+    [Tooltip("Select if you want to use enviro skybox your custom material.")]
+    public SkyboxModiLW skyboxModeLW;
+    [Tooltip("If SkyboxMode == CustomSkybox : Assign your skybox material here!")]
 	public Material customSkyboxMaterial;
 	[Tooltip("If SkyboxMode == CustomColor : Select your sky color here!")]
 	public Color customSkyboxColor;
@@ -138,6 +182,14 @@ public class EnviroSkySettings
 	[Tooltip("Color gradient for sundisk. Influence sundisk color based on current sun altitude")]
 	public Gradient sunDiskColor;
 
+    [Tooltip("Top color of simple skybox.")]
+    public Gradient simpleSkyColor;
+    [Tooltip("Horizon color of simple skybox.")]
+    public Gradient simpleHorizonColor;
+    [Tooltip("Sun color of simple skybox.")]
+    public Gradient simpleSunColor;
+    [Tooltip("Size of sun in simple skybox mode.")]
+    public AnimationCurve simpleSunDiskSize = new AnimationCurve();
 
     [Header("Moon")]
     [Tooltip("Whether to render the moon.")]
@@ -146,13 +198,17 @@ public class EnviroSkySettings
     public MoonPhases moonPhaseMode = MoonPhases.Realistic;
 	[Tooltip("The Moon texture.")]
 	public Texture moonTexture;
-	[Tooltip("The color of the moon")]
+    [Tooltip("The Moon's Glow texture.")]
+    public Texture glowTexture;
+    [Tooltip("The color of the moon")]
 	public Color moonColor;
 	[Range(0f,5f)][Tooltip("Brightness of the moon.")]
 	public float moonBrightness = 1f;
 	[Range(0f,20f)][Tooltip("Size of the moon.")]
 	public float moonSize = 10f;
-	[Tooltip("Glow around moon.")]
+    [Range(0f, 20f)][Tooltip("Size of the moon glowing effect.")]
+    public float glowSize = 10f;
+    [Tooltip("Glow around moon.")]
 	public AnimationCurve moonGlow = new AnimationCurve();
 	[Tooltip("Glow color around moon.")]
 	public Color moonGlowColor;
@@ -175,6 +231,10 @@ public class EnviroSkySettings
 	public Cubemap starsCubeMap;
 	[Tooltip("Intensity of stars based on time of day.")]
 	public AnimationCurve starsIntensity = new AnimationCurve();
+    [Tooltip("Stars Twinkling Speed")]
+    [Range(0f, 10f)]
+    public float starsTwinklingRate = 1f;
+
     [Header("Galaxy")]
     [Tooltip("A cubemap for night galaxy.")]
     public Cubemap galaxyCubeMap;
@@ -182,8 +242,7 @@ public class EnviroSkySettings
     public AnimationCurve galaxyIntensity = new AnimationCurve();
 
     [Header("Sky Dithering")]
-    public float noiseScale = 10f;
-    public float noiseIntensity = 1.5f;
+    public bool dithering = true;
 }
 
 [Serializable]
@@ -223,13 +282,27 @@ public class EnviroLightSettings // All Lightning Variables
 	[Header("Global Reflections")]
     [Tooltip("Enable/disable enviro reflection probe..")]
     public bool globalReflections = true;
+
+    [Tooltip("Enable/disable enviro reflection probe updates based on gametime changes..")]
+    public bool globalReflectionsUpdateOnGameTime = true;
+    [Tooltip("Enable/disable enviro reflection probe updates based on transform position changes..")]
+    public bool globalReflectionsUpdateOnPosition = true;
     [Tooltip("Reflection probe intensity.")]
+    [Range(0f, 2f)]
     public float globalReflectionsIntensity = 0.5f;
     [Tooltip("Reflection probe update rate.")]
     public float globalReflectionsUpdate = 0.025f;
     [Tooltip("Reflection probe intensity.")]
     [Range(0.1f,10f)]
     public float globalReflectionsScale = 1f;
+}
+
+[Serializable]
+public class EnviroDistanceBlurSettings
+{
+    public bool antiFlicker = true;
+    public bool highQuality = true;
+    public float radius = 7f;
 }
 
 
@@ -273,35 +346,36 @@ public class EnviroFogSettings
     public float noiseScale = 0.001f;
     [Tooltip("The speed and direction of height based fog.")]
     public Vector2 noiseVelocity = new Vector2(3f, 1.5f);
-    [Header("Fog Scattering")]
+   // [Header("Fog Scattering")]
 	[Tooltip("Influence scattering near sun.")]
 	public float mie = 5f;
 	[Tooltip("Influence scattering near sun.")]
 	public float g = 5f;
-	[Header("Fog Dithering")]
-	[Tooltip("Fog dithering settings to reduce color banding.")]
-	public float fogDitheringScale = 240f;
-	[Tooltip("Fog dithering settings to reduce color banding.")]
-	public float fogDitheringIntensity = 0.5f;
 
-	[HideInInspector]
+    [Header("Fog Dithering")]
+    public bool dithering = true;
+
+    [Tooltip("Color gradient for Top Fog")]
+    public Gradient simpleFogColor;
+
+    [HideInInspector]
 	public float skyFogIntensity = 1f;
 }
 
 [Serializable]
 public class EnviroVolumeLightingSettings
 {
+#if ENVIRO_HD
     [Tooltip("Downsampling of volume light rendering.")]
     public EnviroSkyRendering.VolumtericResolution Resolution = EnviroSkyRendering.VolumtericResolution.Quarter;
-
+#endif
     [Tooltip("Activate or deactivate directional volume light rendering.")]
     public bool dirVolumeLighting = true;
     [Header("Quality")]
     [Range(1, 64)]
     public int SampleCount = 8;
     [Header("Light Settings")]
-    [Range(0.0f, 1.0f)]
-    public float ScatteringCoef = 0.025f;
+    public AnimationCurve ScatteringCoef = new AnimationCurve();
     [Range(0.0f, 0.1f)]
     public float ExtinctionCoef = 0.05f;
     [Range(0.0f, 0.999f)]
@@ -328,9 +402,9 @@ public class EnviroLightShaftsSettings
 {
 	[Header("Quality Settings")]
 	[Tooltip("Lightshafts resolution quality setting.")]
-	public EnviroLightShafts.SunShaftsResolution resolution = EnviroLightShafts.SunShaftsResolution.Normal;
+	public EnviroPostProcessing.SunShaftsResolution resolution = EnviroPostProcessing.SunShaftsResolution.Normal;
 	[Tooltip("Lightshafts blur mode.")]
-	public EnviroLightShafts.ShaftsScreenBlendMode screenBlendMode = EnviroLightShafts.ShaftsScreenBlendMode.Screen;
+	public EnviroPostProcessing.ShaftsScreenBlendMode screenBlendMode = EnviroPostProcessing.ShaftsScreenBlendMode.Screen;
 	[Tooltip("Use cameras depth to hide lightshafts?")]
 	public bool useDepthTexture = true;
 
@@ -507,15 +581,30 @@ public class EnviroCloudSettings
     [Tooltip("Size of the shadow cookie.")]
     [Range(1000, 10000)]
     public int shadowCookieSize = 10000;
+
+    public EnviroParticleClouds ParticleCloudsLayer1 = new EnviroParticleClouds();
+    public EnviroParticleClouds ParticleCloudsLayer2 = new EnviroParticleClouds();
 }
 
 
-[System.Serializable]
+[Serializable]
+public class EnviroParticleClouds
+{
+    [Tooltip("Particle clouds relative height.")][Range(0f,0.2f)]
+    public float height = 0.05f;
+    [Tooltip("Global Color for flat clouds based sun positon.")]
+    public Gradient particleCloudsColor;
+}
+
+
+    [System.Serializable]
 public class EnviroProfile : ScriptableObject 
 {
+    
 	public string version;
 	public EnviroLightSettings lightSettings = new EnviroLightSettings();
     public EnviroVolumeLightingSettings volumeLightSettings = new EnviroVolumeLightingSettings();
+    public EnviroDistanceBlurSettings distanceBlurSettings = new EnviroDistanceBlurSettings();
     public EnviroSkySettings skySettings = new EnviroSkySettings();
 	public EnviroCloudSettings cloudsSettings = new EnviroCloudSettings();
 	public EnviroWeatherSettings weatherSettings = new EnviroWeatherSettings();
@@ -536,13 +625,30 @@ public class EnviroProfile : ScriptableObject
 		Fog,
         VolumeLighting,
 		Lightshafts,
+        DistanceBlur,
 		Season,
 		Satellites,
 		Audio,
 		Quality
 	}
-	[HideInInspector]public settingsMode viewMode;
-	[HideInInspector]public bool showPlayerSetup = true;
+
+    public enum settingsModeLW
+    {
+        Lighting,
+        Sky,
+        Weather,
+        Clouds,
+        Fog,
+        Lightshafts,
+        Season,
+        Satellites,
+        Audio,
+        Quality
+    }
+
+    [HideInInspector]public settingsMode viewMode;
+    [HideInInspector]public settingsModeLW viewModeLW;
+    [HideInInspector]public bool showPlayerSetup = true;
 	[HideInInspector]public bool showRenderingSetup = false;
 	[HideInInspector]public bool showComponentsSetup = false;
 	[HideInInspector]public bool showTimeUI = false;
@@ -559,7 +665,7 @@ public static class EnviroProfileCreation {
 	{
 		EnviroProfile profile = ScriptableObject.CreateInstance<EnviroProfile>();
 
-		profile.version = "2.0.5";
+		profile.version = "2.1.0";
 		// Setup new profile with default settings
 		SetupDefaults (profile);
 
@@ -567,7 +673,7 @@ public static class EnviroProfileCreation {
 		string path = AssetDatabase.GetAssetPath (Selection.activeObject);
 		if (path == "") 
 		{
-			path = "Assets/Enviro - Dynamic Enviroment/Profiles";
+			path = "Assets/Enviro - Sky and Weather/Core/Profiles";
 		} 
 		string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath (path + "/New " + "Enviro Profile" + ".asset");
 		AssetDatabase.CreateAsset (profile, assetPathAndName);
@@ -626,8 +732,14 @@ public static class EnviroProfileCreation {
 		profile.skySettings.scatteringCurve.AddKey(CreateKey (-10f, 0.5f,55f,55f));
 		profile.skySettings.scatteringCurve.AddKey(CreateKey (6.5f, 0.52f,35f,35f));
 		profile.skySettings.scatteringCurve.AddKey(CreateKey(11f,1f));
-		// Scattering Color Tint
-		gradientColors.Add (GetColor ("#8492C8"));gradientTimes.Add (0f);
+
+        profile.skySettings.simpleSunDiskSize = new AnimationCurve();
+        profile.skySettings.simpleSunDiskSize.AddKey(CreateKey(0.015f, 0.0f));
+        profile.skySettings.simpleSunDiskSize.AddKey(CreateKey(0.035f, 0.37f,-0.1f, -0.1f));
+        profile.skySettings.simpleSunDiskSize.AddKey(CreateKey(0.015f, 1f));
+
+        // Scattering Color Tint
+        gradientColors.Add (GetColor ("#8492C8"));gradientTimes.Add (0f);
 		gradientColors.Add (GetColor ("#8492C8"));gradientTimes.Add (0.45f);
 		gradientColors.Add (GetColor ("#FFB69C"));gradientTimes.Add (0.527f);
 		gradientColors.Add (GetColor ("#D2D2D2"));gradientTimes.Add (0.75f);
@@ -660,7 +772,7 @@ public static class EnviroProfileCreation {
 		profile.skySettings.starsIntensity.AddKey(CreateKey(0.0f,0.6f));
 		profile.skySettings.starsIntensity.AddKey(CreateKey(0.0f,1f));
 		// Get Texture
-		profile.skySettings.moonTexture = GetAssetTexture ("tex_enviro_moon");
+		profile.skySettings.moonTexture = GetAssetTexture ("tex_enviro_moon_standard");
 		profile.skySettings.starsCubeMap = GetAssetCubemap ("cube_enviro_stars");
         //Galaxy
         profile.skySettings.galaxyIntensity.AddKey(CreateKey(1f, 0f));
@@ -669,9 +781,51 @@ public static class EnviroProfileCreation {
         profile.skySettings.galaxyIntensity.AddKey(CreateKey(0.0f, 1f));
         profile.skySettings.galaxyCubeMap = GetAssetCubemap("cube_enviro_galaxy");
 
+        //Simple Sky Color
+        gradientColors.Add(GetColor("#0F1013")); gradientTimes.Add(0f);
+        gradientColors.Add(GetColor("#272A35")); gradientTimes.Add(0.465f);
+        gradientColors.Add(GetColor("#277BA5")); gradientTimes.Add(0.50f);
+        gradientColors.Add(GetColor("#7CA0BA")); gradientTimes.Add(0.56f);
+        gradientColors.Add(GetColor("#5687B8")); gradientTimes.Add(1f);
+
+        List<float> alpha = new List<float>();
+        List<float> alphaTimes = new List<float>();
+
+        alpha.Add(0f); alphaTimes.Add(0f);
+        alpha.Add(0.5f); alphaTimes.Add(0.47f);
+        alpha.Add(1f); alphaTimes.Add(1f);
+        profile.skySettings.simpleSkyColor = CreateGradient(gradientColors, gradientTimes, alpha, alphaTimes);
+        gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+        //Simple Horizon Color
+        gradientColors.Add(GetColor("#0F1013")); gradientTimes.Add(0f);
+        gradientColors.Add(GetColor("#272A35")); gradientTimes.Add(0.46f);
+        gradientColors.Add(GetColor("#DD8F3B")); gradientTimes.Add(0.506f);
+        gradientColors.Add(GetColor("#DADADA")); gradientTimes.Add(0.603f);
+        gradientColors.Add(GetColor("#FFFFFF")); gradientTimes.Add(1f);
+        profile.skySettings.simpleHorizonColor = CreateGradient(gradientColors, gradientTimes);
+        gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+        //Simple Sun Color
+        gradientColors.Add(GetColor("#000000")); gradientTimes.Add(0f);
+        gradientColors.Add(GetColor("#FF6340")); gradientTimes.Add(0.46f);
+        gradientColors.Add(GetColor("#FF7308")); gradientTimes.Add(0.506f);
+        gradientColors.Add(GetColor("#E3C29E")); gradientTimes.Add(0.56f);
+        gradientColors.Add(GetColor("#FFE9D4")); gradientTimes.Add(1f);
+        profile.skySettings.simpleSunColor = CreateGradient(gradientColors, gradientTimes);
+        gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+        //Simple Fog
+        gradientColors.Add(GetColor("#101217")); gradientTimes.Add(0f);
+        gradientColors.Add(GetColor("#4C5570")); gradientTimes.Add(0.46f);
+        gradientColors.Add(GetColor("#D8A269")); gradientTimes.Add(0.50f);
+        gradientColors.Add(GetColor("#C7D7E3")); gradientTimes.Add(0.57f);
+        gradientColors.Add(GetColor("#DBE7F0")); gradientTimes.Add(1f);
+        profile.fogSettings.simpleFogColor = CreateGradient(gradientColors, gradientTimes);
+        gradientColors = new List<Color>(); gradientTimes = new List<float>();
 
     //Clouds:
-    Texture clouds1 = GetAssetTexture("tex_enviro_noise");
+        Texture clouds1 = GetAssetTexture("tex_enviro_noise");
 		Texture clouds2 = GetAssetTexture("tex_enviro_cirrus");
 		if (clouds1 == null || clouds2 == null)
 			Debug.Log ("Cannot find cloud textures");
@@ -723,6 +877,17 @@ public static class EnviroProfileCreation {
 		profile.cloudsSettings.ambientLightIntensity.AddKey(CreateKey(0.35f, 0.617f));
         profile.cloudsSettings.ambientLightIntensity.AddKey(CreateKey(0.32f, 1f));
 
+        //Particle Clouds Color
+        gradientColors.Add(GetColor("#24272D")); gradientTimes.Add(0f);
+        gradientColors.Add(GetColor("#2E3038")); gradientTimes.Add(0.46f);
+        gradientColors.Add(GetColor("#544E46")); gradientTimes.Add(0.51f);
+        gradientColors.Add(GetColor("#B7BABC")); gradientTimes.Add(0.56f);
+        gradientColors.Add(GetColor("#D2D2D2")); gradientTimes.Add(1f);
+        profile.cloudsSettings.ParticleCloudsLayer1.particleCloudsColor = CreateGradient(gradientColors, gradientTimes);
+        profile.cloudsSettings.ParticleCloudsLayer2.particleCloudsColor = CreateGradient(gradientColors, gradientTimes);
+        gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+
         //LightShafts
         gradientColors.Add (GetColor ("#FF703C"));gradientTimes.Add (0f);
 		gradientColors.Add (GetColor ("#FF5D00"));gradientTimes.Add (0.47f);
@@ -751,6 +916,12 @@ public static class EnviroProfileCreation {
 
         //Lightning
         profile.weatherSettings.lightningEffect = GetAssetPrefab("Enviro_Lightning_Strike");
+
+        //Volume Lighting  
+        profile.volumeLightSettings.ScatteringCoef = new AnimationCurve();
+        profile.volumeLightSettings.ScatteringCoef.AddKey(CreateKey(0.5f, 0f));
+        profile.volumeLightSettings.ScatteringCoef.AddKey(CreateKey(0.2f, 0.5f));
+        profile.volumeLightSettings.ScatteringCoef.AddKey(CreateKey(0.15f, 1f));
     }
 
 	public static bool UpdateProfile(EnviroProfile profile,string fromV, string toV)
@@ -758,105 +929,10 @@ public static class EnviroProfileCreation {
 		if (profile == null)
 			return false;
 
-		if ((fromV == "1.9.0" || fromV == "1.9.1") && toV == "2.0.5") {
-			//Sun Intensity
-			profile.lightSettings.directLightSunIntensity = new AnimationCurve();
-			profile.lightSettings.directLightSunIntensity.AddKey (CreateKey (0f, 0f));
-			profile.lightSettings.directLightSunIntensity.AddKey (CreateKey (0f, 0.42f));
-			profile.lightSettings.directLightSunIntensity.AddKey (CreateKey (0.75f, 0.5f, 5f, 5f));
-			profile.lightSettings.directLightSunIntensity.AddKey (CreateKey (1.5f, 1f));
+        List<Color> gradientColors = new List<Color>();
+        List<float> gradientTimes = new List<float>();
 
-			//Light Moon Intensity
-			profile.lightSettings.directLightMoonIntensity = new AnimationCurve();
-			profile.lightSettings.directLightMoonIntensity.AddKey (CreateKey (0.01f, 0f));
-			profile.lightSettings.directLightMoonIntensity.AddKey (CreateKey (0.01f, 0.42f));
-			profile.lightSettings.directLightMoonIntensity.AddKey (CreateKey (0.6f, 0.5f, 2f, 2f));
-			profile.lightSettings.directLightMoonIntensity.AddKey (CreateKey (1.0f, 1f));
-
-            //Shadow Intensity
-            profile.lightSettings.shadowIntensity = new AnimationCurve();
-            profile.lightSettings.shadowIntensity.AddKey(CreateKey(1.0f, 0f));
-            profile.lightSettings.shadowIntensity.AddKey(CreateKey(1.0f, 1f));
-       
-            //clouds light intensity
-            profile.cloudsSettings.directLightIntensity = new AnimationCurve();
-            profile.cloudsSettings.directLightIntensity.AddKey(CreateKey(0.02f, 0f));
-            profile.cloudsSettings.directLightIntensity.AddKey(CreateKey(0.15f, 0.495f));
-            profile.cloudsSettings.directLightIntensity.AddKey(CreateKey(0.15f, 1f));
-
-            //clouds light intensity
-            profile.cloudsSettings.ambientLightIntensity = new AnimationCurve();
-            profile.cloudsSettings.ambientLightIntensity.AddKey(CreateKey(0.017f, 0f));
-            profile.cloudsSettings.ambientLightIntensity.AddKey(CreateKey(0.0f, 0.46f));
-            profile.cloudsSettings.ambientLightIntensity.AddKey(CreateKey(0.35f, 0.617f));
-            profile.cloudsSettings.ambientLightIntensity.AddKey(CreateKey(0.32f, 1f));
-
-            //Moon Colors
-            profile.skySettings.moonColor = GetColor("#9C9D9EFF");
-			profile.skySettings.moonGlowColor = GetColor ("#4D4D4DFF");
-
-			List<Color> gradientColors = new List<Color> ();
-			List<float> gradientTimes = new List<float> ();
-			gradientColors.Add (GetColor ("#17171A"));gradientTimes.Add (0f);
-			gradientColors.Add (GetColor ("#17171A"));gradientTimes.Add (0.455f);
-			gradientColors.Add (GetColor ("#3D3D3B"));gradientTimes.Add (0.48f);
-			gradientColors.Add (GetColor ("#EEB279"));gradientTimes.Add (0.53f);
-			gradientColors.Add (GetColor ("#EEF0FF"));gradientTimes.Add (0.6f);
-			gradientColors.Add (GetColor ("#ECEEFF"));gradientTimes.Add (1f);
-			profile.cloudsSettings.cirrusCloudsColor = CreateGradient (gradientColors, gradientTimes);
-
-			gradientColors = new List<Color> ();
-			gradientTimes = new List<float> ();
-			gradientColors.Add (GetColor ("#17171A"));gradientTimes.Add (0f);
-			gradientColors.Add (GetColor ("#17171A"));gradientTimes.Add (0.455f);
-			gradientColors.Add (GetColor ("#3D3D3B"));gradientTimes.Add (0.48f);
-			gradientColors.Add (GetColor ("#EEB279"));gradientTimes.Add (0.53f);
-			gradientColors.Add (GetColor ("#EEF0FF"));gradientTimes.Add (0.6f);
-			gradientColors.Add (GetColor ("#ECEEFF"));gradientTimes.Add (1f);
-			profile.cloudsSettings.flatCloudsColor = CreateGradient (gradientColors, gradientTimes);
-
-
-			gradientColors = new List<Color> ();
-			gradientTimes = new List<float> ();
-			gradientColors.Add (GetColor ("#17171A"));gradientTimes.Add (0f);
-			gradientColors.Add (GetColor ("#17171A"));gradientTimes.Add (0.455f);
-			gradientColors.Add (GetColor ("#3D3D3B"));gradientTimes.Add (0.48f);
-			gradientColors.Add (GetColor ("#EEB279"));gradientTimes.Add (0.53f);
-			gradientColors.Add (GetColor ("#CECECE"));gradientTimes.Add (0.58f);
-			gradientColors.Add (GetColor ("#CECECE"));gradientTimes.Add (1f);
-			profile.cloudsSettings.volumeCloudsColor = CreateGradient (gradientColors, gradientTimes);
-			profile.cloudsSettings.volumeCloudsMoonColor = CreateGradient(GetColor("#232228"),0f,GetColor("#B6BCDC"),1f);
-
-            //Clouds:
-            Texture clouds1 = GetAssetTexture("tex_enviro_noise");
-			Texture clouds2 = GetAssetTexture("tex_enviro_cirrus");
-			if (clouds1 == null || clouds2 == null)
-				Debug.Log ("Cannot find cloud textures");
-			profile.cloudsSettings.flatCloudsNoiseTexture = clouds1;
-			profile.cloudsSettings.cirrusCloudsTexture = clouds2;
-
-			// Moon tex
-			profile.skySettings.moonTexture = GetAssetTexture ("tex_enviro_moon");
-			profile.skySettings.moonBrightness = 1f;
-
-            //Galaxy
-            profile.skySettings.galaxyIntensity = new AnimationCurve();
-            profile.skySettings.galaxyIntensity.AddKey(CreateKey(0.4f, 0f));
-            profile.skySettings.galaxyIntensity.AddKey(CreateKey(0.015f, 0.5f));
-            profile.skySettings.galaxyIntensity.AddKey(CreateKey(0.0f, 0.6f));
-            profile.skySettings.galaxyIntensity.AddKey(CreateKey(0.0f, 1f));
-            profile.skySettings.galaxyCubeMap = GetAssetCubemap("cube_enviro_galaxy");
-
-
-            //Lightning
-            profile.weatherSettings.lightningEffect = GetAssetPrefab("Enviro_Lightning_Strike");
-
-
-            profile.version = toV;
-			return true;
-		}
-
-        if ((fromV == "2.0.0" || fromV == "2.0.1" || fromV == "2.0.2") && toV == "2.0.5")
+        if ((fromV == "2.0.0" || fromV == "2.0.1" || fromV == "2.0.2") && toV == "2.1.0")
         {
             //Galaxy
             profile.skySettings.galaxyIntensity = new AnimationCurve();
@@ -866,24 +942,221 @@ public static class EnviroProfileCreation {
             profile.skySettings.galaxyIntensity.AddKey(CreateKey(0.0f, 1f));
             profile.skySettings.galaxyCubeMap = GetAssetCubemap("cube_enviro_galaxy");
 
+            profile.skySettings.moonTexture = GetAssetTexture("tex_enviro_moon_standard");
             //Lightning
             profile.weatherSettings.lightningEffect = GetAssetPrefab("Enviro_Lightning_Strike");
+
+            //Simple Sky Color
+            gradientColors.Add(GetColor("#0F1013")); gradientTimes.Add(0f);
+            gradientColors.Add(GetColor("#272A35")); gradientTimes.Add(0.465f);
+            gradientColors.Add(GetColor("#277BA5")); gradientTimes.Add(0.50f);
+            gradientColors.Add(GetColor("#7CA0BA")); gradientTimes.Add(0.56f);
+            gradientColors.Add(GetColor("#5687B8")); gradientTimes.Add(1f);
+
+            List<float> alpha = new List<float>();
+            List<float> alphaTimes = new List<float>();
+
+            alpha.Add(0f); alphaTimes.Add(0f);
+            alpha.Add(0.5f); alphaTimes.Add(0.47f);
+            alpha.Add(1f); alphaTimes.Add(1f);
+            profile.skySettings.simpleSkyColor = CreateGradient(gradientColors, gradientTimes, alpha, alphaTimes);
+            gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+            //Simple Horizon Color
+            gradientColors.Add(GetColor("#0F1013")); gradientTimes.Add(0f);
+            gradientColors.Add(GetColor("#272A35")); gradientTimes.Add(0.46f);
+            gradientColors.Add(GetColor("#DD8F3B")); gradientTimes.Add(0.506f);
+            gradientColors.Add(GetColor("#DADADA")); gradientTimes.Add(0.603f);
+            gradientColors.Add(GetColor("#FFFFFF")); gradientTimes.Add(1f);
+            profile.skySettings.simpleHorizonColor = CreateGradient(gradientColors, gradientTimes);
+            gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+            //Simple Sun Color
+            gradientColors.Add(GetColor("#000000")); gradientTimes.Add(0f);
+            gradientColors.Add(GetColor("#FF6340")); gradientTimes.Add(0.46f);
+            gradientColors.Add(GetColor("#FF7308")); gradientTimes.Add(0.506f);
+            gradientColors.Add(GetColor("#E3C29E")); gradientTimes.Add(0.56f);
+            gradientColors.Add(GetColor("#FFE9D4")); gradientTimes.Add(1f);
+            profile.skySettings.simpleSunColor = CreateGradient(gradientColors, gradientTimes);
+            gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+            //Simple Fog
+            gradientColors.Add(GetColor("#101217")); gradientTimes.Add(0f);
+            gradientColors.Add(GetColor("#4C5570")); gradientTimes.Add(0.46f);
+            gradientColors.Add(GetColor("#D8A269")); gradientTimes.Add(0.50f);
+            gradientColors.Add(GetColor("#C7D7E3")); gradientTimes.Add(0.57f);
+            gradientColors.Add(GetColor("#DBE7F0")); gradientTimes.Add(1f);
+            profile.fogSettings.simpleFogColor = CreateGradient(gradientColors, gradientTimes);
+            gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+            //SunDisk Scale
+            profile.skySettings.simpleSunDiskSize = new AnimationCurve();
+            profile.skySettings.simpleSunDiskSize.AddKey(CreateKey(0.015f, 0.0f));
+            profile.skySettings.simpleSunDiskSize.AddKey(CreateKey(0.035f, 0.37f, -0.1f, -0.1f));
+            profile.skySettings.simpleSunDiskSize.AddKey(CreateKey(0.015f, 1f));
+
+            //Particle Clouds Color
+            gradientColors.Add(GetColor("#24272D")); gradientTimes.Add(0f);
+            gradientColors.Add(GetColor("#2E3038")); gradientTimes.Add(0.46f);
+            gradientColors.Add(GetColor("#544E46")); gradientTimes.Add(0.51f);
+            gradientColors.Add(GetColor("#B7BABC")); gradientTimes.Add(0.56f);
+            gradientColors.Add(GetColor("#D2D2D2")); gradientTimes.Add(1f);
+            profile.cloudsSettings.ParticleCloudsLayer1.particleCloudsColor = CreateGradient(gradientColors, gradientTimes);
+            profile.cloudsSettings.ParticleCloudsLayer2.particleCloudsColor = CreateGradient(gradientColors, gradientTimes);
+            gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+            profile.volumeLightSettings.ScatteringCoef = new AnimationCurve();
+            profile.volumeLightSettings.ScatteringCoef.AddKey(CreateKey(0.5f, 0f));
+            profile.volumeLightSettings.ScatteringCoef.AddKey(CreateKey(0.2f, 0.5f));
+            profile.volumeLightSettings.ScatteringCoef.AddKey(CreateKey(0.15f, 1f));
 
             profile.version = toV;
             return true;
         }
 
-        if (fromV == "2.0.3" && toV == "2.0.5")
+        if (fromV == "2.0.3" && toV == "2.1.0")
         {
             //Lightning
             profile.weatherSettings.lightningEffect = GetAssetPrefab("Enviro_Lightning_Strike");
+
+            //Simple Sky Color
+            gradientColors.Add(GetColor("#0F1013")); gradientTimes.Add(0f);
+            gradientColors.Add(GetColor("#272A35")); gradientTimes.Add(0.465f);
+            gradientColors.Add(GetColor("#277BA5")); gradientTimes.Add(0.50f);
+            gradientColors.Add(GetColor("#7CA0BA")); gradientTimes.Add(0.56f);
+            gradientColors.Add(GetColor("#5687B8")); gradientTimes.Add(1f);
+
+            profile.skySettings.moonTexture = GetAssetTexture("tex_enviro_moon_standard");
+
+            List<float> alpha = new List<float>();
+            List<float> alphaTimes = new List<float>();
+
+            alpha.Add(0f); alphaTimes.Add(0f);
+            alpha.Add(0.5f); alphaTimes.Add(0.47f);
+            alpha.Add(1f); alphaTimes.Add(1f);
+            profile.skySettings.simpleSkyColor = CreateGradient(gradientColors, gradientTimes, alpha, alphaTimes);
+            gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+            //Simple Horizon Color
+            gradientColors.Add(GetColor("#0F1013")); gradientTimes.Add(0f);
+            gradientColors.Add(GetColor("#272A35")); gradientTimes.Add(0.46f);
+            gradientColors.Add(GetColor("#DD8F3B")); gradientTimes.Add(0.506f);
+            gradientColors.Add(GetColor("#DADADA")); gradientTimes.Add(0.603f);
+            gradientColors.Add(GetColor("#FFFFFF")); gradientTimes.Add(1f);
+            profile.skySettings.simpleHorizonColor = CreateGradient(gradientColors, gradientTimes);
+            gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+            //Simple Sun Color
+            gradientColors.Add(GetColor("#000000")); gradientTimes.Add(0f);
+            gradientColors.Add(GetColor("#FF6340")); gradientTimes.Add(0.46f);
+            gradientColors.Add(GetColor("#FF7308")); gradientTimes.Add(0.506f);
+            gradientColors.Add(GetColor("#E3C29E")); gradientTimes.Add(0.56f);
+            gradientColors.Add(GetColor("#FFE9D4")); gradientTimes.Add(1f);
+            profile.skySettings.simpleSunColor = CreateGradient(gradientColors, gradientTimes);
+            gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+            //Simple Fog
+            gradientColors.Add(GetColor("#101217")); gradientTimes.Add(0f);
+            gradientColors.Add(GetColor("#4C5570")); gradientTimes.Add(0.46f);
+            gradientColors.Add(GetColor("#D8A269")); gradientTimes.Add(0.50f);
+            gradientColors.Add(GetColor("#C7D7E3")); gradientTimes.Add(0.57f);
+            gradientColors.Add(GetColor("#DBE7F0")); gradientTimes.Add(1f);
+            profile.fogSettings.simpleFogColor = CreateGradient(gradientColors, gradientTimes);
+            gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+            profile.skySettings.simpleSunDiskSize = new AnimationCurve();
+            profile.skySettings.simpleSunDiskSize.AddKey(CreateKey(0.015f, 0.0f));
+            profile.skySettings.simpleSunDiskSize.AddKey(CreateKey(0.035f, 0.37f, -0.1f, -0.1f));
+            profile.skySettings.simpleSunDiskSize.AddKey(CreateKey(0.015f, 1f));
+
+            //Particle Clouds Color
+            gradientColors.Add(GetColor("#24272D")); gradientTimes.Add(0f);
+            gradientColors.Add(GetColor("#2E3038")); gradientTimes.Add(0.46f);
+            gradientColors.Add(GetColor("#544E46")); gradientTimes.Add(0.51f);
+            gradientColors.Add(GetColor("#B7BABC")); gradientTimes.Add(0.56f);
+            gradientColors.Add(GetColor("#D2D2D2")); gradientTimes.Add(1f);
+            profile.cloudsSettings.ParticleCloudsLayer1.particleCloudsColor = CreateGradient(gradientColors, gradientTimes);
+            profile.cloudsSettings.ParticleCloudsLayer2.particleCloudsColor = CreateGradient(gradientColors, gradientTimes);
+            gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+            profile.volumeLightSettings.ScatteringCoef = new AnimationCurve();
+            profile.volumeLightSettings.ScatteringCoef.AddKey(CreateKey(0.5f, 0f));
+            profile.volumeLightSettings.ScatteringCoef.AddKey(CreateKey(0.2f, 0.5f));
+            profile.volumeLightSettings.ScatteringCoef.AddKey(CreateKey(0.15f, 1f));
 
             profile.version = toV;
             return true;
         }
 
-        if (fromV == "2.0.4" && toV == "2.0.5")
+        if (fromV == "2.0.4" || fromV == "2.0.5" && toV == "2.1.0")
         {
+
+            profile.skySettings.moonTexture = GetAssetTexture("tex_enviro_moon_standard");
+
+            //Simple Sky Color
+            gradientColors.Add(GetColor("#0F1013")); gradientTimes.Add(0f);
+            gradientColors.Add(GetColor("#272A35")); gradientTimes.Add(0.465f);
+            gradientColors.Add(GetColor("#277BA5")); gradientTimes.Add(0.50f);
+            gradientColors.Add(GetColor("#7CA0BA")); gradientTimes.Add(0.56f);
+            gradientColors.Add(GetColor("#5687B8")); gradientTimes.Add(1f);
+
+            List<float> alpha = new List<float>();
+            List<float> alphaTimes = new List<float>();
+
+            alpha.Add(0f); alphaTimes.Add(0f);
+            alpha.Add(0.5f); alphaTimes.Add(0.47f);
+            alpha.Add(1f); alphaTimes.Add(1f);
+            profile.skySettings.simpleSkyColor = CreateGradient(gradientColors, gradientTimes, alpha, alphaTimes);
+            gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+            //Simple Fog
+            gradientColors.Add(GetColor("#101217")); gradientTimes.Add(0f);
+            gradientColors.Add(GetColor("#4C5570")); gradientTimes.Add(0.46f);
+            gradientColors.Add(GetColor("#D8A269")); gradientTimes.Add(0.50f);
+            gradientColors.Add(GetColor("#C7D7E3")); gradientTimes.Add(0.57f);
+            gradientColors.Add(GetColor("#DBE7F0")); gradientTimes.Add(1f);
+            profile.fogSettings.simpleFogColor = CreateGradient(gradientColors, gradientTimes);
+            gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+            //Simple Horizon Color
+            gradientColors.Add(GetColor("#0F1013")); gradientTimes.Add(0f);
+            gradientColors.Add(GetColor("#272A35")); gradientTimes.Add(0.46f);
+            gradientColors.Add(GetColor("#DD8F3B")); gradientTimes.Add(0.506f);
+            gradientColors.Add(GetColor("#DADADA")); gradientTimes.Add(0.603f);
+            gradientColors.Add(GetColor("#FFFFFF")); gradientTimes.Add(1f);
+            profile.skySettings.simpleHorizonColor = CreateGradient(gradientColors, gradientTimes);
+            gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+            //Simple Sun Color
+            gradientColors.Add(GetColor("#000000")); gradientTimes.Add(0f);
+            gradientColors.Add(GetColor("#FF6340")); gradientTimes.Add(0.46f);
+            gradientColors.Add(GetColor("#FF7308")); gradientTimes.Add(0.506f);
+            gradientColors.Add(GetColor("#E3C29E")); gradientTimes.Add(0.56f);
+            gradientColors.Add(GetColor("#FFE9D4")); gradientTimes.Add(1f);
+            profile.skySettings.simpleSunColor = CreateGradient(gradientColors, gradientTimes);
+            gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+            //SunDisk Scale
+            profile.skySettings.simpleSunDiskSize = new AnimationCurve();
+            profile.skySettings.simpleSunDiskSize.AddKey(CreateKey(0.015f, 0.0f));
+            profile.skySettings.simpleSunDiskSize.AddKey(CreateKey(0.035f, 0.37f, -0.1f, -0.1f));
+            profile.skySettings.simpleSunDiskSize.AddKey(CreateKey(0.015f, 1f));
+
+            //Particle Clouds Color
+            gradientColors.Add(GetColor("#24272D")); gradientTimes.Add(0f);
+            gradientColors.Add(GetColor("#2E3038")); gradientTimes.Add(0.46f);
+            gradientColors.Add(GetColor("#544E46")); gradientTimes.Add(0.51f);
+            gradientColors.Add(GetColor("#B7BABC")); gradientTimes.Add(0.56f);
+            gradientColors.Add(GetColor("#D2D2D2")); gradientTimes.Add(1f);
+            profile.cloudsSettings.ParticleCloudsLayer1.particleCloudsColor = CreateGradient(gradientColors, gradientTimes);
+            profile.cloudsSettings.ParticleCloudsLayer2.particleCloudsColor = CreateGradient(gradientColors, gradientTimes);
+            gradientColors = new List<Color>(); gradientTimes = new List<float>();
+
+            profile.volumeLightSettings.ScatteringCoef = new AnimationCurve();
+            profile.volumeLightSettings.ScatteringCoef.AddKey(CreateKey(0.5f, 0f));
+            profile.volumeLightSettings.ScatteringCoef.AddKey(CreateKey(0.2f, 0.5f));
+            profile.volumeLightSettings.ScatteringCoef.AddKey(CreateKey(0.15f, 1f));
+
             profile.version = toV;
             return true;
         }
@@ -1001,7 +1274,31 @@ public static class EnviroProfileCreation {
 		return nG;
 	}
 
-	public static Color GetColor (string hex)
+    public static Gradient CreateGradient(List<Color> clrs, List<float> times, List<float> alpha, List<float> timesAlpha)
+    {
+        Gradient nG = new Gradient();
+
+        GradientColorKey[] gClr = new GradientColorKey[clrs.Count];
+        GradientAlphaKey[] gAlpha = new GradientAlphaKey[alpha.Count];
+
+        for (int i = 0; i < clrs.Count; i++)
+        {
+            gClr[i].color = clrs[i];
+            gClr[i].time = times[i];
+        }
+
+        for (int i = 0; i < alpha.Count; i++)
+        {
+            gAlpha[i].alpha = alpha[i];
+            gAlpha[i].time = timesAlpha[i];
+        }
+
+        nG.SetKeys(gClr, gAlpha);
+        return nG;
+    }
+
+
+    public static Color GetColor (string hex)
 	{
 		Color clr = new Color ();	
 		ColorUtility.TryParseHtmlString (hex, out clr);

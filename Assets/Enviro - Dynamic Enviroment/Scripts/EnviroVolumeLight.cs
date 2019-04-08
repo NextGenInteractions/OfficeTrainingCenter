@@ -1,4 +1,4 @@
-//  Copyright(c) 2016, Michal Skalsky
+//  Copyright(c) 2016, Michal Skalsky, (Modified for use in Enviro - Sky and Weather)
 //  All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification,
@@ -35,6 +35,7 @@ using System;
 
 [AddComponentMenu("Enviro/Volume Light")]
 [RequireComponent(typeof(Light))]
+[ExecuteInEditMode]
 public class EnviroVolumeLight : MonoBehaviour 
 {
 	public event Action<EnviroSkyRendering, EnviroVolumeLight, CommandBuffer, Matrix4x4> CustomRenderEvent;
@@ -77,9 +78,6 @@ public class EnviroVolumeLight : MonoBehaviour
     void Start() 
     {
 
-		//RenderTextureDescriptor dsc = new RenderTextureDescriptor(1024, 1024, 0);
-		//temp = new RenderTexture (1024,1024,0);
-
 #if UNITY_5_5_OR_NEWER
         if (SystemInfo.graphicsDeviceType == GraphicsDeviceType.Direct3D11 || SystemInfo.graphicsDeviceType == GraphicsDeviceType.Direct3D12 ||
             SystemInfo.graphicsDeviceType == GraphicsDeviceType.Metal || SystemInfo.graphicsDeviceType == GraphicsDeviceType.PlayStation4 ||
@@ -98,6 +96,39 @@ public class EnviroVolumeLight : MonoBehaviour
             return;
         }
 #endif
+
+
+
+	}
+
+    /// <summary>
+    /// 
+    /// </summary>
+    void OnEnable()
+    {
+        if (EnviroSkyMgr.instance == null)
+        {
+            this.enabled = false;
+            return;
+        }
+         
+#if ENVIRO_LW
+        if (EnviroSkyMgr.instance.currentEnviroSkyVersion == EnviroSkyMgr.EnviroSkyVersion.LW)
+        {
+            this.enabled = false;
+            return;
+        }
+#endif
+
+#if ENVIRO_PRO
+        if (EnviroSkyMgr.instance.currentRenderPipeline != EnviroSkyMgr.EnviroRenderPipeline.Legacy)
+        {
+            this.enabled = false;
+            return;
+        }
+#endif
+
+
         _commandBuffer = new CommandBuffer();
         _commandBuffer.name = "Light Command Buffer";
 
@@ -107,30 +138,28 @@ public class EnviroVolumeLight : MonoBehaviour
 
         _light = GetComponent<Light>();
 
-		if (_light.type == LightType.Directional) {
-			_light.AddCommandBuffer (LightEvent.BeforeScreenspaceMask, _commandBuffer);
-			_light.AddCommandBuffer (LightEvent.AfterShadowMap, _cascadeShadowCommandBuffer);
-		} else {
-			_light.AddCommandBuffer (LightEvent.AfterShadowMap, _commandBuffer);
-		}
+        if (_light.type == LightType.Directional)
+        {
+            _light.AddCommandBuffer(LightEvent.BeforeScreenspaceMask, _commandBuffer);
+            _light.AddCommandBuffer(LightEvent.AfterShadowMap, _cascadeShadowCommandBuffer);
+        }
+        else
+        {
+            _light.AddCommandBuffer(LightEvent.AfterShadowMap, _commandBuffer);
+        }
 
-		if(volumeLightShader == null)
-			volumeLightShader = Shader.Find ("Enviro/VolumeLight");
+        if (volumeLightShader == null)
+            volumeLightShader = Shader.Find("Enviro/VolumeLight");
 
         if (volumeLightShader == null)
             throw new Exception("Critical Error: \"Enviro/VolumeLight\" shader is missing.");
 
-        if (_light.type != LightType.Directional) {
-			_material = new Material (volumeLightShader);
-		}
-	}
+        if (_light.type != LightType.Directional)
+        {
+            _material = new Material(volumeLightShader);
+        }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    void OnEnable()
-    {
-		if(GetComponent<Light>() != null && GetComponent<Light>().type != LightType.Directional)
+        if (GetComponent<Light>() != null && GetComponent<Light>().type != LightType.Directional)
             EnviroSkyRendering.PreRenderEvent += VolumetricLightRenderer_PreRenderEvent;
     }
 
@@ -139,7 +168,20 @@ public class EnviroVolumeLight : MonoBehaviour
     /// </summary>
     void OnDisable()
     {
-		if(GetComponent<Light>() != null && GetComponent<Light>().type != LightType.Directional)
+        if (_light != null && _commandBuffer != null)
+        {
+            if (_light.type == LightType.Directional)
+            {
+                _light.RemoveCommandBuffer(LightEvent.BeforeScreenspaceMask, _commandBuffer);
+                _light.RemoveCommandBuffer(LightEvent.AfterShadowMap, _cascadeShadowCommandBuffer);
+            }
+            else
+            {
+                _light.RemoveCommandBuffer(LightEvent.AfterShadowMap, _commandBuffer);
+            }
+        }
+
+        if (GetComponent<Light>() != null && GetComponent<Light>().type != LightType.Directional)
             EnviroSkyRendering.PreRenderEvent -= VolumetricLightRenderer_PreRenderEvent;
     }
 
@@ -148,7 +190,7 @@ public class EnviroVolumeLight : MonoBehaviour
     /// </summary>
     public void OnDestroy()
     {        
-        Destroy(_material);
+        DestroyImmediate(_material);
     }
 
     /// <summary>
@@ -245,7 +287,7 @@ public class EnviroVolumeLight : MonoBehaviour
 
         if (_light.shadows != LightShadows.None && forceShadowsOff == false)
         {
-			if (EnviroSky.instance.PlayerCamera.stereoEnabled) 
+			if (UnityEngine.XR.XRSettings.enabled) 
 			{
 				if (EnviroSky.instance.singlePassVR) 
 				{
@@ -378,10 +420,8 @@ public class EnviroVolumeLight : MonoBehaviour
 
         if (_light.shadows != LightShadows.None && forceShadowsOff == false)
         {
-			if (EnviroSky.instance.PlayerCamera.stereoEnabled)
-            {
-				if (EnviroSky.instance.singlePassVR)
-                {
+			if (UnityEngine.XR.XRSettings.enabled) {
+				if (EnviroSky.instance.singlePassVR) {
 					clip = Matrix4x4.TRS (new Vector3 (0.5f, 0.5f, 0.5f), Quaternion.identity, new Vector3 (0.5f, 0.5f, 0.5f));
 
 					if (_reversedZ)

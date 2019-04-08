@@ -8,27 +8,37 @@ public class DemoUI : MonoBehaviour {
 
 
 	public UnityEngine.UI.Slider sliderTime;
-	public UnityEngine.UI.Slider sliderQuality;
+	UnityEngine.UI.Slider sliderQuality;
 	public UnityEngine.UI.Text timeText;
-	public UnityEngine.UI.Dropdown weatherDropdown;
-	public UnityEngine.UI.Dropdown seasonDropdown;
+    public UnityEngine.UI.Text weatherText;
+    public UnityEngine.UI.Text temperatureText;
+    public UnityEngine.UI.Dropdown weatherDropdown;
+	//UnityEngine.UI.Dropdown seasonDropdown;
 
- 	bool seasonmode = true;
-	bool fastdays = false;
+ 	//bool seasonmode = true;
+	//bool fastdays = false;
 
 	private bool started = false;
 
 	void Start () 
 	{
-		EnviroSky.instance.OnWeatherChanged += (EnviroWeatherPreset type) =>
+
+          if(EnviroSkyMgr.instance == null || !EnviroSkyMgr.instance.IsAvailable())
+            {
+                this.enabled = false;
+                return;
+            }
+
+        EnviroSkyMgr.instance.OnWeatherChanged += (EnviroWeatherPreset type) =>
 		{
 			UpdateWeatherSlider ();	
 		};
 
-		EnviroSky.instance.OnSeasonChanged += (EnviroSeasons.Seasons season) =>
+       
+        /*EnviroSkyMgr.instance.OnSeasonChanged += (EnviroSeasons.Seasons season) =>
 		{
 			UpdateSeasonSlider(season);
-		};
+		};*/
 	}
 		
 	IEnumerator setupDrodown ()
@@ -36,9 +46,9 @@ public class DemoUI : MonoBehaviour {
 		started = true;
 		yield return new WaitForSeconds (0.1f);
 
-		for (int i = 0; i < EnviroSky.instance.Weather.weatherPresets.Count; i++) {
+		for (int i = 0; i < EnviroSkyMgr.instance.GetCurrentWeatherPresetList().Count; i++) {
 			UnityEngine.UI.Dropdown.OptionData o = new UnityEngine.UI.Dropdown.OptionData();
-			o.text = EnviroSky.instance.Weather.weatherPresets [i].Name;
+			o.text = EnviroSkyMgr.instance.GetCurrentWeatherPresetList()[i].Name;
 			weatherDropdown.options.Add (o);
 		}
 
@@ -50,88 +60,77 @@ public class DemoUI : MonoBehaviour {
 	{
 		if (sliderTime.value < 0f)
 			sliderTime.value = 0f;
-		EnviroSky.instance.SetInternalTimeOfDay (sliderTime.value * 24f);
-	}
-
-
-	public void ChangeTimeLenghtSlider (float value) 
-	{
-		EnviroSky.instance.GameTime.DayLengthInMinutes = value;
+		EnviroSkyMgr.instance.SetTimeOfDay (sliderTime.value * 24f);
 	}
 
     public void ChangeCloudQuality(int value)
     {
-         EnviroSky.instance.cloudsSettings.cloudsQuality = (EnviroCloudSettings.CloudQuality)value;
-    }
+#if ENVIRO_HD
+        EnviroSky.instance.cloudsSettings.cloudsQuality = (EnviroCloudSettings.CloudQuality)value;
+#endif
+     }
 
-        public void ChangeQualitySlider () 
+    public void ChangeAmbientVolume (float value)
 	{
-		EnviroSky.instance.profile.qualitySettings.GlobalParticleEmissionRates = sliderQuality.value;
-	}
-
-	public void ChangeAmbientVolume (float value)
-	{
-		EnviroSky.instance.Audio.ambientSFXVolume = value;
+        EnviroSkyMgr.instance.ambientAudioVolume = value;
 	}
 
 	public void ChangeWeatherVolume (float value)
 	{
-		EnviroSky.instance.Audio.weatherSFXVolume = value;
-	}
-
+        EnviroSkyMgr.instance.weatherAudioVolume = value;
+    }
 
 	public void SetWeatherID (int id) 
 	{
-		EnviroSky.instance.ChangeWeather (id);
+		EnviroSkyMgr.instance.ChangeWeather (id);
 	}
 
-    public void SetClouds(int id)
+    public void SetVolumeClouds(bool b)
     {
-        EnviroSky.instance.cloudsMode = (EnviroSky.EnviroCloudsMode)id;
+        EnviroSkyMgr.instance.useVolumeClouds = b;
     }
 
-        public void OverwriteSeason ()
-	{
-		if (!seasonmode) {
-			seasonmode = true;
-			EnviroSky.instance.Seasons.calcSeasons = true;
-		}
-		else {
-			seasonmode = false;
-			EnviroSky.instance.Seasons.calcSeasons = false;
-		}
-		
-	}
+    public void SetVolumeLighting(bool b)
+    {
+        EnviroSkyMgr.instance.useVolumeLighting = b;
+    }
 
-	public void FastDays ()
-	{
-		if (!fastdays) {
-			fastdays = true;
-			EnviroSky.instance.GameTime.DayLengthInMinutes = 0.2f;
-		}
-		else {
-			fastdays = false;
-			EnviroSky.instance.GameTime.DayLengthInMinutes = 5f;
-		}
+    public void SetFlatClouds(bool b)
+    {
+        EnviroSkyMgr.instance.useFlatClouds = b;
+    }
 
-	}
+    public void SetParticleClouds(bool b)
+    {
+        EnviroSkyMgr.instance.useParticleClouds = b;
+    }
 
-	public void SetSeason (int id)
+    public void SetSunShafts(bool b)
+    {
+        EnviroSkyMgr.instance.useSunShafts = b;
+    }
+
+    public void SetMoonShafts(bool b)
+    {
+        EnviroSkyMgr.instance.useMoonShafts = b;
+    }
+
+    public void SetSeason (int id)
 	{
 		switch (id) 
 		{
 		case 0:
-			EnviroSky.instance.ChangeSeason (EnviroSeasons.Seasons.Spring);
+			EnviroSkyMgr.instance.ChangeSeason (EnviroSeasons.Seasons.Spring);
 		break;
 		case 1:
-			EnviroSky.instance.ChangeSeason (EnviroSeasons.Seasons.Summer);
+            EnviroSkyMgr.instance.ChangeSeason (EnviroSeasons.Seasons.Summer);
 			break;
 		case 2:
-			EnviroSky.instance.ChangeSeason (EnviroSeasons.Seasons.Autumn);
+            EnviroSkyMgr.instance.ChangeSeason (EnviroSeasons.Seasons.Autumn);
 			break;
 		case 3:
-			EnviroSky.instance.ChangeSeason (EnviroSeasons.Seasons.Winter);
-			break;
+            EnviroSkyMgr.instance.ChangeSeason (EnviroSeasons.Seasons.Winter);
+            break;
 		}
 	}
 
@@ -141,28 +140,30 @@ public class DemoUI : MonoBehaviour {
 		switch (id) 
 		{
 		case 0:
-			EnviroSky.instance.GameTime.ProgressTime = EnviroTime.TimeProgressMode.None;
+			EnviroSkyMgr.instance.SetTimeProgress(EnviroTime.TimeProgressMode.None);
 			break;
 		case 1:
-			EnviroSky.instance.GameTime.ProgressTime = EnviroTime.TimeProgressMode.Simulated;
-			break;
+            EnviroSkyMgr.instance.SetTimeProgress(EnviroTime.TimeProgressMode.Simulated);
+            break;
 		case 2:
-			EnviroSky.instance.GameTime.ProgressTime = EnviroTime.TimeProgressMode.SystemTime;
+            EnviroSkyMgr.instance.SetTimeProgress(EnviroTime.TimeProgressMode.SystemTime);
 			break;
 		}
 	}
+
+
 		
 	void UpdateWeatherSlider ()
 	{
-		if (EnviroSky.instance.Weather.currentActiveWeatherPreset != null) {
+		if (EnviroSkyMgr.instance.GetCurrentWeatherPreset() != null) {
 			for (int i = 0; i < weatherDropdown.options.Count; i++) {
-				if (weatherDropdown.options [i].text == EnviroSky.instance.Weather.currentActiveWeatherPreset.Name)
+				if (weatherDropdown.options [i].text == EnviroSkyMgr.instance.GetCurrentWeatherPreset().Name)
 					weatherDropdown.value = i;
 			}
 		}
 	}
 
-	void UpdateSeasonSlider (EnviroSeasons.Seasons s)
+	/*void UpdateSeasonSlider (EnviroSeasons.Seasons s)
 	{
 		switch (s) {
 		case EnviroSeasons.Seasons.Spring:
@@ -179,23 +180,26 @@ public class DemoUI : MonoBehaviour {
 			break;
 		}
 	}
-
+    */
 	void Update ()
 	{
-		if (!EnviroSky.instance.started)
+		if (!EnviroSkyMgr.instance.IsStarted())
 			return;
 		else {
 			if(!started)
 				StartCoroutine(setupDrodown ());
 		}
 
-		timeText.text = EnviroSky.instance.GetTimeString ();
-		ChangeQualitySlider ();
-	}
+		timeText.text = EnviroSkyMgr.instance.GetTimeString ();
+            if(EnviroSkyMgr.instance.GetCurrentWeatherPreset() != null)
+        weatherText.text = EnviroSkyMgr.instance.GetCurrentWeatherPreset().Name;
+
+            temperatureText.text = EnviroSkyMgr.instance.GetCurrentTemperatureString();
+    }
 
 	void LateUpdate ()
 	{
-		sliderTime.value = EnviroSky.instance.internalHour / 24f;
+		sliderTime.value = EnviroSkyMgr.instance.GetUniversalTimeOfDay() / 24f;
 	}
 }
 }

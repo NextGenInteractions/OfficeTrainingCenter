@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198000011328045526}
   - component: {fileID: 199000011986733202}
   m_Layer: 0
-  m_Name: Light Snow
+  m_Name: Light Snow HQ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

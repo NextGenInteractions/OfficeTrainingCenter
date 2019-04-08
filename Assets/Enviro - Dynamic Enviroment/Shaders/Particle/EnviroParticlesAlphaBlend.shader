@@ -20,7 +20,8 @@ Category {
 			#pragma target 2.0
 			#pragma multi_compile_particles
 			#pragma multi_compile_fog
-			
+			#pragma exclude_renderers gles 
+
 			#include "UnityCG.cginc"
 			#include "../../Resources/Shaders/Core/EnviroFogCore.cginc"
 
@@ -61,7 +62,7 @@ Category {
 				return o;
 			}
 
-			sampler2D_float _CameraDepthTexture;
+			UNITY_DECLARE_DEPTH_TEXTURE(_CameraDepthTexture);
 			float _InvFade;
 			
 			fixed4 frag (v2f i) : SV_Target

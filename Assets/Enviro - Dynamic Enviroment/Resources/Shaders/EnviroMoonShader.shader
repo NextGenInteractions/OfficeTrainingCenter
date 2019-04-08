@@ -23,7 +23,8 @@ Shader "Enviro/MoonShader"
             	CGPROGRAM
                 #pragma vertex vert
                 #pragma fragment frag
- 
+				#pragma target 2.0
+	
                 #include "UnityCG.cginc"
  				uniform float4 _SunPosition;
  				uniform float4 _MoonPosition;

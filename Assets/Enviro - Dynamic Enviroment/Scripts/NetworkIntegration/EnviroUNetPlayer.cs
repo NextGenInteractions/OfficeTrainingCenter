@@ -3,13 +3,19 @@
 /// </summary>
 
 using UnityEngine;
+#if ENVIRO_UNET_SUPPORT
 using UnityEngine.Networking;
+#endif
 using System.Collections;
+#if ENVIRO_UNET_SUPPORT
 [AddComponentMenu("Enviro/Integration/UNet Player")]
 [RequireComponent(typeof (NetworkIdentity))]
 public class EnviroUNetPlayer : NetworkBehaviour {
-
-	public bool assignOnStart = true;
+#else
+public class EnviroUNetPlayer : MonoBehaviour {
+#endif
+#if ENVIRO_UNET_SUPPORT
+    public bool assignOnStart = true;
     public bool findSceneCamera = true;
 
     public GameObject Player;
@@ -29,7 +35,7 @@ public class EnviroUNetPlayer : NetworkBehaviour {
         if (isLocalPlayer) 
 		{
 			if (assignOnStart && Player != null && PlayerCamera != null)
-				EnviroSky.instance.AssignAndStart (Player, PlayerCamera);
+				EnviroSkyMgr.instance.AssignAndStart (Player, PlayerCamera);
 
 			Cmd_RequestSeason ();
 			Cmd_RequestCurrentWeather ();
@@ -39,23 +45,23 @@ public class EnviroUNetPlayer : NetworkBehaviour {
 	[Command]
 	void Cmd_RequestSeason ()
 	{
-		RpcRequestSeason((int)EnviroSky.instance.Seasons.currentSeasons);
+		RpcRequestSeason((int)EnviroSkyMgr.instance.GetCurrentSeason());
 	}
 
 	[ClientRpc]
 	void RpcRequestSeason (int season)
 	{
-		EnviroSky.instance.Seasons.currentSeasons = (EnviroSeasons.Seasons)season;
+        EnviroSkyMgr.instance.ChangeSeason((EnviroSeasons.Seasons)season);
 	}
 
 	[Command]
 	void Cmd_RequestCurrentWeather ()
 	{
-		for (int i = 0; i < EnviroSky.instance.Weather.zones.Count; i++) 
+		for (int i = 0; i < EnviroSkyMgr.instance.Weather.zones.Count; i++) 
 		{
-			for (int w = 0; w < EnviroSky.instance.Weather.WeatherPrefabs.Count; w++)
+			for (int w = 0; w < EnviroSkyMgr.instance.Weather.WeatherPrefabs.Count; w++)
 			{
-				if(EnviroSky.instance.Weather.WeatherPrefabs[w] == EnviroSky.instance.Weather.zones[i].currentActiveZoneWeatherPrefab)
+                if (EnviroSkyMgr.instance.Weather.WeatherPrefabs[w] == EnviroSkyMgr.instance.Weather.zones[i].currentActiveZoneWeatherPrefab)
 					RpcRequestCurrentWeather(w,i);
 			}
 		}
@@ -64,7 +70,7 @@ public class EnviroUNetPlayer : NetworkBehaviour {
 	[ClientRpc]
 	void RpcRequestCurrentWeather (int weather, int zone)
 	{
-		EnviroSky.instance.Weather.zones[zone].currentActiveZoneWeatherPrefab = EnviroSky.instance.Weather.WeatherPrefabs[weather];
-        EnviroSky.instance.Weather.zones[zone].currentActiveZoneWeatherPreset = EnviroSky.instance.Weather.WeatherPrefabs[weather].weatherPreset;
+        EnviroSkyMgr.instance.ChangeZoneWeather(zone, weather);
     }
+#endif
 }

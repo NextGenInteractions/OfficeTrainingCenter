@@ -88,11 +88,11 @@ public class EnviroVegetationInstance : MonoBehaviour {
 
 	void Start () 
 	{
-		EnviroSky.instance.RegisterMe (this);
-		currentSeason = EnviroSky.instance.Seasons.currentSeasons;
-		maxAgeInHours = EnviroSky.instance.GetInHours (Age.maxAgeHours, Age.maxAgeDays, Age.maxAgeYears);
+		EnviroSkyMgr.instance.RegisterVegetationInstance (this);
+		currentSeason = EnviroSkyMgr.instance.GetCurrentSeason();
+		maxAgeInHours = EnviroSkyMgr.instance.GetInHours(Age.maxAgeHours, Age.maxAgeDays, Age.maxAgeYears);
 
-		EnviroSky.instance.OnSeasonChanged += (EnviroSeasons.Seasons season) =>
+        EnviroSkyMgr.instance.OnSeasonChanged += (EnviroSeasons.Seasons season) =>
 		{
 			SetSeason ();
 		};
@@ -129,8 +129,8 @@ public class EnviroVegetationInstance : MonoBehaviour {
 
 	void SetSeason ()
 	{
-		currentSeason = EnviroSky.instance.Seasons.currentSeasons;
-		VegetationChange ();
+		currentSeason = EnviroSkyMgr.instance.GetCurrentSeason();
+        VegetationChange ();
 	}
 
 	public void KeepVariablesClear ()
@@ -166,7 +166,7 @@ public class EnviroVegetationInstance : MonoBehaviour {
 
 	public void UpdateGrowth ()
 	{
-		ageInHours = EnviroSky.instance.currentTimeInHours - Age.birthdayInHours;
+		ageInHours = EnviroSkyMgr.instance.GetCurrentTimeInHours() - Age.birthdayInHours;
 		KeepVariablesClear ();
 		if (!stay) {
 			if (currentStage + 1 < GrowStages.Count) 
@@ -253,7 +253,7 @@ public class EnviroVegetationInstance : MonoBehaviour {
 	
 	public void Birth (int stage, float startAge)
 	{
-		Age.birthdayInHours = EnviroSky.instance.currentTimeInHours - startAge;
+		Age.birthdayInHours = EnviroSkyMgr.instance.GetCurrentTimeInHours() - startAge;
 		startAge = 0f;
 		ageInHours = 0f;
 		currentStage = stage;

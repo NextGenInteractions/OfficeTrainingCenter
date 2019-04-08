@@ -26,27 +26,27 @@ public class EnviroCTSIntegration : MonoBehaviour {
 			return;
 		}
 
-		if (EnviroSky.instance == null) {
-			Debug.LogWarning("EnviroSky not found! Please add EnviroSky prefab to your scene!");
+		if (EnviroSkyMgr.instance == null) {
+			Debug.LogWarning("EnviroSky Manager not found! Please add Enviro Manager to your scene!");
 			return;
 		}
-	daysInYear = EnviroSky.instance.seasonsSettings.SpringInDays + EnviroSky.instance.seasonsSettings.SummerInDays + EnviroSky.instance.seasonsSettings.AutumnInDays + EnviroSky.instance.seasonsSettings.WinterInDays;
+	daysInYear =  EnviroSkyMgr.instance.Time.DaysInYear;
 	}
 	
 
 	void Update () 
 	{
-		if (ctsWeatherManager == null || EnviroSky.instance == null)
+		if (ctsWeatherManager == null || EnviroSkyMgr.instance == null)
 			return;
 
 		if (updateSnow)
-			ctsWeatherManager.SnowPower = EnviroSky.instance.Weather.curSnowStrength;
+			ctsWeatherManager.SnowPower = EnviroSkyMgr.instance.GetSnowIntensity();
 
 		if(updateWetness)
-			ctsWeatherManager.RainPower = EnviroSky.instance.Weather.curWetness;
+			ctsWeatherManager.RainPower = EnviroSkyMgr.instance.GetWetnessIntensity();
 
 		if (updateSeasons) {
-			ctsWeatherManager.Season = Mathf.Lerp (0f, 4f, EnviroSky.instance.currentDay / daysInYear);
+			ctsWeatherManager.Season = Mathf.Lerp (0f, 4f, EnviroSkyMgr.instance.GetCurrentDay() / daysInYear);
 		}
 	}
 }

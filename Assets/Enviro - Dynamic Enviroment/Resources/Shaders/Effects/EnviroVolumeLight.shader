@@ -94,7 +94,7 @@ Shader "Enviro/VolumeLight"
 			#pragma vertex vert
 			#pragma fragment fragPointInside
 			#pragma target 3.5
-			#pragma exclude_renderers d3d9
+			#pragma exclude_renderers d3d9 gles 
 
 			#define UNITY_HDR_ON
 
@@ -145,7 +145,7 @@ Shader "Enviro/VolumeLight"
 			#pragma vertex vert
 			#pragma fragment fragPointInside
 			#pragma target 3.5
-			#pragma exclude_renderers d3d9
+			#pragma exclude_renderers d3d9 gles
 
 			#define UNITY_HDR_ON
 
@@ -195,7 +195,7 @@ Shader "Enviro/VolumeLight"
 			#pragma vertex vert
 			#pragma fragment fragPointOutside
 			#pragma target 3.5
-			#pragma exclude_renderers d3d9
+			#pragma exclude_renderers d3d9 gles
 
 			#define UNITY_HDR_ON
 
@@ -254,7 +254,7 @@ Shader "Enviro/VolumeLight"
 			#pragma vertex vert
 			#pragma fragment fragSpotOutside
 			#pragma target 3.5
-			#pragma exclude_renderers d3d9
+			#pragma exclude_renderers d3d9 gles
 
 			#define UNITY_HDR_ON
 
@@ -321,7 +321,7 @@ Shader "Enviro/VolumeLight"
 				#pragma vertex vertDir
 				#pragma fragment fragDir
 				#pragma target 3.5
-				#pragma exclude_renderers d3d9
+				#pragma exclude_renderers d3d9 gles
 
 				#define UNITY_HDR_ON
 
@@ -430,7 +430,7 @@ Shader "Enviro/VolumeLight"
 				#pragma vertex vertW
 				#pragma fragment fragW
 				#pragma target 3.5
-				#pragma exclude_renderers d3d9
+				#pragma exclude_renderers d3d9 gles
 
 				#ifdef SHADOWS_DEPTH
 				#define SHADOWS_NATIVE

@@ -22,8 +22,8 @@ MonoBehaviour:
   winter: 0
   possibiltyInWinter: 100
   cloudsConfig:
-    topColor: {r: 0.29411763, g: 0.29411763, b: 0.29411763, a: 1}
-    bottomColor: {r: 0.14705884, g: 0.14705884, b: 0.14705884, a: 1}
+    ambientTopColorBrightness: 1.397
+    ambientbottomColorBrightness: 1.397
     skyBlending: 0.475
     alphaCoef: 1.42
     scatteringCoef: 0
@@ -40,9 +40,16 @@ MonoBehaviour:
     flatSoftness: 0.785
     flatBrightness: 0.34
     flatColorPow: 2.41
+    particleLayer1Alpha: 0.257
+    particleLayer1Brightness: 0.561
+    particleLayer1ColorPow: 2
+    particleLayer2Alpha: 0.217
+    particleLayer2Brightness: 0.608
+    particleLayer2ColorPow: 2
+    particleCloudsOverwrite: 1
   fogStartDistance: 0
   fogDistance: 0
-  fogDensity: 0.0001
+  fogDensity: 0.001
   weatherSkyMod:
     serializedVersion: 2
     key0: {r: 0, g: 0, b: 0, a: 1}
@@ -105,8 +112,8 @@ MonoBehaviour:
     serializedVersion: 2
     key0: {r: 0, g: 0, b: 0, a: 1}
     key1: {r: 0, g: 0, b: 0, a: 1}
-    key2: {r: 0.09019608, g: 0.09019608, b: 0.09019608, a: 0.9254902}
-    key3: {r: 0.12156863, g: 0.12156863, b: 0.12156863, a: 0.9529412}
+    key2: {r: 0.051470578, g: 0.051470578, b: 0.051470578, a: 0.87058824}
+    key3: {r: 0.08088237, g: 0.08088237, b: 0.08088237, a: 0.87058824}
     key4: {r: 0.12156863, g: 0.12156863, b: 0.12156863, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
@@ -120,8 +127,8 @@ MonoBehaviour:
     ctime6: 0
     ctime7: 0
     atime0: 0
-    atime1: 29491
-    atime2: 32839
+    atime1: 30840
+    atime2: 33924
     atime3: 65535
     atime4: 0
     atime5: 0
@@ -130,12 +137,14 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 4
     m_NumAlphaKeys: 4
-  volumeLightIntensity: 1
+  volumeLightIntensity: 0.1
+  shadowIntensityMod: -1
   heightFogDensity: 1.95
-  SkyFogHeight: 0.96
-  SkyFogIntensity: 1.15
+  SkyFogHeight: 2.25
+  SkyFogIntensity: 1
   FogScatteringIntensity: 1
   fogSunBlocking: 0
+  moonIntensity: 0
   effectSystems:
   - prefab: {fileID: 1000010755747430, guid: 345f0b3a653208b47b4c607a213b3f46, type: 2}
     localPositionOffset: {x: 0, y: 25, z: 0}
@@ -143,6 +152,7 @@ MonoBehaviour:
   WindStrenght: 0.5
   wetnessLevel: 1
   snowLevel: 0
+  temperatureLevel: -2
   isLightningStorm: 0
   lightningInterval: 10
   weatherSFX: {fileID: 8300000, guid: e60b9243727bbb5428fbb3e7f7fe44cd, type: 3}
@@ -154,3 +164,6 @@ MonoBehaviour:
   AutumnNightAmbient: {fileID: 0}
   WinterDayAmbient: {fileID: 0}
   WinterNightAmbient: {fileID: 0}
+  blurDistance: 148
+  blurIntensity: 1
+  blurSkyIntensity: 1.39

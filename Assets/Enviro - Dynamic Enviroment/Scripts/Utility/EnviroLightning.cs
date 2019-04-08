@@ -12,8 +12,8 @@ public class EnviroLightning : MonoBehaviour {
 	{ 
 		StopAllCoroutines ();
 		GetComponent<Light> ().enabled = false;
-		EnviroSky.instance.thunder = 0f;
-	}
+        EnviroSkyMgr.instance.SetLightningFlashTrigger(0f);
+    }
 
 
 	public IEnumerator LightningBolt()
@@ -27,10 +27,10 @@ public class EnviroLightning : MonoBehaviour {
 		
 		while(thisFlash < flashCount){
 			GetComponent<Light>().intensity = defaultIntensity * Random.Range(1, 1.5f);
-			EnviroSky.instance.thunder = Random.Range (5f, 10f);
+            EnviroSkyMgr.instance.SetLightningFlashTrigger(Random.Range (5f, 10f));
 			yield return new WaitForSeconds(Random.Range (0.05f,0.1f));
 			GetComponent<Light>().intensity = defaultIntensity;
-			EnviroSky.instance.thunder = 1f;
+            EnviroSkyMgr.instance.SetLightningFlashTrigger(1f);
 			thisFlash++;
 		}
 

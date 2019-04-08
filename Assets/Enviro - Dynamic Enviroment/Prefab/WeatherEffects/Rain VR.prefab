@@ -4535,7 +4535,7 @@ ParticleSystem:
     randomizePerFrame: 0
   ExternalForcesModule:
     enabled: 1
-    multiplier: 10
+    multiplier: 2
   ClampVelocityModule:
     enabled: 0
     x:

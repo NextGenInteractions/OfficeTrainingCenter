@@ -16,9 +16,9 @@ Shader "Enviro/ShadowCookie"
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
-			
+			#pragma target 2.0
 			#include "UnityCG.cginc"
-
+			#pragma exclude_renderers gles 
 			struct appdata
 			{
 				float4 vertex : POSITION;

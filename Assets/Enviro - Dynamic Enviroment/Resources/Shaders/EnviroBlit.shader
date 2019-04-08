@@ -18,12 +18,12 @@
 			#pragma vertex vert
 			#pragma fragment frag
 			#include "UnityCG.cginc"
+			#pragma exclude_renderers gles 
 
 			uniform sampler2D _MainTex;
 			uniform half4 _MainTex_ST;
 			uniform half4 _MainTex_TexelSize;
 			UNITY_DECLARE_DEPTH_TEXTURE(_CameraDepthTexture);
-		
 			uniform half4 _CameraDepthTexture_ST;
 
 			uniform sampler2D _SubFrame;
@@ -127,7 +127,6 @@
 						reprojection = mul(_ProjectionSPVR, pos);
 					}
 #else
-
 					pos = mul(_InverseProjection, pos);
 					pos = pos / pos.w;
 					pos.xyz = mul((float3x3)_InverseRotation, pos.xyz);
@@ -136,8 +135,8 @@
 					reprojection = mul(_Projection, pos);
 #endif
 				
-					//reprojection = reprojection / reprojection.w;
-					//reprojection.xy = reprojection.xy * 0.5 + 0.5;
+				//	reprojection = reprojection / reprojection.w;
+				//	reprojection.xy = reprojection.xy * 0.5 + 0.5;
 
 					if (reprojection.y < 0.0 || reprojection.y > 1.0 || reprojection.x < 0.0 || reprojection.x > 1.0)
 					{

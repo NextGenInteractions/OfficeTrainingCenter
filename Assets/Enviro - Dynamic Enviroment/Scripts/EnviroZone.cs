@@ -26,8 +26,13 @@ public class EnviroZone : MonoBehaviour {
 	public WeatherUpdateMode updateMode = WeatherUpdateMode.GameTimeHours;
 	[Tooltip("Defines how often (gametime hours or realtime minutes) the system will heck to change the current weather conditions.")]
 	public float WeatherUpdateIntervall = 6f;
-	[Header("Zone scaling and gizmo:")]
-	[Tooltip("Defines the zone scale.")]
+    [Header("Zone scaling and gizmo:")]
+    [Tooltip("Enable this to use a mesh for zone trigger.")]
+    public bool useMeshZone = false;
+    [Tooltip("Custom Zone Mesh")]
+    public Mesh zoneMesh;
+
+    [Tooltip("Defines the zone scale.")]
 	public Vector3 zoneScale = new Vector3 (100f, 100f, 100f);
 	[Tooltip("Defines the color of the zone's gizmo in editor mode.")]
 	public Color zoneGizmoColor = Color.gray;
@@ -40,7 +45,8 @@ public class EnviroZone : MonoBehaviour {
 	[HideInInspector]public EnviroWeatherPreset lastActiveZoneWeatherPreset;
 
 	private BoxCollider zoneCollider;
-	private double nextUpdate;
+    private MeshCollider zoneMeshCollider;
+    private double nextUpdate;
 	private float nextUpdateRealtime;
 	private bool init = false;
 	private bool isDefault;
@@ -50,31 +56,46 @@ public class EnviroZone : MonoBehaviour {
 	{
 		if (zoneWeatherPresets.Count > 0)
 		{
-			zoneCollider = gameObject.AddComponent<BoxCollider> ();
-			zoneCollider.isTrigger = true;
 
-			if (!GetComponent<EnviroSky> ())
-				EnviroSky.instance.RegisterZone (this);
+            if (!useMeshZone)
+            {
+                zoneCollider = gameObject.AddComponent<BoxCollider>();
+                zoneCollider.isTrigger = true;
+            }
+            else
+            {
+                zoneMeshCollider = gameObject.AddComponent<MeshCollider>();
+                zoneMeshCollider.sharedMesh = zoneMesh;
+                zoneMeshCollider.convex = true;
+                zoneMeshCollider.isTrigger = true;
+            }
+
+			if (!EnviroSkyMgr.instance.IsDefaultZone(gameObject))
+				EnviroSkyMgr.instance.RegisterZone (this);
 			else 
 				isDefault = true;
 
+
 			UpdateZoneScale ();
-			nextUpdate = EnviroSky.instance.currentTimeInHours + WeatherUpdateIntervall;
+
+			nextUpdate = EnviroSkyMgr.instance.GetCurrentTimeInHours() + WeatherUpdateIntervall;
 			nextUpdateRealtime = Time.time + (WeatherUpdateIntervall * 60f); 
 		}
 		else
 		{
-			Debug.LogError("Please add Weather Prefabs to Zone:" + gameObject.name);
+			Debug.Log("Please add Weather Prefabs to Zone:" + gameObject.name);
 		}
 	}
 
 	public void UpdateZoneScale ()
 	{
-		if (!isDefault)
-			zoneCollider.size = zoneScale;
-		else
-			zoneCollider.size = (Vector3.one * (1f / EnviroSky.instance.transform.localScale.y)) * 0.25f;
-	}
+        if (!isDefault && !useMeshZone)
+            zoneCollider.size = zoneScale;
+        else if (!isDefault && useMeshZone)
+            transform.localScale = zoneScale;
+        else if (isDefault && !useMeshZone)
+            zoneCollider.size = (Vector3.one * (1f / transform.localScale.y)) * 0.25f;
+    }
 
 	public void CreateZoneWeatherTypeList ()
 	{
@@ -87,12 +108,12 @@ public class EnviroZone : MonoBehaviour {
 			}
 
 			bool addThis = true;
-			for (int i2 = 0; i2 < EnviroSky.instance.Weather.weatherPresets.Count; i2++)
+			for (int i2 = 0; i2 < EnviroSkyMgr.instance.GetCurrentWeatherPresetList().Count; i2++)
 			{
-				if (zoneWeatherPresets [i] == EnviroSky.instance.Weather.weatherPresets [i2]) 
+				if (zoneWeatherPresets [i] == EnviroSkyMgr.instance.GetCurrentWeatherPresetList()[i2]) 
 				{
 					addThis = false;
-					zoneWeather.Add (EnviroSky.instance.Weather.WeatherPrefabs [i2]);
+					zoneWeather.Add (EnviroSkyMgr.instance.GetCurrentWeatherPrefabList()[i2]);
 				}
 			}
 
@@ -129,13 +150,13 @@ public class EnviroZone : MonoBehaviour {
 					}
 				}
 				wP.effectEmmisionRates.Clear ();
-				wPrefab.transform.parent = EnviroSky.instance.Weather.VFXHolder.transform;
+				wPrefab.transform.parent = EnviroSkyMgr.instance.GetVFXHolder().transform;
 				wPrefab.transform.localPosition = Vector3.zero;
 				wPrefab.transform.localRotation = Quaternion.identity;
 				zoneWeather.Add(wP);
 
-				EnviroSky.instance.Weather.WeatherPrefabs.Add (wP);
-				EnviroSky.instance.Weather.weatherPresets.Add (zoneWeatherPresets [i]);
+                EnviroSkyMgr.instance.GetCurrentWeatherPrefabList().Add (wP);
+                EnviroSkyMgr.instance.GetCurrentWeatherPresetList().Add (zoneWeatherPresets [i]);
 			}
 		}
 		
@@ -144,26 +165,26 @@ public class EnviroZone : MonoBehaviour {
 		{
 			for (int i2 = 0; i2 < zoneWeather[i].effectSystems.Count; i2++)
 			{
-				zoneWeather[i].effectEmmisionRates.Add(EnviroSky.GetEmissionRate(zoneWeather[i].effectSystems[i2]));
-				EnviroSky.SetEmissionRate(zoneWeather[i].effectSystems[i2],0f);
+				zoneWeather[i].effectEmmisionRates.Add(EnviroSkyMgr.instance.GetEmissionRate(zoneWeather[i].effectSystems[i2]));
+                EnviroSkyMgr.instance.SetEmissionRate(zoneWeather[i].effectSystems[i2],0f);
 			}   
 		}
 			
         //Set initial weather
-		if (isDefault && EnviroSky.instance.Weather.startWeatherPreset != null) 
+		if (isDefault && EnviroSkyMgr.instance.GetStartWeatherPreset() != null) 
 		{
-            EnviroSky.instance.SetWeatherOverwrite(EnviroSky.instance.Weather.startWeatherPreset);
+            EnviroSkyMgr.instance.ChangeWeatherInstant(EnviroSkyMgr.instance.GetStartWeatherPreset());
 
             for (int i = 0; i < zoneWeather.Count; i++)
             {
-                if(zoneWeather[i].weatherPreset == EnviroSky.instance.Weather.startWeatherPreset)
+                if(zoneWeather[i].weatherPreset == EnviroSkyMgr.instance.GetStartWeatherPreset())
                 {
                     currentActiveZoneWeatherPrefab = zoneWeather[i];
                     lastActiveZoneWeatherPrefab = zoneWeather[i];
                 }
             }
-            currentActiveZoneWeatherPreset = EnviroSky.instance.Weather.startWeatherPreset;
-            lastActiveZoneWeatherPreset = EnviroSky.instance.Weather.startWeatherPreset;
+            currentActiveZoneWeatherPreset = EnviroSkyMgr.instance.GetStartWeatherPreset();
+            lastActiveZoneWeatherPreset = EnviroSkyMgr.instance.GetStartWeatherPreset();
 		} 
 		else 
 		{
@@ -173,7 +194,7 @@ public class EnviroZone : MonoBehaviour {
 			lastActiveZoneWeatherPreset = zoneWeatherPresets [0];
 		}
 
-		nextUpdate = EnviroSky.instance.currentTimeInHours + WeatherUpdateIntervall;
+		nextUpdate = EnviroSkyMgr.instance.GetCurrentTimeInHours() + WeatherUpdateIntervall;
 	}
 		
 	void BuildNewWeatherList ()
@@ -181,7 +202,7 @@ public class EnviroZone : MonoBehaviour {
 		curPossibleZoneWeather = new List<EnviroWeatherPrefab> ();
 		for (int i = 0; i < zoneWeather.Count; i++) 
 		{
-			switch (EnviroSky.instance.Seasons.currentSeasons)
+			switch (EnviroSkyMgr.instance.GetCurrentSeason())
 			{
 			case EnviroSeasons.Seasons.Spring:
 				if (zoneWeather[i].weatherPreset.Spring)
@@ -211,22 +232,22 @@ public class EnviroZone : MonoBehaviour {
 		{
 			int würfel = UnityEngine.Random.Range (0,100);
 
-			if (EnviroSky.instance.Seasons.currentSeasons == EnviroSeasons.Seasons.Spring)
+			if (EnviroSkyMgr.instance.GetCurrentSeason() == EnviroSeasons.Seasons.Spring)
 			{
 				if (würfel <= curPossibleZoneWeather[i].weatherPreset.possibiltyInSpring)
 					over.Add(curPossibleZoneWeather[i]);
 			}else
-			if (EnviroSky.instance.Seasons.currentSeasons == EnviroSeasons.Seasons.Summer)
+			if (EnviroSkyMgr.instance.GetCurrentSeason() == EnviroSeasons.Seasons.Summer)
 			{
 					if (würfel <= curPossibleZoneWeather[i].weatherPreset.possibiltyInSummer)
 					over.Add(curPossibleZoneWeather[i]);
 			}else
-			if (EnviroSky.instance.Seasons.currentSeasons == EnviroSeasons.Seasons.Autumn)
+			if (EnviroSkyMgr.instance.GetCurrentSeason() == EnviroSeasons.Seasons.Autumn)
 			{
 						if (würfel <= curPossibleZoneWeather[i].weatherPreset.possibiltyInAutumn)
 					over.Add(curPossibleZoneWeather[i]);
 			}else
-			if (EnviroSky.instance.Seasons.currentSeasons == EnviroSeasons.Seasons.Winter)
+			if (EnviroSkyMgr.instance.GetCurrentSeason() == EnviroSeasons.Seasons.Winter)
 			{
 							if (würfel <= curPossibleZoneWeather[i].weatherPreset.possibiltyInWinter)
 					over.Add(curPossibleZoneWeather[i]);
@@ -234,8 +255,8 @@ public class EnviroZone : MonoBehaviour {
 		} 
 
 		if (over.Count > 0)
-		{		
-			EnviroSky.instance.NotifyZoneWeatherChanged (over [0].weatherPreset, this);
+		{
+            EnviroSkyMgr.instance.NotifyZoneWeatherChanged (over [0].weatherPreset, this);
 			return over [0];
 		}
 		else
@@ -244,7 +265,7 @@ public class EnviroZone : MonoBehaviour {
 		
 	void WeatherUpdate ()
 	{
-		nextUpdate = EnviroSky.instance.currentTimeInHours + WeatherUpdateIntervall;
+		nextUpdate = EnviroSkyMgr.instance.GetCurrentTimeInHours() + WeatherUpdateIntervall;
 		nextUpdateRealtime = Time.time + (WeatherUpdateIntervall * 60f); 
 
 		BuildNewWeatherList ();
@@ -253,7 +274,7 @@ public class EnviroZone : MonoBehaviour {
 		lastActiveZoneWeatherPreset = currentActiveZoneWeatherPreset;
 		currentActiveZoneWeatherPrefab = PossibiltyCheck ();
 		currentActiveZoneWeatherPreset = currentActiveZoneWeatherPrefab.weatherPreset;
-		EnviroSky.instance.NotifyZoneWeatherChanged (currentActiveZoneWeatherPreset, this);
+        EnviroSkyMgr.instance.NotifyZoneWeatherChanged (currentActiveZoneWeatherPreset, this);
 	}
 
     IEnumerator CreateWeatherListLate ()
@@ -265,14 +286,21 @@ public class EnviroZone : MonoBehaviour {
 
 	void LateUpdate () 
 	{
-        if (EnviroSky.instance == null)
+        if (EnviroSkyMgr.instance == null)
         {
             Debug.Log("No EnviroSky instance found!");
             return;
         }
 
-        if (EnviroSky.instance.started && !init) 
+        if (EnviroSkyMgr.instance.IsStarted() && !init) 
 		{
+            if(zoneWeatherPresets.Count < 1)
+            {
+                Debug.Log("Zone with no Presets! Please assign at least one preset. Deactivated for now!");
+                this.enabled = false;
+                return;
+            }
+
 			if (isDefault) {
 				CreateZoneWeatherTypeList ();          
                 init = true;
@@ -281,65 +309,68 @@ public class EnviroZone : MonoBehaviour {
 		}
 
 		if (updateMode == WeatherUpdateMode.GameTimeHours) {
-			if (EnviroSky.instance.currentTimeInHours > nextUpdate && EnviroSky.instance.Weather.updateWeather && EnviroSky.instance.started)
+			if (EnviroSkyMgr.instance.GetCurrentTimeInHours() > nextUpdate && EnviroSkyMgr.instance.IsAutoWeatherUpdateActive() && EnviroSkyMgr.instance.IsStarted())
 				WeatherUpdate ();
 		} else {
-			if (Time.time > nextUpdateRealtime && EnviroSky.instance.Weather.updateWeather && EnviroSky.instance.started)
+			if (Time.time > nextUpdateRealtime && EnviroSkyMgr.instance.IsAutoWeatherUpdateActive() && EnviroSkyMgr.instance.IsStarted())
 				WeatherUpdate ();
 		}
 
-        if (EnviroSky.instance.Player == null)
+        if (EnviroSkyMgr.instance.Player == null)
         {
             // Debug.Log("No Player Assigned in EnviroSky object!");
             return;
         }
 
-        if (isDefault && init)                               
-			zoneCollider.center = new Vector3(0f,(EnviroSky.instance.Player.transform.position.y-EnviroSky.instance.transform.position.y) / EnviroSky.instance.transform.lossyScale.y,0f);
+        if (isDefault && init && !useMeshZone)                               
+			zoneCollider.center = new Vector3(0f,(EnviroSkyMgr.instance.Player.transform.position.y-transform.position.y) / transform.lossyScale.y,0f);
 	}
 
 
 	/// Triggers
 	void OnTriggerEnter (Collider col)
 	{
-		if (EnviroSky.instance == null)
+		if (EnviroSkyMgr.instance == null)
 			return;
 
-		if (EnviroSky.instance.profile.weatherSettings.useTag) {
-			if (col.gameObject.tag == EnviroSky.instance.gameObject.tag) {
-				EnviroSky.instance.Weather.currentActiveZone = this;
-				EnviroSky.instance.NotifyZoneChanged (this);
+        if (EnviroSkyMgr.instance.GetUseWeatherTag()) {
+			if (col.gameObject.tag == EnviroSkyMgr.instance.GetEnviroSkyTag()) {
+                EnviroSkyMgr.instance.SetCurrentActiveZone(this);
+                EnviroSkyMgr.instance.NotifyZoneChanged (this);
 			}
 		} else {
-			if (col.gameObject.GetComponent<EnviroSky> ()) {
-				EnviroSky.instance.Weather.currentActiveZone = this;
-				EnviroSky.instance.NotifyZoneChanged (this);
+			if (EnviroSkyMgr.instance.IsEnviroSkyAttached(col.gameObject)) {
+                EnviroSkyMgr.instance.SetCurrentActiveZone(this);
+                EnviroSkyMgr.instance.NotifyZoneChanged (this);
 			}
 		}
 	}
 
 	void OnTriggerExit (Collider col)
 	{
-		if (ExitToDefault == false || EnviroSky.instance == null)
+		if (ExitToDefault == false || EnviroSkyMgr.instance == null)
 			return;
 		
-		if (EnviroSky.instance.profile.weatherSettings.useTag) {
-			if (col.gameObject.tag == EnviroSky.instance.gameObject.tag) {
-				EnviroSky.instance.Weather.currentActiveZone = EnviroSky.instance.Weather.zones[0];
-				EnviroSky.instance.NotifyZoneChanged (EnviroSky.instance.Weather.zones[0]);
+		if (EnviroSkyMgr.instance.GetUseWeatherTag()) {
+			if (col.gameObject.tag == EnviroSkyMgr.instance.GetEnviroSkyTag()) {
+                EnviroSkyMgr.instance.SetToZone(0);
+                EnviroSkyMgr.instance.NotifyZoneChanged (EnviroSkyMgr.instance.GetZoneByID(0));
 			}
 		} else {
-			if (col.gameObject.GetComponent<EnviroSky> ()) {
-				EnviroSky.instance.Weather.currentActiveZone = EnviroSky.instance.Weather.zones[0];
-				EnviroSky.instance.NotifyZoneChanged (EnviroSky.instance.Weather.zones[0]);
+			if (EnviroSkyMgr.instance.IsEnviroSkyAttached(col.gameObject)) {
+                EnviroSkyMgr.instance.SetToZone(0);
+                EnviroSkyMgr.instance.NotifyZoneChanged (EnviroSkyMgr.instance.GetZoneByID(0));
 			}
 		}
 	}
 
-
 	void OnDrawGizmos () 
 	{
 		Gizmos.color = zoneGizmoColor;
-		Gizmos.DrawCube (transform.position, new Vector3(zoneScale.x,zoneScale.y,zoneScale.z));
+
+        if (useMeshZone && zoneMesh != null)
+            Gizmos.DrawMesh(zoneMesh);
+        else
+            Gizmos.DrawCube(transform.position, new Vector3(zoneScale.x, zoneScale.y, zoneScale.z));
 	}
 }

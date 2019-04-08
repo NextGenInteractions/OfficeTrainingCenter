@@ -9,8 +9,7 @@ public class EnviroAdditionalCamera : MonoBehaviour {
 
     private Camera myCam;
     private EnviroSkyRendering skyRender;
-    private EnviroLightShafts lightShaftsScriptSun;
-    private EnviroLightShafts lightShaftsScriptMoon;
+    private EnviroPostProcessing enviroPostProcessing;
 
     private void OnEnable()
     {
@@ -46,50 +45,11 @@ public class EnviroAdditionalCamera : MonoBehaviour {
             }
         }
 #endif
+        enviroPostProcessing = EnviroSky.instance.PlayerCamera.gameObject.GetComponent<EnviroPostProcessing>();
 
-        EnviroLightShafts[] shaftScripts = myCam.gameObject.GetComponents<EnviroLightShafts>();
+        if (enviroPostProcessing == null)
+            enviroPostProcessing = EnviroSky.instance.PlayerCamera.gameObject.AddComponent<EnviroPostProcessing>();
 
-        if (shaftScripts.Length > 0)
-            lightShaftsScriptSun = shaftScripts[0];
-
-        if (lightShaftsScriptSun != null)
-        {
-            DestroyImmediate(lightShaftsScriptSun.sunShaftsMaterial);
-            DestroyImmediate(lightShaftsScriptSun.simpleClearMaterial);
-            lightShaftsScriptSun.sunShaftsMaterial = new Material(Shader.Find("Enviro/Effects/LightShafts"));
-            lightShaftsScriptSun.sunShaftsShader = lightShaftsScriptSun.sunShaftsMaterial.shader;
-            lightShaftsScriptSun.simpleClearMaterial = new Material(Shader.Find("Enviro/Effects/ClearLightShafts"));
-            lightShaftsScriptSun.simpleClearShader = lightShaftsScriptSun.simpleClearMaterial.shader;
-        }
-        else
-        {
-            lightShaftsScriptSun = myCam.gameObject.AddComponent<EnviroLightShafts>();
-            lightShaftsScriptSun.sunShaftsMaterial = new Material(Shader.Find("Enviro/Effects/LightShafts"));
-            lightShaftsScriptSun.sunShaftsShader = lightShaftsScriptSun.sunShaftsMaterial.shader;
-            lightShaftsScriptSun.simpleClearMaterial = new Material(Shader.Find("Enviro/Effects/ClearLightShafts"));
-            lightShaftsScriptSun.simpleClearShader = lightShaftsScriptSun.simpleClearMaterial.shader;
-        }
-
-        if (shaftScripts.Length > 1)
-            lightShaftsScriptMoon = shaftScripts[1];
-
-        if (lightShaftsScriptMoon != null)
-        {
-            DestroyImmediate(lightShaftsScriptMoon.sunShaftsMaterial);
-            DestroyImmediate(lightShaftsScriptMoon.simpleClearMaterial);
-            lightShaftsScriptMoon.sunShaftsMaterial = new Material(Shader.Find("Enviro/Effects/LightShafts"));
-            lightShaftsScriptMoon.sunShaftsShader = lightShaftsScriptMoon.sunShaftsMaterial.shader;
-            lightShaftsScriptMoon.simpleClearMaterial = new Material(Shader.Find("Enviro/Effects/ClearLightShafts"));
-            lightShaftsScriptMoon.simpleClearShader = lightShaftsScriptMoon.simpleClearMaterial.shader;
-        }
-        else
-        {
-            lightShaftsScriptMoon = myCam.gameObject.AddComponent<EnviroLightShafts>();
-            lightShaftsScriptMoon.sunShaftsMaterial = new Material(Shader.Find("Enviro/Effects/LightShafts"));
-            lightShaftsScriptMoon.sunShaftsShader = lightShaftsScriptMoon.sunShaftsMaterial.shader;
-            lightShaftsScriptMoon.simpleClearMaterial = new Material(Shader.Find("Enviro/Effects/ClearLightShafts"));
-            lightShaftsScriptMoon.simpleClearShader = lightShaftsScriptMoon.simpleClearMaterial.shader;
-        }
     }
 
 
@@ -102,7 +62,7 @@ public class EnviroAdditionalCamera : MonoBehaviour {
         if (skyRender != null)
         {
             skyRender.dirVolumeLighting = EnviroSky.instance.volumeLightSettings.dirVolumeLighting;
-            skyRender.volumeLighting = EnviroSky.instance.volumeLighting;
+            skyRender.volumeLighting = EnviroSky.instance.useVolumeLighting;
             skyRender.distanceFog = EnviroSky.instance.fogSettings.distanceFog;
             skyRender.heightFog = EnviroSky.instance.fogSettings.heightFog;
             skyRender.height = EnviroSky.instance.fogSettings.height;
@@ -110,55 +70,5 @@ public class EnviroAdditionalCamera : MonoBehaviour {
             skyRender.useRadialDistance = EnviroSky.instance.fogSettings.useRadialDistance;
             skyRender.startDistance = EnviroSky.instance.fogSettings.startDistance;
         }
-
-        //Update LightShafts
-        if (lightShaftsScriptSun != null)
-        {
-            lightShaftsScriptSun.resolution = EnviroSky.instance.lightshaftsSettings.resolution;
-            lightShaftsScriptSun.screenBlendMode = EnviroSky.instance.lightshaftsSettings.screenBlendMode;
-            lightShaftsScriptSun.useDepthTexture = EnviroSky.instance.lightshaftsSettings.useDepthTexture;
-            lightShaftsScriptSun.sunThreshold = EnviroSky.instance.lightshaftsSettings.thresholdColorSun.Evaluate(EnviroSky.instance.GameTime.solarTime);
-
-            lightShaftsScriptSun.sunShaftBlurRadius = EnviroSky.instance.lightshaftsSettings.blurRadius;
-            lightShaftsScriptSun.sunShaftIntensity = EnviroSky.instance.lightshaftsSettings.intensity;
-            lightShaftsScriptSun.maxRadius = EnviroSky.instance.lightshaftsSettings.maxRadius;
-            lightShaftsScriptSun.sunColor = EnviroSky.instance.lightshaftsSettings.lightShaftsColorSun.Evaluate(EnviroSky.instance.GameTime.solarTime);
-            lightShaftsScriptSun.sunTransform = EnviroSky.instance.Components.Sun.transform;
-
-            if (EnviroSky.instance.LightShafts.sunLightShafts)
-            {
-                lightShaftsScriptSun.enabled = true;
-            }
-            else
-            {
-                lightShaftsScriptSun.enabled = false;
-            }
-        }
-
-        if (lightShaftsScriptMoon != null)
-        {
-            lightShaftsScriptMoon.resolution = EnviroSky.instance.lightshaftsSettings.resolution;
-            lightShaftsScriptMoon.screenBlendMode = EnviroSky.instance.lightshaftsSettings.screenBlendMode;
-            lightShaftsScriptMoon.useDepthTexture = EnviroSky.instance.lightshaftsSettings.useDepthTexture;
-            lightShaftsScriptMoon.sunThreshold = EnviroSky.instance.lightshaftsSettings.thresholdColorMoon.Evaluate(EnviroSky.instance.GameTime.lunarTime);
-
-
-            lightShaftsScriptMoon.sunShaftBlurRadius = EnviroSky.instance.lightshaftsSettings.blurRadius;
-            lightShaftsScriptMoon.sunShaftIntensity = Mathf.Clamp((EnviroSky.instance.lightshaftsSettings.intensity - EnviroSky.instance.GameTime.solarTime), 0, 100);
-            lightShaftsScriptMoon.maxRadius = EnviroSky.instance.lightshaftsSettings.maxRadius;
-            lightShaftsScriptMoon.sunColor = EnviroSky.instance.lightshaftsSettings.lightShaftsColorMoon.Evaluate(EnviroSky.instance.GameTime.lunarTime);
-            lightShaftsScriptMoon.sunTransform = EnviroSky.instance.Components.Moon.transform;
-
-            if (EnviroSky.instance.LightShafts.moonLightShafts)
-            {
-                lightShaftsScriptMoon.enabled = true;
-            }
-            else
-            {
-                lightShaftsScriptMoon.enabled = false;
-            }
-        }
     }
-
-
 }

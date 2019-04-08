@@ -11,15 +11,15 @@
 		Tags{ "RenderType" = "Opaque" }
 
 		Pass
-	{
+		{
 		CGPROGRAM
 		#pragma vertex vert
 		#pragma fragment frag
 		#pragma target 3.0
+		#pragma exclude_renderers gles 
 		#pragma multi_compile __ UNITY_COLORSPACE_GAMMA
-		#pragma shader_feature ENVIRO_CLOUD_FAR_LOD
 		#include "UnityCG.cginc"
-		#include "/Core/EnviroFogCore.cginc"
+		#include "../../../Core/Resources/Shaders/Core/EnviroFogCore.cginc"
 
 		struct appdata
 		{
@@ -43,7 +43,7 @@
 	{
 		v2f o;
 		UNITY_INITIALIZE_OUTPUT(v2f, o);
-		o.position = UnityObjectToClipPos(v.vertex);
+		o.position = UnityObjectToClipPos(v.vertex); 
 		o.uv = v.texcoord;
 		o.sky.x = saturate(_SunDir.y + 0.25);
 		o.sky.y = saturate(clamp(1.0 - _SunDir.y, 0.0, 0.5));
@@ -55,10 +55,11 @@
 	uniform sampler3D _DetailNoise;
 	uniform sampler2D _WeatherMap;
 	uniform sampler2D _CurlNoise;
+	//uniform sampler2D _bayerNoise;
 	UNITY_DECLARE_DEPTH_TEXTURE(_CameraDepthTexture);
 
-	uniform float4 _CloudBaseColor;
-	uniform float4 _CloudTopColor;
+	uniform float _CloudBaseColor;
+	uniform float _CloudTopColor;
 	uniform float4 _CloudsParameter;
 	uniform float4 _Steps;
 	uniform float _AlphaCoef;
@@ -76,8 +77,7 @@
 	uniform float4 _CloudsAnimation;
 	uniform float _Tonemapping;
 	uniform float _CloudsExposure;
-	uniform float3 _SunDir1;
-	uniform float3 _MoonDir;
+	uniform float3 _LightDir;
 	uniform float _gameTime;
 	uniform float _PrimAtt;
 	uniform float _SecAtt;
@@ -102,18 +102,29 @@
 		return float2(-b - Delta, -b + Delta);
 	}
 
+	float2	ComputeBothSphereIntersections(float3 _Pos, float3 _Direction, float3 _SphereCenter, float _SphereRadius)
+	{
+		float3 D = _Pos - _SphereCenter;
+		float b = dot(_Direction, D);
+		float c = dot(D, D) - _SphereRadius*_SphereRadius;
+		float Delta = b*b - c;
+		float SqrtDelta = sqrt(Delta);
+		return lerp(float2(-b - SqrtDelta, -b + SqrtDelta), float2(+env_inf, -env_inf), saturate(-10000.0 * Delta));
+	}
+
 	// Realtime Volumetric Rendering Course Notes by Patapom (page 15)
 	float exponential_integral(float z) {
 		return 0.5772156649015328606065 + log(1e-4 + abs(z)) + z * (1.0 + z * (0.25 + z * ((1.0 / 18.0) + z * ((1.0 / 96.0) + z * (1.0 / 600.0))))); // For x!=0
 	}
 
 	// Realtime Volumetric Rendering Course Notes by Patapom (page 15)
-	float3 CalculateAmbientLighting(float altitude, float extinction_coeff) {
+	float3 CalculateAmbientLighting(float altitude, float extinction_coeff, float4 skyColor) 
+	{
 		float ambient_term = 0.6 * saturate(1.0 - altitude);
-		float3 isotropic_scattering_top = (_CloudTopColor.rgb * _LightColor) * max(0.0, exp(ambient_term) - ambient_term * exponential_integral(ambient_term));
+		float3 isotropic_scattering_top = (skyColor.rgb * _CloudTopColor * _LightColor) * max(0.0, exp(ambient_term) - ambient_term * exponential_integral(ambient_term));
 
 		ambient_term = -extinction_coeff * altitude;
-		float3 isotropic_scattering_bottom = _CloudBaseColor.rgb * max(0.0, exp(ambient_term) - ambient_term * exponential_integral(ambient_term)) * 1.5;
+		float3 isotropic_scattering_bottom = skyColor.rgb * _CloudBaseColor * max(0.0, exp(ambient_term) - ambient_term * exponential_integral(ambient_term)) * 1.5;
 
 		isotropic_scattering_top *= saturate(altitude);
 
@@ -177,8 +188,9 @@
 	float CalculateCloudDensity(float3 pos, float height, float3 weather, float dist, bool details)
 	{
 		const float baseFreq = 1e-5;
+		
 		float4 coord = float4(pos * baseFreq * _BaseNoiseUV, 0.0);
-		coord.xyz += float3(_CloudsAnimation.x * 20, -_Time.x * 0.15 ,_CloudsAnimation.y * 20);
+		coord.xyz += float3(_CloudsAnimation.x, -_Time.x * 0.15 ,_CloudsAnimation.y );
 		float4 baseNoise = 0;
 		
 		if(dist > _LODDistance)
@@ -205,12 +217,12 @@
 		if (details && dist > 0.1)
 		{
 			coord = float4(pos * baseFreq * _DetailNoiseUV, 0.0);
-			coord.xyz += float3(_CloudsAnimation.x * 20, -_Time.x * 0.15, _CloudsAnimation.y * 20);
-			float3 curl = get_curl_offset(pos, 5.0, 0, height);
-			float3 detailNoise = tex3Dlod(_DetailNoise, coord + float4(curl, 0)).rgb;
+			coord.xyz += float3(_CloudsAnimation.x , -_Time.x * 0.15, _CloudsAnimation.y );
+		//	float3 curl = get_curl_offset(pos, 5.0, 0, height);
+			float3 detailNoise = tex3Dlod(_DetailNoise, coord ).rgb;
 			float high_freq_fBm = (detailNoise.r * 0.625) + (detailNoise.g * 0.25) + (detailNoise.b * 0.125);
-			float high_freq_noise_modifier = lerp(high_freq_fBm, 1.0f - high_freq_fBm, saturate(height * 10));
-			cloudDensity = Remap(cloudDensity, high_freq_noise_modifier * 0.35, 1.0, 0.0, 1.0);
+			float high_freq_noise_modifier = lerp(high_freq_fBm,1.0f - high_freq_fBm, saturate(height * 10));
+			cloudDensity = Remap(cloudDensity, high_freq_noise_modifier * (1.4 * clamp(height,0.1,1) ), 1.0, 0.0, 1.0);
 		}
 		///
 		return saturate(_CloudDensityScale * cloudDensity);
@@ -228,7 +240,7 @@
 		// attenuation – difference from slides – reduce the secondary component when we look toward the sun.
 		float primary_attenuation = exp(-dl);
 		float secondary_attenuation = exp(-dl * 0.25) * 0.7;
-		float attenuation_probability = max(Remap(cos_angle, 0.7, 1.0, _SecAtt, _SecAtt * 0.25) , _PrimAtt);
+		float attenuation_probability = max(Remap(cos_angle, 0.7, 1.0, _SecAtt, _SecAtt * 0.25), _PrimAtt);
 
 		// in-scattering – one difference from presentation slides – we also reduce this effect once light has attenuated to make it directional.
 		float depth_probability = lerp(0.05 + pow(ds_loded, Remap(height_fraction, 0.3, 0.85, 0.5, 2.0)), 1.0, saturate(dl / step_size));
@@ -300,12 +312,13 @@
 		float4 color = 0.0;
 		float rawDepth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, UnityStereoTransformScreenSpaceTex(i.uv));
 		float dpth = Linear01Depth(rawDepth);
+		
 		float3 wsDir = dpth * ray;
 		float3 viewDir = normalize(wsDir);
 
 		float4 sky = ComputeScatteringClouds(viewDir, i.sky.xy, _gameTime);
 
-		float3 LightDirection = _WorldSpaceLightPos0;
+		float3 LightDirection = _LightDir;
 		float3 LightColor = _LightColor.rgb;
 
 		if (_gameTime > 0.55)
@@ -314,8 +327,11 @@
 		float pRad = _CloudsParameter.w;
 		float3 pCent = float3(0.0, -pRad, 0.0);
 
-		float2 hitDistBottom = raySphereIntersect(EyePosition, ray, pCent, _CloudsParameter.w + _CloudsParameter.x);
-		float2 hitDistTop = raySphereIntersect(EyePosition, ray, pCent, _CloudsParameter.w + _CloudsParameter.y);
+		//float2 hitDistBottom = raySphereIntersect(EyePosition, ray, pCent, _CloudsParameter.w + _CloudsParameter.x);
+		//float2 hitDistTop = raySphereIntersect(EyePosition, ray, pCent, _CloudsParameter.w + _CloudsParameter.y);
+
+		float2 hitDistBottom = ComputeBothSphereIntersections(EyePosition, ray, pCent, _CloudsParameter.w + _CloudsParameter.x);
+		float2 hitDistTop = ComputeBothSphereIntersections(EyePosition, ray, pCent, _CloudsParameter.w + _CloudsParameter.y);
 
 		float2 hitDistance;
 
@@ -326,8 +342,11 @@
 		{
 			hitDistance = float2(hitDistBottom.y, hitDistTop.y);
 
-			if (ray.y < 0.0f)
-				clip(h * h * (1.0 - ray.y * ray.y) - pRad * pRad);
+			if (ray.y < -0.1f)
+				//clip(h * h * (1.0 - ray.y * ray.y) - pRad * pRad);
+				return float4(0,0,0,0);
+				
+
 		}
 		else if (ch > _CloudsParameter.y)
 		{
@@ -335,6 +354,7 @@
 				hitDistance = float2(hitDistTop.x, hitDistBottom.x);
 			else
 				hitDistance = float2(0.0, -1.0);
+
 		}
 		else
 		{
@@ -345,16 +365,26 @@
 		}
 
 		hitDistance.x = max(0.0, hitDistance.x);
+		//clip(hitDistance.y - hitDistance.x);
 
-		clip(hitDistance.y - hitDistance.x);
+
+		float MeanFreePathKm = 120 * (1.0 + hitDistance.x) / (1 * lerp(1.0, 0.025, smoothstep(-0.2, -0.6, 1)));
+		hitDistance.y = min(hitDistance.y, hitDistance.x + MeanFreePathKm);
+
+		/////////////////////////
+
+
+		/////////////////////
 
 		float inScatteringAngle = dot(ray, LightDirection);
-		int steps = (int)lerp(_Steps.x, _Steps.x * 0.5f, abs(ray.y));
+		int steps = (int)lerp(_Steps.x, _Steps.x * 1, abs(ray.y));
 		float rayStepLength = 1 * (hitDistance.y - hitDistance.x) / steps;
 		float3 rayStep = ray * rayStepLength;
+		//float offset = tex2D(_bayerNoise, i.position.xy % 4).r * 5;
+		//float3 pos = EyePosition + (hitDistance.x + 0.5 * rayStepLength) * (ray * offset);
 		float3 pos = EyePosition + (hitDistance.x + 0.5 * rayStepLength) * ray;
-		int executeSteps = min(steps, (int)_Steps.y);
-
+		int executeSteps = min(steps, (int)_Steps.y); 
+	
 		float extinct = 1.0;
 		float opticalDepth = 0.0;
 		float cloudDensity = 0.0;
@@ -363,12 +393,13 @@
 		if (dpth < 1)
 			executeSteps *= _stepsInDepth;
 
+
 		//Raymarching
 		[loop]
 		for (int i = 0; i < executeSteps; i++)
 		{
 			float height = calcHeight(pos, pCent);
-
+			//
 			//Get out of expensive raymarching
 			if (extinct < 0.01 || height > 1.0 || height < 0.0 || _GlobalCoverage <= -0.9)
 				break;
@@ -378,7 +409,7 @@
 
 			//Check if we are inside of clouds.
 			cloudDensity = CalculateCloudDensity(pos, height, weather, ray.y, false);
-
+			
 			[branch]
 			if (cloudDensity > 0.0)
 			{
@@ -389,10 +420,10 @@
 
 				float3 sunLight = pow(LightColor, 2) * ds.x;
 
-				float3 ambientLight = CalculateAmbientLighting(height, _AmbientLightIntensity) *  ds.z;
+				float3 ambientLight = CalculateAmbientLighting(height, _AmbientLightIntensity,sky) * ds.z;
 
 				float hg = PhaseHenyeyGreenStein(inScatteringAngle, _HgPhaseFactor);
-				float energy = GetLightEnergy(pos, height, cloudDensity, ds.x, hg, viewDir, rayStepLength, _ExtinctionCoef);
+				float energy = GetLightEnergy(pos, height, cloudDensity, ds.x, hg, dot(pos, LightDirection), rayStepLength, _ExtinctionCoef);
 
 				ambientLight *= _AmbientLightIntensity * 0.02 * currentOpticalDepth;
 				sunLight.rgb = sunLight.rgb * energy * ds.z;
@@ -402,8 +433,8 @@
 				extinct = Beer(opticalDepth);
 
 				color.rgb += (sunLight.rgb + ambientLight) * extinct;
-			}
-
+			
+			}			
 			pos += rayStep;
 		}
 
@@ -418,7 +449,7 @@
 			color.rgb = saturate(1.0 - exp(-_CloudsExposure * color.rgb));
 
 #if defined(UNITY_COLORSPACE_GAMMA)
-		color.rgb = pow(color.rgb, 0.454545);
+		color.rgb = LinearToGammaSpace(color.rgb);
 #endif
 	
 		return color;

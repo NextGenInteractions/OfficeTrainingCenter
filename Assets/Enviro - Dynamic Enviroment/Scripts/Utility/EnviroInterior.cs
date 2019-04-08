@@ -100,8 +100,8 @@ public class EnviroInterior : MonoBehaviour {
 
 	public void Enter ()
 	{
-		EnviroSky.instance.interiorMode = true;
-        EnviroSky.instance.lastInteriorZone = this;
+		EnviroSkyMgr.instance.interiorMode = true;
+        EnviroSkyMgr.instance.lastInteriorZone = this;
 
 		if (directLighting) {
 			fadeOutDirectLight = false;
@@ -120,15 +120,15 @@ public class EnviroInterior : MonoBehaviour {
         }
 
         if(ambientAudio)
-			EnviroSky.instance.Audio.ambientSFXVolumeMod = ambientVolume;
+			EnviroSkyMgr.instance.ambientAudioVolumeModifier = ambientVolume;
 		if(weatherAudio)
-			EnviroSky.instance.Audio.weatherSFXVolumeMod = weatherVolume;
+            EnviroSkyMgr.instance.weatherAudioVolumeModifier = weatherVolume;
 
         if (zoneAudioClip != null)
         {
-            EnviroSky.instance.currentInteriorZoneAudioFadingSpeed = zoneAudioFadingSpeed;
-            EnviroSky.instance.AudioSourceZone.FadeIn(zoneAudioClip);
-            EnviroSky.instance.currentInteriorZoneAudioVolume = zoneAudioVolume;
+            EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorZoneAudioFadingSpeed = zoneAudioFadingSpeed;
+            EnviroSkyMgr.instance.AudioSettings.AudioSourceZone.FadeIn(zoneAudioClip);
+            EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorZoneAudioVolume = zoneAudioVolume;
         }
 
         if (fog)
@@ -154,7 +154,7 @@ public class EnviroInterior : MonoBehaviour {
 
 	public void Exit ()
 	{
-		EnviroSky.instance.interiorMode = false;
+		EnviroSkyMgr.instance.interiorMode = false;
 
 		if (directLighting) {
 			fadeInDirectLight = false;
@@ -172,14 +172,14 @@ public class EnviroInterior : MonoBehaviour {
         }
 
         if(ambientAudio)
-			EnviroSky.instance.Audio.ambientSFXVolumeMod = 0f;
+			EnviroSkyMgr.instance.ambientAudioVolumeModifier = 0f;
 		if(weatherAudio)
-			EnviroSky.instance.Audio.weatherSFXVolumeMod = 0f;
+			EnviroSkyMgr.instance.weatherAudioVolumeModifier = 0f;
 
         if (zoneAudioClip != null)
         {
-            EnviroSky.instance.currentInteriorZoneAudioFadingSpeed = zoneAudioFadingSpeed;
-            EnviroSky.instance.AudioSourceZone.FadeOut();
+            EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorZoneAudioFadingSpeed = zoneAudioFadingSpeed;
+            EnviroSkyMgr.instance.AudioSettings.AudioSourceZone.FadeOut();
         }
 
         if (fog)
@@ -216,7 +216,7 @@ public class EnviroInterior : MonoBehaviour {
 
         if (zoneAudioClip != null)
         {
-            EnviroSky.instance.AudioSourceZone.FadeOut();
+            EnviroSkyMgr.instance.AudioSettings.AudioSourceZone.FadeOut();
         }
 
         if (skybox)
@@ -248,7 +248,7 @@ public class EnviroInterior : MonoBehaviour {
 
     void Update () 
 	{
-        if (EnviroSky.instance == null)
+        if (EnviroSkyMgr.instance == null || EnviroSkyMgr.instance.IsAvailable() == false)
             return;
 
         if (directLighting) 
@@ -256,14 +256,14 @@ public class EnviroInterior : MonoBehaviour {
 			if (fadeInDirectLight) 
 			{
 				curDirectLightingMod = Color.Lerp (curDirectLightingMod, directLightingMod, directLightFadeSpeed * Time.deltaTime);
-				EnviroSky.instance.currentInteriorDirectLightMod = curDirectLightingMod;
+                EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorDirectLightMod = curDirectLightingMod;
 				if (curDirectLightingMod == directLightingMod)
 					fadeInDirectLight = false;
 			} 
 			else if (fadeOutDirectLight) 
 			{
 				curDirectLightingMod = Color.Lerp (curDirectLightingMod, fadeOutColor, directLightFadeSpeed * Time.deltaTime);
-				EnviroSky.instance.currentInteriorDirectLightMod = curDirectLightingMod;
+                EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorDirectLightMod = curDirectLightingMod;
 				if (curDirectLightingMod == fadeOutColor)
 					fadeOutDirectLight = false;
 			}
@@ -274,14 +274,14 @@ public class EnviroInterior : MonoBehaviour {
 			if (fadeInAmbientLight) 
 			{
 				curAmbientLightingMod = Color.Lerp (curAmbientLightingMod, ambientLightingMod,ambientLightFadeSpeed * Time.deltaTime);
-				EnviroSky.instance.currentInteriorAmbientLightMod = curAmbientLightingMod;
+                EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorAmbientLightMod = curAmbientLightingMod;
 
-				if (EnviroSky.instance.lightSettings.ambientMode == UnityEngine.Rendering.AmbientMode.Trilight) {
+				if (EnviroSkyMgr.instance.LightSettings.ambientMode == UnityEngine.Rendering.AmbientMode.Trilight) {
 					curAmbientEQLightingMod = Color.Lerp (curAmbientEQLightingMod, ambientEQLightingMod, ambientLightFadeSpeed * Time.deltaTime);
-					EnviroSky.instance.currentInteriorAmbientEQLightMod = curAmbientEQLightingMod;
+                    EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorAmbientEQLightMod = curAmbientEQLightingMod;
 
 					curAmbientGRLightingMod = Color.Lerp (curAmbientGRLightingMod, ambientGRLightingMod, ambientLightFadeSpeed * Time.deltaTime);
-					EnviroSky.instance.currentInteriorAmbientGRLightMod = curAmbientGRLightingMod;
+                    EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorAmbientGRLightMod = curAmbientGRLightingMod;
 				}
 
 				if (curAmbientLightingMod == ambientLightingMod)
@@ -290,14 +290,14 @@ public class EnviroInterior : MonoBehaviour {
 			else if (fadeOutAmbientLight) 
 			{
 				curAmbientLightingMod = Color.Lerp (curAmbientLightingMod, fadeOutColor, 2f * Time.deltaTime);
-				EnviroSky.instance.currentInteriorAmbientLightMod = curAmbientLightingMod;
+                EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorAmbientLightMod = curAmbientLightingMod;
 
-				if (EnviroSky.instance.lightSettings.ambientMode == UnityEngine.Rendering.AmbientMode.Trilight) {
+				if (EnviroSkyMgr.instance.LightSettings.ambientMode == UnityEngine.Rendering.AmbientMode.Trilight) {
 					curAmbientEQLightingMod = Color.Lerp (curAmbientEQLightingMod, fadeOutColor, 2f * Time.deltaTime);
-					EnviroSky.instance.currentInteriorAmbientEQLightMod = curAmbientEQLightingMod;
+                    EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorAmbientEQLightMod = curAmbientEQLightingMod;
 
 					curAmbientGRLightingMod = Color.Lerp (curAmbientGRLightingMod, fadeOutColor, 2f * Time.deltaTime);
-					EnviroSky.instance.currentInteriorAmbientGRLightMod = curAmbientGRLightingMod;
+                    EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorAmbientGRLightMod = curAmbientGRLightingMod;
 				}
 
 				if (curAmbientLightingMod == fadeOutColor)
@@ -310,14 +310,14 @@ public class EnviroInterior : MonoBehaviour {
             if (fadeInSkybox)
             {
                 curskyboxColorMod = Color.Lerp(curskyboxColorMod, skyboxColorMod, skyboxFadeSpeed * Time.deltaTime);
-                EnviroSky.instance.currentInteriorSkyboxMod = curskyboxColorMod;
+                EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorSkyboxMod = curskyboxColorMod;
                 if (curskyboxColorMod == skyboxColorMod)
                     fadeInSkybox = false;
             }
             else if (fadeOutSkybox)
             {
                 curskyboxColorMod = Color.Lerp(curskyboxColorMod, fadeOutColor, skyboxFadeSpeed * Time.deltaTime);
-                EnviroSky.instance.currentInteriorSkyboxMod = curskyboxColorMod;
+                EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorSkyboxMod = curskyboxColorMod;
                 if (curskyboxColorMod == fadeOutColor)
                     fadeOutSkybox = false;
             }
@@ -327,14 +327,14 @@ public class EnviroInterior : MonoBehaviour {
             {
                 if (fadeInFog)
                 {
-                    EnviroSky.instance.currentInteriorFogMod = Mathf.Lerp(EnviroSky.instance.currentInteriorFogMod, minFogMod, fogFadeSpeed * Time.deltaTime);
-                    if (EnviroSky.instance.currentInteriorFogMod <= minFogMod + 0.001)
+                    EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorFogMod = Mathf.Lerp(EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorFogMod, minFogMod, fogFadeSpeed * Time.deltaTime);
+                    if (EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorFogMod <= minFogMod + 0.001)
                        fadeInFog = false;
                 }
                 else if (fadeOutFog)
                 {
-                    EnviroSky.instance.currentInteriorFogMod = Mathf.Lerp(EnviroSky.instance.currentInteriorFogMod, 1, (fogFadeSpeed * 2) * Time.deltaTime);
-                   if (EnviroSky.instance.currentInteriorFogMod >= 0.999)
+                EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorFogMod = Mathf.Lerp(EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorFogMod, 1, (fogFadeSpeed * 2) * Time.deltaTime);
+                   if (EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorFogMod >= 0.999)
                        fadeOutFog = false;
                 }
             }
@@ -344,14 +344,14 @@ public class EnviroInterior : MonoBehaviour {
             if (fadeInFogColor)
             {
                 curFogColorMod = Color.Lerp(curFogColorMod, fogColorMod, fogFadeSpeed * Time.deltaTime);
-                EnviroSky.instance.currentInteriorFogColorMod = curFogColorMod;
+                EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorFogColorMod = curFogColorMod;
                 if (curFogColorMod == fogColorMod)
                     fadeInFogColor = false;
             }
             else if (fadeOutFogColor)
             {
                 curFogColorMod = Color.Lerp(curFogColorMod, fadeOutColor, fogFadeSpeed * Time.deltaTime);
-                EnviroSky.instance.currentInteriorFogColorMod = curFogColorMod;
+                EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorFogColorMod = curFogColorMod;
                 if (curFogColorMod == fadeOutColor)
                     fadeOutFogColor = false;
             }
@@ -362,14 +362,14 @@ public class EnviroInterior : MonoBehaviour {
         {
             if (fadeInWeather)
             {
-                EnviroSky.instance.currentInteriorWeatherEffectMod = Mathf.Lerp(EnviroSky.instance.currentInteriorWeatherEffectMod, 0, weatherFadeSpeed * Time.deltaTime);
-                if (EnviroSky.instance.currentInteriorWeatherEffectMod <= 0.001)
+                EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorWeatherEffectMod = Mathf.Lerp(EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorWeatherEffectMod, 0, weatherFadeSpeed * Time.deltaTime);
+                if (EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorWeatherEffectMod <= 0.001)
                     fadeInWeather = false;
             }
             else if (fadeOutWeather)
             {
-                EnviroSky.instance.currentInteriorWeatherEffectMod = Mathf.Lerp(EnviroSky.instance.currentInteriorWeatherEffectMod, 1, (weatherFadeSpeed * 2) * Time.deltaTime);
-                if (EnviroSky.instance.currentInteriorWeatherEffectMod >= 0.999)
+                EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorWeatherEffectMod = Mathf.Lerp(EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorWeatherEffectMod, 1, (weatherFadeSpeed * 2) * Time.deltaTime);
+                if (EnviroSkyMgr.instance.InteriorZoneSettings.currentInteriorWeatherEffectMod >= 0.999)
                     fadeOutWeather = false;
             }
         }

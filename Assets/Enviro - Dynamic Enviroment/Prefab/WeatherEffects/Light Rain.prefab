@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198000013770246810}
   - component: {fileID: 199000010814745886}
   m_Layer: 0
-  m_Name: Light Rain
+  m_Name: Light Rain HQ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -9,17 +9,17 @@ public class EnviroDayNightSwitch : MonoBehaviour {
 
 		lightsArray = GetComponentsInChildren<Light> ();
 
-		EnviroSky.instance.OnDayTime += () =>
+        EnviroSkyMgr.instance.OnDayTime += () =>
 		{
 			Deactivate () ;
 		};
 
-		EnviroSky.instance.OnNightTime += () =>
+		EnviroSkyMgr.instance.OnNightTime += () =>
 		{
 			Activate () ;
 		};
 
-		if (EnviroSky.instance.isNight)
+		if (EnviroSkyMgr.instance.IsNight())
 			Activate ();
 		else
 			Deactivate ();

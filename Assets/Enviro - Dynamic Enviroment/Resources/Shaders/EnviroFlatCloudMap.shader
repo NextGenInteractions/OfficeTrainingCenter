@@ -13,6 +13,7 @@ Shader "Enviro/FlatCloudMap" {
 		#pragma fragment frag
 		#include "UnityCG.cginc"
 		#pragma target 3.0
+		#pragma exclude_renderers gles 
 
 		uniform sampler2D _NoiseTex;
 		uniform float _Softness = 0.2;

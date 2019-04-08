@@ -21,14 +21,14 @@ public class EnviroEvents : MonoBehaviour {
 
 	void Start ()
 	{
-		EnviroSky.instance.OnHourPassed += () => HourPassed ();
-		EnviroSky.instance.OnDayPassed += () => DayPassed ();
-		EnviroSky.instance.OnYearPassed += () => YearPassed ();
-		EnviroSky.instance.OnWeatherChanged += (EnviroWeatherPreset type) =>  WeatherChanged ();
-		EnviroSky.instance.OnSeasonChanged += (EnviroSeasons.Seasons season) => SeasonsChanged ();
-		EnviroSky.instance.OnNightTime += () => NightTime ();
-		EnviroSky.instance.OnDayTime += () => DayTime ();
-		EnviroSky.instance.OnZoneChanged += (EnviroZone zone) =>  ZoneChanged ();
+		EnviroSkyMgr.instance.OnHourPassed += () => HourPassed ();
+        EnviroSkyMgr.instance.OnDayPassed += () => DayPassed ();
+        EnviroSkyMgr.instance.OnYearPassed += () => YearPassed ();
+        EnviroSkyMgr.instance.OnWeatherChanged += (EnviroWeatherPreset type) =>  WeatherChanged ();
+        EnviroSkyMgr.instance.OnSeasonChanged += (EnviroSeasons.Seasons season) => SeasonsChanged ();
+        EnviroSkyMgr.instance.OnNightTime += () => NightTime ();
+        EnviroSkyMgr.instance.OnDayTime += () => DayTime ();
+        EnviroSkyMgr.instance.OnZoneChanged += (EnviroZone zone) =>  ZoneChanged ();
 	}
 		
 	private void HourPassed()

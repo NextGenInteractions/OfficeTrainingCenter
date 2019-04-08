@@ -14,21 +14,24 @@ public class EnviroReflections : MonoBehaviour {
 
 	if (probe == null)
 			probe = GetComponent<ReflectionProbe> ();
-	}
 
-	void  UpdateProbe ()
+        
+    }
+
+    void  UpdateProbe ()
 	{
 		probe.RenderProbe ();
-		lastUpdate = EnviroSky.instance.currentTimeInHours;
+		lastUpdate = EnviroSkyMgr.instance.GetCurrentTimeInHours();
+    
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
-        if (EnviroSky.instance == null)
+        if (EnviroSkyMgr.instance.IsAvailable() == false)
             return;
 
-        if (EnviroSky.instance.currentTimeInHours > lastUpdate + ReflectionUpdateInGameHours || EnviroSky.instance.currentTimeInHours < lastUpdate - ReflectionUpdateInGameHours)
+        if (EnviroSkyMgr.instance.GetCurrentTimeInHours() > lastUpdate + ReflectionUpdateInGameHours || EnviroSkyMgr.instance.GetCurrentTimeInHours() < lastUpdate - ReflectionUpdateInGameHours)
 			UpdateProbe ();
 	}
 }

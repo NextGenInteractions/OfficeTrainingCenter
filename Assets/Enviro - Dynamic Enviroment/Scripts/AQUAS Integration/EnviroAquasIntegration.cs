@@ -29,9 +29,9 @@ public class EnviroAquasIntegration : MonoBehaviour {
 
 	void Start () 
 	{
-		if (EnviroSky.instance == null) 
+		if (EnviroSkyMgr.instance == null) 
 		{
-			Debug.Log ("No EnviroSky in scene! This component will be disabled!");
+			Debug.Log ("No EnviroSky Manager in scene! This component will be disabled!");
 			this.enabled = false;
 			return;
 		}
@@ -39,42 +39,42 @@ public class EnviroAquasIntegration : MonoBehaviour {
 		if(GameObject.Find ("UnderWaterCameraEffects") != null)
 			aquasUnderWater = GameObject.Find ("UnderWaterCameraEffects").GetComponent<AQUAS_LensEffects> ();
 	
-		defaultDistanceFog = EnviroSky.instance.fogSettings.distanceFog;
-		defaultHeightFog = EnviroSky.instance.fogSettings.heightFog;
+		defaultDistanceFog = EnviroSkyMgr.instance.FogSettings.distanceFog;
+		defaultHeightFog = EnviroSkyMgr.instance.FogSettings.heightFog;
 
 		SetupEnviroWithAQUAS ();
 	}
 
 	void Update () 
 	{
-         if (EnviroSky.instance == null)
+         if (EnviroSkyMgr.instance == null)
             return;
 
 		//Check if we are underwater! Deactivate the workaround plane and enviro fog.
 		if (waterObject != null && aquasUnderWater != null) {
 			if (aquasUnderWater.underWater && !isUnderWater) {
 				if (deactivateEnviroFogUnderwater) {
-					EnviroSky.instance.fogSettings.distanceFog = false;
-					EnviroSky.instance.fogSettings.heightFog = false;
-					EnviroSky.instance.customFogIntensity = underwaterFogColorInfluence;
+                    EnviroSkyMgr.instance.FogSettings.distanceFog = false;
+                    EnviroSkyMgr.instance.FogSettings.heightFog = false;
+                    EnviroSkyMgr.instance.CustomFogIntensity = underwaterFogColorInfluence;
                     
 				}
-				EnviroSky.instance.updateFogDensity = false;
-                EnviroSky.instance.Audio.ambientSFXVolumeMod = -1f;
-                EnviroSky.instance.Audio.weatherSFXVolumeMod = -1f;
+                EnviroSkyMgr.instance.UpdateFogIntensity = false;
+                EnviroSkyMgr.instance.ambientAudioVolumeModifier = -1f;
+                EnviroSkyMgr.instance.weatherAudioVolumeModifier = -1f;
 				isUnderWater = true;
 			} else if (!aquasUnderWater.underWater && isUnderWater) {
 				if (deactivateEnviroFogUnderwater) {
-					EnviroSky.instance.updateFogDensity = true;
-					EnviroSky.instance.fogSettings.distanceFog = defaultDistanceFog;
-					EnviroSky.instance.fogSettings.heightFog = defaultHeightFog;
-					RenderSettings.fogDensity = EnviroSky.instance.Weather.currentActiveWeatherPreset.fogDensity;
-					EnviroSky.instance.customFogColor = aquasUnderWater.underWaterParameters.fogColor;
-					EnviroSky.instance.customFogIntensity = 0f;
+                    EnviroSkyMgr.instance.UpdateFogIntensity = true;
+                    EnviroSkyMgr.instance.FogSettings.distanceFog = defaultDistanceFog;
+                    EnviroSkyMgr.instance.FogSettings.heightFog = defaultHeightFog;
+					RenderSettings.fogDensity = EnviroSkyMgr.instance.Weather.currentActiveWeatherPreset.fogDensity;
+                    EnviroSkyMgr.instance.CustomFogColor = aquasUnderWater.underWaterParameters.fogColor;
+                    EnviroSkyMgr.instance.CustomFogIntensity = 0f;
 				}
-                EnviroSky.instance.Audio.ambientSFXVolumeMod = 0f;
-                EnviroSky.instance.Audio.weatherSFXVolumeMod = 0f;
-				isUnderWater = false;
+                EnviroSkyMgr.instance.ambientAudioVolumeModifier = 0f;
+                EnviroSkyMgr.instance.weatherAudioVolumeModifier = 0f;
+                isUnderWater = false;
 			}
 		}
 	}
@@ -86,7 +86,7 @@ public class EnviroAquasIntegration : MonoBehaviour {
 			if (deactivateAquasReflectionProbe)
 				DeactivateReflectionProbe (waterObject);
 
-			if (EnviroSky.instance.fogSettings.distanceFog == false && EnviroSky.instance.fogSettings.heightFog == false)
+			if (EnviroSkyMgr.instance.FogSettings.distanceFog == false && EnviroSkyMgr.instance.FogSettings.heightFog == false)
 				deactivateEnviroFogUnderwater = false;
 
 			if (aquasUnderWater != null)
