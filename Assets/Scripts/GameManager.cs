@@ -376,9 +376,9 @@ public class GameManager : MonoBehaviour {
                     stateDone = true;
                 }
 
-                Debug.Log("masterIntake = " + GetGaugeRotation(masterIntake));
+                //Debug.Log("masterIntake = " + GetGaugeRotation(masterIntake));
 
-                if (GetGaugeRotation(masterIntake) <= -0.075f) //reached the end
+                if (GetGaugeRotation(masterIntake) <= -0.025f) //reached the end
                 {
                     primerArrow.SetActive(false);
                     voiceOverPlayer.PlayOneShot(successSound, dingVolume);
@@ -663,7 +663,7 @@ public class GameManager : MonoBehaviour {
         if (redButtonInput && calibrateSlot)
         {
             Debug.Log("Calibrating slot 2");
-            slot2.transform.position = fuelCell2.transform.position + slotAdjustment;
+            //slot2.transform.position = fuelCell2.transform.position + slotAdjustment;
             //slot2.transform.position = new Vector3(fuelCell2.transform.position.x + slotAdjustment, slot2.transform.position.y, fuelCell2.transform.position.z);
         }
         if (redButtonInput && calibrateSlot)
@@ -752,9 +752,10 @@ public class GameManager : MonoBehaviour {
         {
 
             float differenceAngle = oldBladderAngle - flexAngle;
-            
 
-            if(differenceAngle < 0)
+//            Debug.Log("GameManager::SquishObject() differenceAngle = " + differenceAngle);
+
+            if (differenceAngle < 0)
             {
                 differenceAngle = -differenceAngle;
             }
@@ -765,15 +766,18 @@ public class GameManager : MonoBehaviour {
 
             float squishyness = Remap(Mathf.Abs(differenceAngle), 0, 15, 1.5f, 0.1f);
 
+
+
             orangeButton.GetComponent<Light>().intensity = Remap(Mathf.Abs(differenceAngle), 0 , 15 , 1, 4.5f);
 
             if (squishyness < 1.5f && squishyness > 0.0f) //Removing jitter from the sensor.
             {
-                if (squishyness < 0.3f)
+                if (squishyness < 1.3f)
                 {
+                    Debug.Log("GameManager::SquishObject() squishyness = " + squishyness);
                     totalAirPressure = totalAirPressure - 0.005f; //reducing pressure slowly
                     valveRetracted = false;
-                    //Debug.Log(totalAirPressure);
+                    Debug.Log(totalAirPressure);
                     if(totalAirPressure < 0 && totalAirPressure >= -0.1f)
                     {
                         SetGaugeRotation(totalAirPressure, masterIntake);

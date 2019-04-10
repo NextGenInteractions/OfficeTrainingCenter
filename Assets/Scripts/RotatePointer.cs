@@ -29,7 +29,7 @@ public class RotatePointer : MonoBehaviour {
     private void RotateAnObjectOnPivot(float value)
     {
         Quaternion fromRotation = transform.localRotation;
-        Quaternion toRotation = Quaternion.Euler(0, targetRotation, 0);
+        Quaternion toRotation = Quaternion.Euler(targetRotation, 0, 0);
         transform.localRotation = Quaternion.Lerp(fromRotation,toRotation,Time.deltaTime * speed);
     }
 
