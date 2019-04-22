@@ -566,6 +566,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 171262, guid: cffd200ee4e4ce24391c946d8cfb73c9, type: 3}
+      propertyPath: m_Name
+      value: DoorKnob
+      objectReference: {fileID: 0}
+    - target: {fileID: 180600, guid: cffd200ee4e4ce24391c946d8cfb73c9, type: 3}
+      propertyPath: m_Name
+      value: DoorKnob (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 462666, guid: cffd200ee4e4ce24391c946d8cfb73c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -598,14 +606,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 180600, guid: cffd200ee4e4ce24391c946d8cfb73c9, type: 3}
-      propertyPath: m_Name
-      value: DoorKnob (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 171262, guid: cffd200ee4e4ce24391c946d8cfb73c9, type: 3}
-      propertyPath: m_Name
-      value: DoorKnob
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cffd200ee4e4ce24391c946d8cfb73c9, type: 3}
 --- !u!1001 &1240174614
@@ -615,6 +615,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 130174, guid: b9658119d043c114fb7b265d83998fb4, type: 3}
+      propertyPath: m_Name
+      value: DoorKnob
+      objectReference: {fileID: 0}
+    - target: {fileID: 143736, guid: b9658119d043c114fb7b265d83998fb4, type: 3}
+      propertyPath: m_Name
+      value: DoorKnob (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 413046, guid: b9658119d043c114fb7b265d83998fb4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
@@ -646,14 +654,6 @@ PrefabInstance:
     - target: {fileID: 413046, guid: b9658119d043c114fb7b265d83998fb4, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 143736, guid: b9658119d043c114fb7b265d83998fb4, type: 3}
-      propertyPath: m_Name
-      value: DoorKnob (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 130174, guid: b9658119d043c114fb7b265d83998fb4, type: 3}
-      propertyPath: m_Name
-      value: DoorKnob
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9658119d043c114fb7b265d83998fb4, type: 3}
@@ -809,6 +809,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 104150, guid: 73ce1ca7363f8cb4b87b8fb6985c7e61, type: 3}
+      propertyPath: m_Name
+      value: DoorKnob (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 121230, guid: 73ce1ca7363f8cb4b87b8fb6985c7e61, type: 3}
+      propertyPath: m_Name
+      value: DoorKnob
+      objectReference: {fileID: 0}
     - target: {fileID: 412734, guid: 73ce1ca7363f8cb4b87b8fb6985c7e61, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3
@@ -840,14 +848,6 @@ PrefabInstance:
     - target: {fileID: 412734, guid: 73ce1ca7363f8cb4b87b8fb6985c7e61, type: 3}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 104150, guid: 73ce1ca7363f8cb4b87b8fb6985c7e61, type: 3}
-      propertyPath: m_Name
-      value: DoorKnob (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 121230, guid: 73ce1ca7363f8cb4b87b8fb6985c7e61, type: 3}
-      propertyPath: m_Name
-      value: DoorKnob
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73ce1ca7363f8cb4b87b8fb6985c7e61, type: 3}
