@@ -532,7 +532,7 @@ GameObject:
   - component: {fileID: 7334793842554344974}
   - component: {fileID: 669956660}
   m_Layer: 0
-  m_Name: --SCRIPT HandPoseSnaps -- JJERALD Fixed
+  m_Name: --SCRIPT HandPoseSnaps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -568,7 +568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHandLeapMesh: {fileID: 0}
   rightHandLeapMesh: {fileID: 0}
-  userObjectDistanceThreshold: 0.8
+  userObjectDistanceThreshold: 0.75
 --- !u!114 &669956660
 MonoBehaviour:
   m_ObjectHideFlags: 0
