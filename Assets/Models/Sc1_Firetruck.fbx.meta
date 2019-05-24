@@ -8,27 +8,49 @@ ModelImporter:
     100004: RSlideUp
     100006: //RootNode
     100008: FireArm
+    100010: FireTruck:FireArm
+    100012: FireTruck:LSlideUp
+    100014: FireTruck:MSlideUp
+    100016: FireTruck:RSlideUp
     400000: LSlideUp
     400002: MSlideUp
     400004: RSlideUp
     400006: //RootNode
     400008: FireArm
+    400010: FireTruck:FireArm
+    400012: FireTruck:LSlideUp
+    400014: FireTruck:MSlideUp
+    400016: FireTruck:RSlideUp
     2100000: Vehicles
+    2100002: FireTruck_Vehicles
     2300000: LSlideUp
     2300002: MSlideUp
     2300004: RSlideUp
     2300006: //RootNode
     2300008: FireArm
+    2300010: FireTruck:FireArm
+    2300012: FireTruck:LSlideUp
+    2300014: FireTruck:MSlideUp
+    2300016: FireTruck:RSlideUp
     3300000: LSlideUp
     3300002: MSlideUp
     3300004: RSlideUp
     3300006: //RootNode
     3300008: FireArm
+    3300010: FireTruck:FireArm
+    3300012: FireTruck:LSlideUp
+    3300014: FireTruck:MSlideUp
+    3300016: FireTruck:RSlideUp
     4300000: FireTruck
     4300002: LSlideUp
     4300004: MSlideUp
     4300006: RSlideUp
     4300008: FireArm
+    4300010: FireTruck:FireTruck
+    4300012: FireTruck:FireArm
+    4300014: FireTruck:LSlideUp
+    4300016: FireTruck:MSlideUp
+    4300018: FireTruck:RSlideUp
   externalObjects: {}
   materials:
     importMaterials: 1
