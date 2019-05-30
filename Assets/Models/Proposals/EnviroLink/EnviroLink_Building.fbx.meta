@@ -1,0 +1,463 @@
+fileFormatVersion: 2
+guid: b356b087d932aca4d954ab82c4827ff9
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Doors
+    100002: //RootNode
+    100004: EnviroLink_Roof
+    100006: EnviroLink_Roof_Glassplane_01
+    100008: Floor_Greenhouse
+    100010: Floor_MainBuilding
+    100012: FloorPlan:BuildingDoors
+    100014: FloorPlan:Door_Double_OpenIn
+    100016: FloorPlan:Door_Double_OpenIn1
+    100018: FloorPlan:Door_OpenIn02
+    100020: FloorPlan:Door_OpenIn03
+    100022: FloorPlan:Door_OpenIn2
+    100024: FloorPlan:Door_OpenIn3
+    100026: FloorPlan:Door_OpenIn4
+    100028: FloorPlan:Door_OpenIn5
+    100030: FloorPlan:Door_RotatePivot
+    100032: FloorPlan:Door_RotatePivot 1
+    100034: FloorPlan:Door_RotatePivot 2
+    100036: FloorPlan:Door_RotatePivot 3
+    100038: FloorPlan:Door_RotatePivot 4
+    100040: FloorPlan:Door_RotatePivot 5
+    100042: FloorPlan:Door_RotatePivot 6
+    100044: FloorPlan:Door_RotatePivot 7
+    100046: FloorPlan:Door_RotatePivot1
+    100048: FloorPlan:Door_RotatePivot1 1
+    100050: FloorPlan:DoorFrame
+    100052: FloorPlan:DoorFrame 1
+    100054: FloorPlan:DoorFrame 2
+    100056: FloorPlan:DoorFrame 3
+    100058: FloorPlan:DoorFrame 4
+    100060: FloorPlan:DoorFrame 5
+    100062: FloorPlan:DoorFrame 6
+    100064: FloorPlan:DoorFrame 7
+    100066: FloorPlan:DoorHandle
+    100068: FloorPlan:DoorHandle 1
+    100070: FloorPlan:DoorHandle 2
+    100072: FloorPlan:DoorHandle 3
+    100074: FloorPlan:DoorHandle 4
+    100076: FloorPlan:DoorHandle 5
+    100078: FloorPlan:DoorHandle 6
+    100080: FloorPlan:DoorHandle 7
+    100082: FloorPlan:DoorHandle 8
+    100084: FloorPlan:DoorHandle 9
+    100086: FloorPlan:Handle
+    100088: FloorPlan:Handle 1
+    100090: FloorPlan:Handle 2
+    100092: FloorPlan:Handle 3
+    100094: FloorPlan:Handle 4
+    100096: FloorPlan:Handle 5
+    100098: FloorPlan:Handle 6
+    100100: FloorPlan:Handle 7
+    100102: FloorPlan:Handle 8
+    100104: FloorPlan:Handle 9
+    100106: Greenhouse
+    100108: Greenhouse_Frame
+    100110: Greenhouse_GlassPane_01
+    100112: Greenhouse_GlassPane_02
+    100114: Greenhouse_GlassPane_03
+    100116: Greenhouse_Roof
+    100118: Greenhouse_Roof 1
+    100120: Greenhouse_Roof_GlassPane_01
+    100122: Greenhouse_Roof_GlassPane_02
+    100124: Lobby_FrontFrame
+    100126: Lobby_GlassPlane_01
+    100128: Lobby_GlassPlane_02
+    100130: Lobby_GlassPlane_03
+    100132: Lobby_SideFrame
+    100134: MainOffice_Windows
+    100136: MainOffice_Windows_GlassPlane_01
+    100138: MainOffice_Windows_GlassPlane_02
+    100140: Office
+    400000: Doors
+    400002: //RootNode
+    400004: EnviroLink_Roof
+    400006: EnviroLink_Roof_Glassplane_01
+    400008: Floor_Greenhouse
+    400010: Floor_MainBuilding
+    400012: FloorPlan:BuildingDoors
+    400014: FloorPlan:Door_Double_OpenIn
+    400016: FloorPlan:Door_Double_OpenIn1
+    400018: FloorPlan:Door_OpenIn02
+    400020: FloorPlan:Door_OpenIn03
+    400022: FloorPlan:Door_OpenIn2
+    400024: FloorPlan:Door_OpenIn3
+    400026: FloorPlan:Door_OpenIn4
+    400028: FloorPlan:Door_OpenIn5
+    400030: FloorPlan:Door_RotatePivot
+    400032: FloorPlan:Door_RotatePivot 1
+    400034: FloorPlan:Door_RotatePivot 2
+    400036: FloorPlan:Door_RotatePivot 3
+    400038: FloorPlan:Door_RotatePivot 4
+    400040: FloorPlan:Door_RotatePivot 5
+    400042: FloorPlan:Door_RotatePivot 6
+    400044: FloorPlan:Door_RotatePivot 7
+    400046: FloorPlan:Door_RotatePivot1
+    400048: FloorPlan:Door_RotatePivot1 1
+    400050: FloorPlan:DoorFrame
+    400052: FloorPlan:DoorFrame 1
+    400054: FloorPlan:DoorFrame 2
+    400056: FloorPlan:DoorFrame 3
+    400058: FloorPlan:DoorFrame 4
+    400060: FloorPlan:DoorFrame 5
+    400062: FloorPlan:DoorFrame 6
+    400064: FloorPlan:DoorFrame 7
+    400066: FloorPlan:DoorHandle
+    400068: FloorPlan:DoorHandle 1
+    400070: FloorPlan:DoorHandle 2
+    400072: FloorPlan:DoorHandle 3
+    400074: FloorPlan:DoorHandle 4
+    400076: FloorPlan:DoorHandle 5
+    400078: FloorPlan:DoorHandle 6
+    400080: FloorPlan:DoorHandle 7
+    400082: FloorPlan:DoorHandle 8
+    400084: FloorPlan:DoorHandle 9
+    400086: FloorPlan:Handle
+    400088: FloorPlan:Handle 1
+    400090: FloorPlan:Handle 2
+    400092: FloorPlan:Handle 3
+    400094: FloorPlan:Handle 4
+    400096: FloorPlan:Handle 5
+    400098: FloorPlan:Handle 6
+    400100: FloorPlan:Handle 7
+    400102: FloorPlan:Handle 8
+    400104: FloorPlan:Handle 9
+    400106: Greenhouse
+    400108: Greenhouse_Frame
+    400110: Greenhouse_GlassPane_01
+    400112: Greenhouse_GlassPane_02
+    400114: Greenhouse_GlassPane_03
+    400116: Greenhouse_Roof
+    400118: Greenhouse_Roof 1
+    400120: Greenhouse_Roof_GlassPane_01
+    400122: Greenhouse_Roof_GlassPane_02
+    400124: Lobby_FrontFrame
+    400126: Lobby_GlassPlane_01
+    400128: Lobby_GlassPlane_02
+    400130: Lobby_GlassPlane_03
+    400132: Lobby_SideFrame
+    400134: MainOffice_Windows
+    400136: MainOffice_Windows_GlassPlane_01
+    400138: MainOffice_Windows_GlassPlane_02
+    400140: Office
+    2100000: FloorPlan_Walls
+    2100002: lambert1
+    2100004: FloorPlan_BrickWall
+    2100006: FloorPlan_Glass
+    2100008: FloorPlan_Carpet
+    2100010: FloorPlan_FloorPlan_PineGreen
+    2100012: FloorPlan_Metal
+    2100014: FloorPlan_FireZone_Decals
+    2100016: FloorPlan_Floor1
+    2100018: FloorPlan_CeilingMetal
+    2100020: Gen_Ceiling
+    2300000: //RootNode
+    2300002: EnviroLink_Roof
+    2300004: EnviroLink_Roof_Glassplane_01
+    2300006: Floor_Greenhouse
+    2300008: Floor_MainBuilding
+    2300010: FloorPlan:Door_RotatePivot
+    2300012: FloorPlan:Door_RotatePivot 1
+    2300014: FloorPlan:Door_RotatePivot 2
+    2300016: FloorPlan:Door_RotatePivot 3
+    2300018: FloorPlan:Door_RotatePivot 4
+    2300020: FloorPlan:Door_RotatePivot 5
+    2300022: FloorPlan:Door_RotatePivot 6
+    2300024: FloorPlan:Door_RotatePivot 7
+    2300026: FloorPlan:Door_RotatePivot1
+    2300028: FloorPlan:Door_RotatePivot1 1
+    2300030: FloorPlan:DoorFrame
+    2300032: FloorPlan:DoorFrame 1
+    2300034: FloorPlan:DoorFrame 2
+    2300036: FloorPlan:DoorFrame 3
+    2300038: FloorPlan:DoorFrame 4
+    2300040: FloorPlan:DoorFrame 5
+    2300042: FloorPlan:DoorFrame 6
+    2300044: FloorPlan:DoorFrame 7
+    2300046: FloorPlan:DoorHandle
+    2300048: FloorPlan:DoorHandle 1
+    2300050: FloorPlan:DoorHandle 2
+    2300052: FloorPlan:DoorHandle 3
+    2300054: FloorPlan:DoorHandle 4
+    2300056: FloorPlan:DoorHandle 5
+    2300058: FloorPlan:DoorHandle 6
+    2300060: FloorPlan:DoorHandle 7
+    2300062: FloorPlan:DoorHandle 8
+    2300064: FloorPlan:DoorHandle 9
+    2300066: FloorPlan:Handle
+    2300068: FloorPlan:Handle 1
+    2300070: FloorPlan:Handle 2
+    2300072: FloorPlan:Handle 3
+    2300074: FloorPlan:Handle 4
+    2300076: FloorPlan:Handle 5
+    2300078: FloorPlan:Handle 6
+    2300080: FloorPlan:Handle 7
+    2300082: FloorPlan:Handle 8
+    2300084: FloorPlan:Handle 9
+    2300086: Greenhouse_Frame
+    2300088: Greenhouse_GlassPane_01
+    2300090: Greenhouse_GlassPane_02
+    2300092: Greenhouse_GlassPane_03
+    2300094: Greenhouse_Roof 1
+    2300096: Greenhouse_Roof_GlassPane_01
+    2300098: Greenhouse_Roof_GlassPane_02
+    2300100: Lobby_FrontFrame
+    2300102: Lobby_GlassPlane_01
+    2300104: Lobby_GlassPlane_02
+    2300106: Lobby_GlassPlane_03
+    2300108: Lobby_SideFrame
+    2300110: MainOffice_Windows
+    2300112: MainOffice_Windows_GlassPlane_01
+    2300114: MainOffice_Windows_GlassPlane_02
+    3300000: //RootNode
+    3300002: EnviroLink_Roof
+    3300004: EnviroLink_Roof_Glassplane_01
+    3300006: Floor_Greenhouse
+    3300008: Floor_MainBuilding
+    3300010: FloorPlan:Door_RotatePivot
+    3300012: FloorPlan:Door_RotatePivot 1
+    3300014: FloorPlan:Door_RotatePivot 2
+    3300016: FloorPlan:Door_RotatePivot 3
+    3300018: FloorPlan:Door_RotatePivot 4
+    3300020: FloorPlan:Door_RotatePivot 5
+    3300022: FloorPlan:Door_RotatePivot 6
+    3300024: FloorPlan:Door_RotatePivot 7
+    3300026: FloorPlan:Door_RotatePivot1
+    3300028: FloorPlan:Door_RotatePivot1 1
+    3300030: FloorPlan:DoorFrame
+    3300032: FloorPlan:DoorFrame 1
+    3300034: FloorPlan:DoorFrame 2
+    3300036: FloorPlan:DoorFrame 3
+    3300038: FloorPlan:DoorFrame 4
+    3300040: FloorPlan:DoorFrame 5
+    3300042: FloorPlan:DoorFrame 6
+    3300044: FloorPlan:DoorFrame 7
+    3300046: FloorPlan:DoorHandle
+    3300048: FloorPlan:DoorHandle 1
+    3300050: FloorPlan:DoorHandle 2
+    3300052: FloorPlan:DoorHandle 3
+    3300054: FloorPlan:DoorHandle 4
+    3300056: FloorPlan:DoorHandle 5
+    3300058: FloorPlan:DoorHandle 6
+    3300060: FloorPlan:DoorHandle 7
+    3300062: FloorPlan:DoorHandle 8
+    3300064: FloorPlan:DoorHandle 9
+    3300066: FloorPlan:Handle
+    3300068: FloorPlan:Handle 1
+    3300070: FloorPlan:Handle 2
+    3300072: FloorPlan:Handle 3
+    3300074: FloorPlan:Handle 4
+    3300076: FloorPlan:Handle 5
+    3300078: FloorPlan:Handle 6
+    3300080: FloorPlan:Handle 7
+    3300082: FloorPlan:Handle 8
+    3300084: FloorPlan:Handle 9
+    3300086: Greenhouse_Frame
+    3300088: Greenhouse_GlassPane_01
+    3300090: Greenhouse_GlassPane_02
+    3300092: Greenhouse_GlassPane_03
+    3300094: Greenhouse_Roof 1
+    3300096: Greenhouse_Roof_GlassPane_01
+    3300098: Greenhouse_Roof_GlassPane_02
+    3300100: Lobby_FrontFrame
+    3300102: Lobby_GlassPlane_01
+    3300104: Lobby_GlassPlane_02
+    3300106: Lobby_GlassPlane_03
+    3300108: Lobby_SideFrame
+    3300110: MainOffice_Windows
+    3300112: MainOffice_Windows_GlassPlane_01
+    3300114: MainOffice_Windows_GlassPlane_02
+    4300000: EnviroLink
+    4300002: Floor_MainBuilding
+    4300004: EnviroLink_Roof
+    4300006: EnviroLink_Roof_Glassplane_01
+    4300008: MainOffice_Windows
+    4300010: MainOffice_Windows_GlassPlane_02
+    4300012: MainOffice_Windows_GlassPlane_01
+    4300014: Lobby_FrontFrame
+    4300016: Lobby_GlassPlane_03
+    4300018: Lobby_GlassPlane_02
+    4300020: Lobby_SideFrame
+    4300022: Lobby_GlassPlane_01
+    4300024: FloorPlan:DoorFrame
+    4300026: FloorPlan:Door_RotatePivot
+    4300028: FloorPlan:DoorHandle
+    4300030: FloorPlan:Handle
+    4300032: FloorPlan:DoorFrame
+    4300034: FloorPlan:Door_RotatePivot
+    4300036: FloorPlan:DoorHandle
+    4300038: FloorPlan:Handle
+    4300040: FloorPlan:DoorFrame
+    4300042: FloorPlan:Door_RotatePivot
+    4300044: FloorPlan:DoorHandle
+    4300046: FloorPlan:Handle
+    4300048: FloorPlan:DoorFrame
+    4300050: FloorPlan:Door_RotatePivot
+    4300052: FloorPlan:DoorHandle
+    4300054: FloorPlan:Handle
+    4300056: FloorPlan:DoorFrame
+    4300058: FloorPlan:Door_RotatePivot
+    4300060: FloorPlan:DoorHandle
+    4300062: FloorPlan:Handle
+    4300064: FloorPlan:DoorFrame
+    4300066: FloorPlan:Door_RotatePivot
+    4300068: FloorPlan:DoorHandle
+    4300070: FloorPlan:Handle
+    4300072: FloorPlan:Door_RotatePivot1
+    4300074: FloorPlan:DoorHandle
+    4300076: FloorPlan:Handle
+    4300078: FloorPlan:DoorFrame
+    4300080: FloorPlan:Door_RotatePivot
+    4300082: FloorPlan:DoorHandle
+    4300084: FloorPlan:Handle
+    4300086: FloorPlan:Door_RotatePivot1
+    4300088: FloorPlan:DoorHandle
+    4300090: FloorPlan:Handle
+    4300092: FloorPlan:DoorFrame
+    4300094: FloorPlan:Door_RotatePivot
+    4300096: FloorPlan:DoorHandle
+    4300098: FloorPlan:Handle
+    4300100: Greenhouse_GlassPane_03
+    4300102: Greenhouse_GlassPane_02
+    4300104: Greenhouse_GlassPane_01
+    4300106: Greenhouse_Frame
+    4300108: Greenhouse_Roof_GlassPane_02
+    4300110: Greenhouse_Roof_GlassPane_01
+    4300112: Greenhouse_Roof
+    4300114: Floor_Greenhouse
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorPlan_BrickWall
+    second: {fileID: 2100000, guid: 02432928fc705444da1b78947008e1e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorPlan_Carpet
+    second: {fileID: 2100000, guid: 08130a3e345b1cd46a874eaef642008d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorPlan_FireZone_Decals
+    second: {fileID: 2100000, guid: f4851847a8904ab4badd4bfc630f0d5b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorPlan_Floor1
+    second: {fileID: 2100000, guid: c4a772f2422808e42854875f6c5b913c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorPlan_FloorPlan_PineGreen
+    second: {fileID: 2100000, guid: 712e148385b059548b4b10d624ea8028, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorPlan_Glass
+    second: {fileID: 2100000, guid: e47db907806add749a535067ee33b6e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorPlan_Metal
+    second: {fileID: 2100000, guid: 419662856fae21c41b557415782ad64d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorPlan_Walls
+    second: {fileID: 2100000, guid: d65d8ca859601644f91ab2f7b9120252, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 6287cded852d6ca48a00096432bce431, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
