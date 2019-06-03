@@ -74,6 +74,25 @@ ModelImporter:
     100136: MainOffice_Windows_GlassPlane_01
     100138: MainOffice_Windows_GlassPlane_02
     100140: Office
+    100142: CeilingInteriorLights
+    100144: CeilingLight_00
+    100146: CeilingLight_01
+    100148: CeilingLight_010
+    100150: CeilingLight_02
+    100152: CeilingLight_03
+    100154: CeilingLight_04
+    100156: CeilingLight_05
+    100158: CeilingLight_06
+    100160: CeilingLight_07
+    100162: CeilingLight_08
+    100164: CeilingLight_09
+    100166: ExteriorRailing
+    100168: ExteriorWalkway
+    100170: Greenhouse_Roof_GlassPane_03
+    100172: GreenHouseFrame01
+    100174: GreenHouseFrame02
+    100176: GreenHouseFrame03
+    100178: WalkwaySteps
     400000: Doors
     400002: //RootNode
     400004: EnviroLink_Roof
@@ -145,6 +164,25 @@ ModelImporter:
     400136: MainOffice_Windows_GlassPlane_01
     400138: MainOffice_Windows_GlassPlane_02
     400140: Office
+    400142: CeilingInteriorLights
+    400144: CeilingLight_00
+    400146: CeilingLight_01
+    400148: CeilingLight_010
+    400150: CeilingLight_02
+    400152: CeilingLight_03
+    400154: CeilingLight_04
+    400156: CeilingLight_05
+    400158: CeilingLight_06
+    400160: CeilingLight_07
+    400162: CeilingLight_08
+    400164: CeilingLight_09
+    400166: ExteriorRailing
+    400168: ExteriorWalkway
+    400170: Greenhouse_Roof_GlassPane_03
+    400172: GreenHouseFrame01
+    400174: GreenHouseFrame02
+    400176: GreenHouseFrame03
+    400178: WalkwaySteps
     2100000: FloorPlan_Walls
     2100002: lambert1
     2100004: FloorPlan_BrickWall
@@ -156,6 +194,11 @@ ModelImporter:
     2100016: FloorPlan_Floor1
     2100018: FloorPlan_CeilingMetal
     2100020: Gen_Ceiling
+    2100022: FloorPlan_LightEmissive
+    2100024: FloorPlan_Black1
+    2100026: Gravel
+    2100028: lambert5
+    2100030: WalkWaySteps
     2300000: //RootNode
     2300002: EnviroLink_Roof
     2300004: EnviroLink_Roof_Glassplane_01
@@ -214,6 +257,24 @@ ModelImporter:
     2300110: MainOffice_Windows
     2300112: MainOffice_Windows_GlassPlane_01
     2300114: MainOffice_Windows_GlassPlane_02
+    2300116: CeilingLight_00
+    2300118: CeilingLight_01
+    2300120: CeilingLight_010
+    2300122: CeilingLight_02
+    2300124: CeilingLight_03
+    2300126: CeilingLight_04
+    2300128: CeilingLight_05
+    2300130: CeilingLight_06
+    2300132: CeilingLight_07
+    2300134: CeilingLight_08
+    2300136: CeilingLight_09
+    2300138: ExteriorRailing
+    2300140: ExteriorWalkway
+    2300142: Greenhouse_Roof_GlassPane_03
+    2300144: GreenHouseFrame01
+    2300146: GreenHouseFrame02
+    2300148: GreenHouseFrame03
+    2300150: WalkwaySteps
     3300000: //RootNode
     3300002: EnviroLink_Roof
     3300004: EnviroLink_Roof_Glassplane_01
@@ -272,6 +333,24 @@ ModelImporter:
     3300110: MainOffice_Windows
     3300112: MainOffice_Windows_GlassPlane_01
     3300114: MainOffice_Windows_GlassPlane_02
+    3300116: CeilingLight_00
+    3300118: CeilingLight_01
+    3300120: CeilingLight_010
+    3300122: CeilingLight_02
+    3300124: CeilingLight_03
+    3300126: CeilingLight_04
+    3300128: CeilingLight_05
+    3300130: CeilingLight_06
+    3300132: CeilingLight_07
+    3300134: CeilingLight_08
+    3300136: CeilingLight_09
+    3300138: ExteriorRailing
+    3300140: ExteriorWalkway
+    3300142: Greenhouse_Roof_GlassPane_03
+    3300144: GreenHouseFrame01
+    3300146: GreenHouseFrame02
+    3300148: GreenHouseFrame03
+    3300150: WalkwaySteps
     4300000: EnviroLink
     4300002: Floor_MainBuilding
     4300004: EnviroLink_Roof
@@ -330,7 +409,30 @@ ModelImporter:
     4300110: Greenhouse_Roof_GlassPane_01
     4300112: Greenhouse_Roof
     4300114: Floor_Greenhouse
+    4300116: CeilingLight_010
+    4300118: CeilingLight_09
+    4300120: CeilingLight_08
+    4300122: CeilingLight_07
+    4300124: CeilingLight_06
+    4300126: CeilingLight_05
+    4300128: CeilingLight_00
+    4300130: CeilingLight_04
+    4300132: CeilingLight_03
+    4300134: CeilingLight_02
+    4300136: CeilingLight_01
+    4300138: GreenHouseFrame01
+    4300140: GreenHouseFrame02
+    4300142: Greenhouse_Roof_GlassPane_03
+    4300144: GreenHouseFrame03
+    4300146: ExteriorWalkway
+    4300148: ExteriorRailing
+    4300150: WalkwaySteps
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorPlan_Black1
+    second: {fileID: 2100000, guid: 394fdc9d0ba4ffa40b311c99afd6820b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -341,6 +443,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: FloorPlan_Carpet
     second: {fileID: 2100000, guid: 08130a3e345b1cd46a874eaef642008d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorPlan_CeilingMetal
+    second: {fileID: 2100000, guid: 419662856fae21c41b557415782ad64d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -364,6 +471,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: FloorPlan_LightEmissive
+    second: {fileID: 2100000, guid: b635b24064e06df46a54f398c77efc30, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: FloorPlan_Metal
     second: {fileID: 2100000, guid: 419662856fae21c41b557415782ad64d, type: 2}
   - first:
@@ -374,8 +486,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Gen_Ceiling
+    second: {fileID: 2100000, guid: a40226f86a856754486305ba03bb030b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: lambert1
-    second: {fileID: 2100000, guid: 6287cded852d6ca48a00096432bce431, type: 2}
+    second: {fileID: 2100000, guid: 14123914a4de438419e10dfac0a1b3ed, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -415,7 +532,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
