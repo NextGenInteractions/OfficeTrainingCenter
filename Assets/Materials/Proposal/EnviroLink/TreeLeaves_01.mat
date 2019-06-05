@@ -8,19 +8,27 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TreeLeaves_01
-  m_Shader: {fileID: 4800000, guid: 85bf9b74e3072b64e8f7e15a84fbfa2e, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON
+  m_Shader: {fileID: 4800000, guid: 54f692b2eb49fea478620a88e090e9a4, type: 3}
+  m_ShaderKeywords: EFFECT_BUMP EFFECT_HUE_VARIATION GEOM_TYPE_LEAF _ENABLEWORLDPROJECTION_ON
+    _FOLIAGESIZE_ON _FOLIAGETINT_ON _LEAVESAMOUNT_ON _LEAVESTINT_ON _MOTIONNOISE_ON
+    _MOTIONTYPEKEY_MOTION _NORMALINVERTONBACKFACE_ON _RENDERTYPEKEY_CUT _RENDERTYPE_CUT
+    _TREELEAVESAMOUNT_ON _TREETINT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2450
+  stringTagMap:
+    RenderType: TransparentCutout
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlbedoTex:
+        m_Texture: {fileID: 2800000, guid: bcca4b888b4729f43bf3550a7c115d49, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: af91b7037ef02e746b4b9b098a01f093, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -40,10 +48,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: bcca4b888b4729f43bf3550a7c115d49, type: 3}
+        m_Texture: {fileID: 2800000, guid: b552f872714b094408aae458649fe061, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -59,26 +71,88 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SurfaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex4coord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _ADSAdvancedLitTreeLeaf: 1
+    - _ADVANCEDD: 0
+    - _BRANCHMOTIONN: 0
+    - _BatchingInfo: 0
+    - _BranchMotionParameters: 0
     - _BumpScale: 1
-    - _Cutoff: 0.077
+    - _CullMode: 0
+    - _Cutoff: 0.021
     - _DetailNormalMapScale: 1
+    - _DetailTint: 1
     - _DstBlend: 0
+    - _GlobalTint: 1
+    - _GlobalTurbulence: 1
     - _GlossMapScale: 1
-    - _Glossiness: 0
+    - _Glossiness: 0.049
     - _GlossyReflections: 1
+    - _Internal_ADS: 1
+    - _Internal_DebugMask: 1
+    - _Internal_DebugMask2: 1
+    - _Internal_DebugMask3: 1
+    - _Internal_DebugVariation: 1
+    - _Internal_LitAdvanced: 1
+    - _Internal_SetByScript: 0
+    - _Internal_TypeTreeLeaf: 1
+    - _Internal_UnityToBoxophobic: 1
+    - _Internal_Version: 220
+    - _LEAFF: 0
+    - _LEAFMOTIONN: 0
+    - _LeafMtionParameters: 0
     - _Metallic: 0
     - _Mode: 1
+    - _MotionAmplitude: 0.6
+    - _MotionAmplitude2: 0.4
+    - _MotionAmplitude3: 0
+    - _MotionNoise: 1
+    - _MotionScale: 0.2
+    - _MotionScale2: 0.4
+    - _MotionScale3: 100
+    - _MotionSpacee: 0
+    - _MotionSpaceeEnd: 0
+    - _MotionSpaceee: 0
+    - _MotionSpaceeeEnd: 0
+    - _MotionSpeed: 1
+    - _MotionSpeed2: 0.18
+    - _MotionSpeed3: 5.39
+    - _MotionVariation2: 2
+    - _MotionVertical2: 0
     - _NormalIntensity: 0
+    - _NormalScale: 2
+    - _Occlusion: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _RENDERINGG: 0
+    - _RenderFaces: 0
+    - _SETTINGSS: 0
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SpecularIntensity: 0
     - _SrcBlend: 1
+    - _TRUNKMOTIONN: 0
+    - _TrunkMotionParameters: 0
     - _UVSec: 0
+    - _VertexOcclusion: 0.5
     - _ZWrite: 1
+    - __dirty: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MainUVs: {r: 1, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SubsurfaceColor: {r: 0.9545638, g: 1, b: 0.17647055, a: 1}

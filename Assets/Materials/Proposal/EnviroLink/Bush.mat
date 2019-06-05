@@ -8,18 +8,23 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Bush
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _ALPHATEST_ON _GLOSSYREFLECTIONS_OFF
+  m_Shader: {fileID: 4800000, guid: b35c6360784f2734c807fab38654e991, type: 3}
+  m_ShaderKeywords: _ALPHATEST_ON _FOLIAGETINT_ON _METALLICGLOSSMAP _MOTIONNOISE_ON
+    _MOTIONSPACE_WORLD _MOTIONTYPEKEY_MOTION_MOTION2 _NORMALINVERTONBACKFACE_ON _NORMALMAP
+    _RENDERTYPEKEY_OPAQUE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
-  stringTagMap:
-    RenderType: TransparentCutout
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlbedoTex:
+        m_Texture: {fileID: 2800000, guid: cdedb7ac381d17245838d2ae33a2bd55, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -41,11 +46,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: cdedb7ac381d17245838d2ae33a2bd55, type: 3}
+        m_Texture: {fileID: 2800000, guid: 46a552a4228b5574ab6f74c1ae1b7bc4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: ecc388f65f754b546bf605495f3d9e70, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: 57d5613df40dfb3479822b8c5f92bf08, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -56,23 +65,76 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SurfaceTex:
+        m_Texture: {fileID: 2800000, guid: ecc388f65f754b546bf605495f3d9e70, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _BumpScale: 1
-    - _Cutoff: 0.211
+    - _ADSAdvancedLitPlant: 1
+    - _ADSStandardLitPlant: 1
+    - _ADVANCEDD: 0
+    - _BatchingInfo: 0
+    - _BumpScale: 0
+    - _CullMode: 0
+    - _Cutoff: 0.126
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _GlobalSize: 0
+    - _GlobalTint: 0.559
+    - _GlobalTurbulence: 1
     - _GlossMapScale: 1
-    - _Glossiness: 0
+    - _Glossiness: 0.5
     - _GlossyReflections: 0
+    - _Internal_ADS: 1
+    - _Internal_DebugMask: 1
+    - _Internal_DebugMask2: 1
+    - _Internal_DebugVariation: 1
+    - _Internal_LitAdvanced: 1
+    - _Internal_LitStandard: 1
+    - _Internal_SetByScript: 0
+    - _Internal_TypePlant: 1
+    - _Internal_UnityToBoxophobic: 1
+    - _Internal_Version: 220
+    - _LeafMotionParameters: 0
+    - _MAINN: 0
+    - _MOTIONLEAFF: 0
+    - _MOTIONPLANTT: 0
     - _Metallic: 0
     - _Mode: 1
+    - _MotionAmplitude: 0.35
+    - _MotionAmplitude3: 0.01
+    - _MotionNoise: 1
+    - _MotionScale: 0.1
+    - _MotionScale3: 100
+    - _MotionSpacee: 0
+    - _MotionSpaceeEnd: 0
+    - _MotionSpaceee: 0
+    - _MotionSpaceeeEnd: 0
+    - _MotionSpeed: 0.5
+    - _MotionSpeed3: 0.26
+    - _MotionVariation: 4.8
+    - _MotionVertical: 0.368
+    - _NormalInvertOnBackface: 1
+    - _NormalScale: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _PlantMotionParameters: 0
+    - _RENDERINGG: 0
+    - _RenderFaces: 0
+    - _SETTINGS: 0
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
+    - __dirty: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MainUVs: {r: 1, g: 1, b: 0, a: 0}
+    - _SubsurfaceColor: {r: 0.992647, g: 0.8262327, b: 0.57661116, a: 1}

@@ -8,17 +8,22 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Fern01_Leaves
-  m_Shader: {fileID: 4800000, guid: 85bf9b74e3072b64e8f7e15a84fbfa2e, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _NORMALMAP _SPECGLOSSMAP
+  m_Shader: {fileID: 4800000, guid: b35c6360784f2734c807fab38654e991, type: 3}
+  m_ShaderKeywords: _ALPHATEST_ON _NORMALMAP _RENDERTYPEKEY_CUT _SPECGLOSSMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2450
+  stringTagMap:
+    RenderType: TransparentCutout
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlbedoTex:
+        m_Texture: {fileID: 2800000, guid: 897ea34b9f27c06439e9bf1e51f7bb59, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: 0280d559e837f9e4788d87c3d520c80b, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -47,6 +52,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: 0280d559e837f9e4788d87c3d520c80b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 2800000, guid: 076ac3aebf46de24dafddd7da3e47443, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -59,19 +68,66 @@ Material:
         m_Texture: {fileID: 2800000, guid: 076ac3aebf46de24dafddd7da3e47443, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SurfaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _ADSAdvancedLitPlant: 1
+    - _ADVANCEDD: 0
+    - _BatchingInfo: 0
     - _BumpScale: -0.4
+    - _CullMode: 0
     - _Cutoff: 0.493
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _GlobalSize: 1
+    - _GlobalTint: 1
+    - _GlobalTurbulence: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 1
+    - _Internal_ADS: 1
+    - _Internal_DebugMask: 1
+    - _Internal_DebugMask2: 1
+    - _Internal_DebugVariation: 1
+    - _Internal_LitAdvanced: 1
+    - _Internal_SetByScript: 0
+    - _Internal_TypePlant: 1
+    - _Internal_UnityToBoxophobic: 1
+    - _Internal_Version: 220
+    - _LeafMotionParameters: 0
+    - _MAINN: 0
+    - _MOTIONLEAFF: 0
+    - _MOTIONPLANTT: 0
     - _Metallic: 0
     - _Mode: 1
+    - _MotionAmplitude: 0
+    - _MotionAmplitude3: 0.12
+    - _MotionNoise: 1
+    - _MotionScale: 0
+    - _MotionScale3: 0.12
+    - _MotionSpacee: 0
+    - _MotionSpaceeEnd: 0
+    - _MotionSpaceee: 0
+    - _MotionSpaceeeEnd: 0
+    - _MotionSpeed: 0
+    - _MotionSpeed3: 0.04
+    - _MotionVariation: 0
+    - _MotionVertical: 0
     - _NormalIntensity: 0.482
+    - _NormalScale: -0.4
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _PlantMotionParameters: 0
+    - _RENDERINGG: 0
+    - _RenderFaces: 0
+    - _SETTINGS: 0
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SpecularIntensity: 0
@@ -79,7 +135,10 @@ Material:
     - _Transparency: 0
     - _UVSec: 0
     - _ZWrite: 1
+    - __dirty: 1
     m_Colors:
     - _Color: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MainUVs: {r: 1, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SubsurfaceColor: {r: 1, g: 1, b: 1, a: 1}

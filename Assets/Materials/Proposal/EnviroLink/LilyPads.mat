@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LilyPads
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _ALPHATEST_ON
+  m_Shader: {fileID: 4800000, guid: 2089e672f3b28ce4fa1d317f1e4ccf99, type: 3}
+  m_ShaderKeywords: _ALPHATEST_ON _MOTIONSPACE_LOCAL _RENDERTYPEKEY_CUT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -20,6 +20,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlbedoTex:
+        m_Texture: {fileID: 2800000, guid: b93c8af582a311e4690061724beee5f6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -48,6 +52,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -56,23 +64,69 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _ADSSimpleLitGeneric: 1
+    - _ADVANCEDD: 0
+    - _BatchingInfo: 0
     - _BumpScale: 1
-    - _Cutoff: 0.077
+    - _CullMode: 0
+    - _Cutoff: 0.052
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _GlobalTurbulence: 1
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
+    - _Internal_ADS: 1
+    - _Internal_DebugMask: 1
+    - _Internal_DebugVariation: 1
+    - _Internal_LitSimple: 1
+    - _Internal_TypeGeneric: 1
+    - _Internal_UnityToBoxophobic: 1
+    - _Internal_Version: 220
+    - _MAINN: 0
+    - _MOTIONN: 0
+    - _MaskAxis: 1
+    - _MaskMax: 1
+    - _MaskMin: 0
+    - _MaskType: 0
+    - _MaskTypee: 0
+    - _MaskTypeeEnd: 0
     - _Metallic: 0.56
     - _Mode: 1
+    - _MotionAmplitude: 0.4
+    - _MotionNoise: 1
+    - _MotionScale: 0
+    - _MotionSpace: 1
+    - _MotionSpacee: 0
+    - _MotionSpaceeEnd: 0
+    - _MotionSpaceee: 0
+    - _MotionSpaceeeEnd: 0
+    - _MotionSpeed: 0.001
+    - _MotionVariation: 0.62
+    - _NormalInvertOnBackface: 1
+    - _NormalScale: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _QuickMaskk: 0
+    - _RENDERINGG: 0
+    - _RenderFaces: 0
+    - _RenderType: 1
+    - _RenderTypee: 0
+    - _SETTINGS: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
+    - __dirty: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _LocalDirection: {r: 1, g: 0, b: 1, a: 0}
+    - _MainUVs: {r: 1, g: 1, b: 0, a: 0}
+    - _UVZero: {r: 1, g: 1, b: 0, a: 0}

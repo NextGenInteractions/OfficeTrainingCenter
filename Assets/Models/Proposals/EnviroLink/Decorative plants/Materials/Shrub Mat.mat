@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shrub Mat
+  m_Shader: {fileID: 4800000, guid: 4e611f85bc3a1924ca0a7ecd251e1954, type: 3}
+  m_ShaderKeywords: _RENDERTYPEKEY_OPAQUE
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlbedoTex:
+        m_Texture: {fileID: 2800000, guid: 93a3c92dca7388a4baa5fef2e28efdce, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: cd3925797577e2e40aac903a92b30b57, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 93a3c92dca7388a4baa5fef2e28efdce, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: cd3925797577e2e40aac903a92b30b57, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ADSSimpleLitPlant: 1
+    - _ADVANCEDD: 0
+    - _BatchingInfo: 0
+    - _BumpScale: 0
+    - _CullMode: 0
+    - _Cutoff: 0.17857143
+    - _GlobalSize: 1
+    - _GlobalTint: 1
+    - _GlobalTurbulence: 1
+    - _Glossiness: 0
+    - _Internal_ADS: 1
+    - _Internal_DebugMask: 1
+    - _Internal_DebugMask2: 1
+    - _Internal_DebugVariation: 1
+    - _Internal_LitSimple: 1
+    - _Internal_SetByScript: 0
+    - _Internal_TypePlant: 1
+    - _Internal_UnityToBoxophobic: 1
+    - _Internal_Version: 220
+    - _LeafMotionParameters: 0
+    - _MAINN: 0
+    - _MOTIONLEAFF: 0
+    - _MOTIONPLANTT: 0
+    - _Mode: 0
+    - _MotionAmplitude: 0.17
+    - _MotionAmplitude3: 0.5
+    - _MotionNoise: 1
+    - _MotionScale: 0.45
+    - _MotionScale3: 0.5
+    - _MotionSpacee: 0
+    - _MotionSpaceeEnd: 0
+    - _MotionSpaceee: 0
+    - _MotionSpaceeeEnd: 0
+    - _MotionSpeed: 0.3
+    - _MotionSpeed3: 1.34
+    - _MotionVariation: 10.69
+    - _MotionVertical: 0
+    - _NormalInvertOnBackface: 1
+    - _NormalScale: 0
+    - _PlantMotionParameters: 0
+    - _RENDERINGG: 0
+    - _RenderFaces: 0
+    - _SETTINGS: 0
+    - _Shininess: 1
+    - __dirty: 1
+    m_Colors:
+    - _Color: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
+    - _MainUVs: {r: 1, g: 1, b: 0, a: 0}
+    - _SpecColor: {r: 0.44117647, g: 0.44117647, b: 0.44117647, a: 1}
