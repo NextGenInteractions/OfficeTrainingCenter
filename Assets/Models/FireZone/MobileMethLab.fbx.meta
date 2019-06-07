@@ -1,0 +1,291 @@
+fileFormatVersion: 2
+guid: cfe25666e6fcb0b4abaa68db5bacdab4
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Bottle_Coke01
+    100002: Bottle_Coke02
+    100004: Bottle_Sprite
+    100006: Bottle_Sprite1
+    100008: CokeBottle
+    100010: CokeBottle 1
+    100012: CokeLid
+    100014: CokeLid 1
+    100016: Container
+    100018: Flask
+    100020: Flask1
+    100022: Flask2
+    100024: GasCanister
+    100026: Jar
+    100028: Jar1
+    100030: Jar2
+    100032: Jar3
+    100034: Jar4
+    100036: Jar5
+    100038: LHandle
+    100040: Lid
+    100042: Lid 1
+    100044: //RootNode
+    100046: PlasticContainer
+    100048: RHandle
+    100050: Salt
+    100052: Salt1
+    100054: Salt_Lid
+    100056: Salt_Lid 1
+    100058: SaltBase
+    100060: SaltBase 1
+    100062: SpriteBottle
+    100064: SpriteBottle 1
+    100066: SpriteBottle1
+    100068: SpriteLid
+    100070: ThinnerCanister
+    400000: Bottle_Coke01
+    400002: Bottle_Coke02
+    400004: Bottle_Sprite
+    400006: Bottle_Sprite1
+    400008: CokeBottle
+    400010: CokeBottle 1
+    400012: CokeLid
+    400014: CokeLid 1
+    400016: Container
+    400018: Flask
+    400020: Flask1
+    400022: Flask2
+    400024: GasCanister
+    400026: Jar
+    400028: Jar1
+    400030: Jar2
+    400032: Jar3
+    400034: Jar4
+    400036: Jar5
+    400038: LHandle
+    400040: Lid
+    400042: Lid 1
+    400044: //RootNode
+    400046: PlasticContainer
+    400048: RHandle
+    400050: Salt
+    400052: Salt1
+    400054: Salt_Lid
+    400056: Salt_Lid 1
+    400058: SaltBase
+    400060: SaltBase 1
+    400062: SpriteBottle
+    400064: SpriteBottle 1
+    400066: SpriteBottle1
+    400068: SpriteLid
+    400070: ThinnerCanister
+    2100000: White
+    2100002: Coke
+    2100004: CokePlastic
+    2100006: Label
+    2100008: SpritePlastic
+    2100010: lambert1
+    2100012: Gen_Glass
+    2100014: Gen_Metal
+    2300000: CokeBottle
+    2300002: CokeBottle 1
+    2300004: CokeLid
+    2300006: CokeLid 1
+    2300008: Container
+    2300010: Flask
+    2300012: Flask1
+    2300014: Flask2
+    2300016: GasCanister
+    2300018: Jar
+    2300020: Jar1
+    2300022: Jar2
+    2300024: Jar3
+    2300026: Jar4
+    2300028: Jar5
+    2300030: LHandle
+    2300032: Lid
+    2300034: Lid 1
+    2300036: RHandle
+    2300038: Salt_Lid
+    2300040: Salt_Lid 1
+    2300042: SaltBase
+    2300044: SaltBase 1
+    2300046: SpriteBottle
+    2300048: SpriteBottle 1
+    2300050: SpriteBottle1
+    2300052: SpriteLid
+    2300054: ThinnerCanister
+    3300000: CokeBottle
+    3300002: CokeBottle 1
+    3300004: CokeLid
+    3300006: CokeLid 1
+    3300008: Container
+    3300010: Flask
+    3300012: Flask1
+    3300014: Flask2
+    3300016: GasCanister
+    3300018: Jar
+    3300020: Jar1
+    3300022: Jar2
+    3300024: Jar3
+    3300026: Jar4
+    3300028: Jar5
+    3300030: LHandle
+    3300032: Lid
+    3300034: Lid 1
+    3300036: RHandle
+    3300038: Salt_Lid
+    3300040: Salt_Lid 1
+    3300042: SaltBase
+    3300044: SaltBase 1
+    3300046: SpriteBottle
+    3300048: SpriteBottle 1
+    3300050: SpriteBottle1
+    3300052: SpriteLid
+    3300054: ThinnerCanister
+    4300000: CokeLid
+    4300002: CokeBottle
+    4300004: CokeLid
+    4300006: CokeBottle
+    4300008: SpriteBottle
+    4300010: SpriteLid
+    4300012: SpriteBottle1
+    4300014: SaltBase
+    4300016: Salt_Lid
+    4300018: Flask
+    4300020: Container
+    4300022: RHandle
+    4300024: LHandle
+    4300026: Jar
+    4300028: GasCanister
+    4300030: Lid
+    4300032: ThinnerCanister
+    4300034: Lid
+    4300036: Jar1
+    4300038: Jar2
+    4300040: Jar3
+    4300042: Flask1
+    4300044: Jar4
+    4300046: SaltBase
+    4300048: Salt_Lid
+    4300050: Jar5
+    4300052: Flask2
+    4300054: SpriteBottle
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Coke
+    second: {fileID: 2100000, guid: 545e8968097dc244ebfcf54b89005784, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CokePlastic
+    second: {fileID: 2100000, guid: 545e8968097dc244ebfcf54b89005784, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gen_Glass
+    second: {fileID: 2100000, guid: e47db907806add749a535067ee33b6e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gen_Metal
+    second: {fileID: 2100000, guid: 14123914a4de438419e10dfac0a1b3ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Label
+    second: {fileID: 2100000, guid: 7b5b25592f6f59a4ba9018fb8413d14c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SpritePlastic
+    second: {fileID: 2100000, guid: b839e400f41d4264186e3b4830cf9e15, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: White
+    second: {fileID: 2100000, guid: 7abf7194619892143b90d72eb67ba250, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
