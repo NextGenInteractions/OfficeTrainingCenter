@@ -72,18 +72,18 @@ Material:
     - _MOTIONLEAFF: 0
     - _MOTIONPLANTT: 0
     - _Mode: 0
-    - _MotionAmplitude: 0
-    - _MotionAmplitude3: 3.42
+    - _MotionAmplitude: 0.01
+    - _MotionAmplitude3: 0.01
     - _MotionNoise: 1
-    - _MotionScale: 0
+    - _MotionScale: 2.79
     - _MotionScale3: 2.91
     - _MotionSpacee: 0
     - _MotionSpaceeEnd: 0
     - _MotionSpaceee: 0
     - _MotionSpaceeeEnd: 0
-    - _MotionSpeed: 0
+    - _MotionSpeed: 1.73
     - _MotionSpeed3: 0.33
-    - _MotionVariation: 0
+    - _MotionVariation: 2.91
     - _MotionVertical: 0
     - _NormalScale: 0
     - _PlantMotionParameters: 0

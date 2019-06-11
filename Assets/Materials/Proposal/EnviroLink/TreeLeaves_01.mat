@@ -115,22 +115,22 @@ Material:
     - _LeafMtionParameters: 0
     - _Metallic: 0
     - _Mode: 1
-    - _MotionAmplitude: 0.6
-    - _MotionAmplitude2: 0.4
-    - _MotionAmplitude3: 0
+    - _MotionAmplitude: 0.01
+    - _MotionAmplitude2: 0.01
+    - _MotionAmplitude3: 0.01
     - _MotionNoise: 1
-    - _MotionScale: 0.2
+    - _MotionScale: 0.74
     - _MotionScale2: 0.4
-    - _MotionScale3: 100
+    - _MotionScale3: 3.02
     - _MotionSpacee: 0
     - _MotionSpaceeEnd: 0
     - _MotionSpaceee: 0
     - _MotionSpaceeeEnd: 0
     - _MotionSpeed: 1
     - _MotionSpeed2: 0.18
-    - _MotionSpeed3: 5.39
+    - _MotionSpeed3: 0.83
     - _MotionVariation2: 2
-    - _MotionVertical2: 0
+    - _MotionVertical2: 0.383
     - _NormalIntensity: 0
     - _NormalScale: 2
     - _Occlusion: 0
@@ -151,7 +151,7 @@ Material:
     - _ZWrite: 1
     - __dirty: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MainUVs: {r: 1, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}

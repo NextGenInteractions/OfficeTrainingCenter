@@ -82,7 +82,7 @@ Material:
     - _BatchingInfo: 0
     - _BumpScale: -0.4
     - _CullMode: 0
-    - _Cutoff: 0.493
+    - _Cutoff: 0.72
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlobalSize: 1
@@ -106,28 +106,28 @@ Material:
     - _MOTIONPLANTT: 0
     - _Metallic: 0
     - _Mode: 1
-    - _MotionAmplitude: 0
-    - _MotionAmplitude3: 0.12
+    - _MotionAmplitude: 0.01
+    - _MotionAmplitude3: 0.01
     - _MotionNoise: 1
-    - _MotionScale: 0
-    - _MotionScale3: 0.12
+    - _MotionScale: 0.36
+    - _MotionScale3: 1.65
     - _MotionSpacee: 0
     - _MotionSpaceeEnd: 0
     - _MotionSpaceee: 0
     - _MotionSpaceeeEnd: 0
-    - _MotionSpeed: 0
-    - _MotionSpeed3: 0.04
-    - _MotionVariation: 0
-    - _MotionVertical: 0
+    - _MotionSpeed: 0.1
+    - _MotionSpeed3: 0.03
+    - _MotionVariation: 4.14
+    - _MotionVertical: 0.757
     - _NormalIntensity: 0.482
-    - _NormalScale: -0.4
+    - _NormalScale: 0.81
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _PlantMotionParameters: 0
     - _RENDERINGG: 0
     - _RenderFaces: 0
     - _SETTINGS: 0
-    - _Smoothness: 0
+    - _Smoothness: 0.064
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SpecularIntensity: 0

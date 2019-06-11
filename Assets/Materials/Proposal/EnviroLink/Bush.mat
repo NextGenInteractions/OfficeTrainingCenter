@@ -105,10 +105,10 @@ Material:
     - _MOTIONPLANTT: 0
     - _Metallic: 0
     - _Mode: 1
-    - _MotionAmplitude: 0.35
+    - _MotionAmplitude: 0.01
     - _MotionAmplitude3: 0.01
     - _MotionNoise: 1
-    - _MotionScale: 0.1
+    - _MotionScale: 0.52
     - _MotionScale3: 100
     - _MotionSpacee: 0
     - _MotionSpaceeEnd: 0
@@ -116,7 +116,7 @@ Material:
     - _MotionSpaceeeEnd: 0
     - _MotionSpeed: 0.5
     - _MotionSpeed3: 0.26
-    - _MotionVariation: 4.8
+    - _MotionVariation: 9.93
     - _MotionVertical: 0.368
     - _NormalInvertOnBackface: 1
     - _NormalScale: 2

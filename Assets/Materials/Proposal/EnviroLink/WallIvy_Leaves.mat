@@ -120,23 +120,23 @@ Material:
     - _MOTIONPLANTT: 0
     - _Metallic: 0
     - _Mode: 0
-    - _MotionAmplitude: 0
+    - _MotionAmplitude: 0.01
     - _MotionAmplitude2: 0
     - _MotionAmplitude3: 0
     - _MotionNoise: 1
-    - _MotionScale: 0
+    - _MotionScale: 7.1
     - _MotionScale2: 0
     - _MotionScale3: 0
     - _MotionSpacee: 0
     - _MotionSpaceeEnd: 0
     - _MotionSpaceee: 0
     - _MotionSpaceeeEnd: 0
-    - _MotionSpeed: 0
+    - _MotionSpeed: 0.1
     - _MotionSpeed2: 0
     - _MotionSpeed3: 0
-    - _MotionVariation: 0
+    - _MotionVariation: 9.62
     - _MotionVariation2: 0
-    - _MotionVertical: 0
+    - _MotionVertical: 0.551
     - _MotionVertical2: 0
     - _NormalIntensity: 0.647
     - _NormalInvertOnBackface: 1

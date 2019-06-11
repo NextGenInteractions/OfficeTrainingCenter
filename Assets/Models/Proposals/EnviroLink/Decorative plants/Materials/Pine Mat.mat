@@ -73,15 +73,15 @@ Material:
     - _MOTIONPLANTT: 0
     - _Mode: 0
     - _MotionAmplitude: 0.03
-    - _MotionAmplitude3: 0.33
+    - _MotionAmplitude3: 0.01
     - _MotionNoise: 1
-    - _MotionScale: 0.12
+    - _MotionScale: 2.88
     - _MotionScale3: 0.84
     - _MotionSpacee: 0
     - _MotionSpaceeEnd: 0
     - _MotionSpaceee: 0
     - _MotionSpaceeeEnd: 0
-    - _MotionSpeed: 0.09
+    - _MotionSpeed: 1.14
     - _MotionSpeed3: 0.45
     - _MotionVariation: 0.07
     - _MotionVertical: 0
