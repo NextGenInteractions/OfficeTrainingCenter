@@ -1,16 +1,15 @@
 fileFormatVersion: 2
-guid: 5a6c0d4bb2b8dbc4ba3310c6eb3c21d0
+guid: 7b5332f451e426f45b7b443908358dc7
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
     2100000: Label
-    2100002: White
-    2100004: lambert1
+    2100002: Master_Gloss
     2300000: //RootNode
     3300000: //RootNode
-    4300000: GasTank_Base
+    4300000: GasTank
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -20,13 +19,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: White
-    second: {fileID: 2100000, guid: 1e55dfd2cb81c7d48a90d0d8167af6d6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 2100000, guid: f6b27a826a316ca47aab74a95bc908d4, type: 2}
+      name: Master_Gloss
+    second: {fileID: 2100000, guid: 4985883d058384f4dacb92e6a950ef80, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

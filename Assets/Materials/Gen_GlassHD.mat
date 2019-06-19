@@ -89,7 +89,7 @@ Material:
     - _MKEditorShowRimBehavior: 1
     - _MKEditorShowSpecularBehavior: 1
     - _MKEditorShowTranslucentBehavior: 0
-    - _MainTint: 0.535
+    - _MainTint: 0.574
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -99,10 +99,10 @@ Material:
     - _RimIntensity: 0.184
     - _RimSize: 3.702
     - _ShadowIntensity: 0.1
-    - _Shininess: 0.795
+    - _Shininess: 0.384
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SpecularIntensity: 0.227
+    - _SpecularIntensity: 0.035
     - _SrcBlend: 1
     - _TranslucentIntensity: 0.5
     - _TranslucentShininess: 0.275
