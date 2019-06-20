@@ -22,12 +22,6 @@ MonoBehaviour:
       networkSync: 0
       value: 0
     - useVariable: 1
-      name: GazeIN
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 0
-    - useVariable: 1
       name: MultiRAE_OutOfCase
       tooltip: 
       showInInspector: 0
@@ -39,31 +33,7 @@ MonoBehaviour:
       showInInspector: 0
       networkSync: 0
       value: 0
-    - useVariable: 1
-      name: GasSampled
-      tooltip: 
-      showInInspector: 1
-      networkSync: 0
-      value: 0
-    - useVariable: 1
-      name: CarZones
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 0
     boolVariables:
-    - useVariable: 1
-      name: Gave_Objective
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 0
-    - useVariable: 1
-      name: GazeIn
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 0
     - useVariable: 1
       name: Gas_1
       tooltip: 
@@ -120,7 +90,7 @@ MonoBehaviour:
     enumVariables: []
     categories:
     - 
-    variableCategoryIDs: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    variableCategoryIDs: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   events:
   - Transfer
   - Get Gaze 1

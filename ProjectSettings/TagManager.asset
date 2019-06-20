@@ -19,7 +19,7 @@ TagManager:
   - 
   - PostProcessing
   - Text
-  - 
+  - UI
   - 
   - 
   - 
@@ -47,4 +47,7 @@ TagManager:
     locked: 0
   - name: Text
     uniqueID: 2003877033
+    locked: 0
+  - name: UI
+    uniqueID: 1785111025
     locked: 0

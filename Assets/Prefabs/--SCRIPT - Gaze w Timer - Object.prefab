@@ -1372,37 +1372,10 @@ MonoBehaviour:
     - name: FINISHED
       isSystemEvent: 1
       isGlobal: 0
-    - name: TRIGGER ENTER
-      isSystemEvent: 1
-      isGlobal: 0
-    - name: TRIGGER EXIT
-      isSystemEvent: 1
-      isGlobal: 0
-    - name: TRIGGER STAY
-      isSystemEvent: 1
-      isGlobal: 0
-    - name: BurnCarInfo
-      isSystemEvent: 0
-      isGlobal: 0
     - name: BurnCarSeen
       isSystemEvent: 0
       isGlobal: 0
-    - name: Get Gaze 1
-      isSystemEvent: 0
-      isGlobal: 1
-    - name: Get Gaze 2
-      isSystemEvent: 0
-      isGlobal: 1
-    - name: Get Gaze 3
-      isSystemEvent: 0
-      isGlobal: 1
-    - name: LookingAt
-      isSystemEvent: 0
-      isGlobal: 0
     - name: NotSeen
-      isSystemEvent: 0
-      isGlobal: 0
-    - name: TimerDone
       isSystemEvent: 0
       isGlobal: 0
     globalTransitions: []
@@ -1416,13 +1389,7 @@ MonoBehaviour:
         value: 0
       intVariables:
       - useVariable: 1
-        name: ObjectSeen
-        tooltip: 
-        showInInspector: 0
-        networkSync: 0
-        value: 0
-      - useVariable: 1
-        name: ObjectNotSeen
+        name: 
         tooltip: 
         showInInspector: 0
         networkSync: 0
@@ -1434,14 +1401,20 @@ MonoBehaviour:
         networkSync: 0
         value: 0
       - useVariable: 1
-        name: GazeObject
+        name: 
+        tooltip: 
+        showInInspector: 0
+        networkSync: 0
+        value: 0
+      - useVariable: 1
+        name: 
         tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       boolVariables:
       - useVariable: 1
-        name: curGaze
+        name: 
         tooltip: 
         showInInspector: 0
         networkSync: 0
@@ -1484,7 +1457,7 @@ MonoBehaviour:
       quaternionVariables: []
       gameObjectVariables:
       - useVariable: 1
-        name: Scenario1Manager
+        name: 
         tooltip: 
         showInInspector: 0
         networkSync: 0
