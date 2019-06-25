@@ -5,6 +5,8 @@ using UnityEngine;
 public class ProximityEmiter : MonoBehaviour
 {
 
+    public MutiRaeManager.Gas type;
+
     public float maxValue = 5.0f;
     public float maxDistance = 5.0f;
 
@@ -13,33 +15,21 @@ public class ProximityEmiter : MonoBehaviour
     public AnimationCurve curve;
 
     //public float output;
-    public Transform testObj;
+    //public Transform testObj;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //output = getValue(testObj);
-    }
-
-
+ 
     public float getValue(Transform t)
     {
-        float distance = Vector3.Distance(t.position, transform.position)/maxDistance;
+        float distance = Vector3.Distance(t.position, transform.position);
 
         float noise = 2 * (Random.value - .5f) * noiseScale;
 
-        return  Mathf.Clamp( noiseScale + maxValue * (curve.Evaluate(distance)/maxDistance), 0, 1);
+        return  Mathf.Clamp( noise + maxValue * (curve.Evaluate(distance/maxDistance)), 0, maxValue);
     }
-
+/*
     public float getValue()
     {
         return getValue(testObj);
     }
-
+*/
 }

@@ -9,9 +9,16 @@ public class ImageSwitcher : MonoBehaviour
 
     public GameObject[] objects;
 
-    public float interval = .5f;
+           // public float interval = .5f;
+
+
+    public bool isDemo = true;
+    public float demoInteral = .5f;
+    public float trainingInterval = 1.0f;
 
     float timer;
+    int index;
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +30,14 @@ public class ImageSwitcher : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+
+        float interval = trainingInterval;
+
+        if (isDemo)
+        {
+            interval = demoInteral;
+        }
+
         if(timer > interval)
         {
             timer = 0;
@@ -32,10 +47,12 @@ public class ImageSwitcher : MonoBehaviour
                 objects[i].SetActive(false);
             }
 
-            int randomindex =  Random.Range(0, objects.Length);
+            //int randomindex =  Random.Range(0, objects.Length);
 
+            index++;
+            index %= objects.Length;
 
-            objects[randomindex].SetActive(true);
+            objects[index].SetActive(true);
 
         }
         
