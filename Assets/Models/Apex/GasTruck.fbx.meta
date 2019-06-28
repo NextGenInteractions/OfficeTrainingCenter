@@ -1,0 +1,696 @@
+fileFormatVersion: 2
+guid: 6bbc7ced8c194054daf533a19f426719
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: GasHolder
+    100002: GasHolder 1
+    100004: GasHolder 2
+    100006: GasTanks
+    100008: GasTanks 1
+    100010: GasTanks 2
+    100012: //RootNode
+    100014: GasUnit
+    100016: GasUnit1
+    100018: GasUnit2
+    100020: LDoor
+    100022: OxyGenTank
+    100024: OxyGenTank 1
+    100026: OxyGenTank 2
+    100028: OxyGenTank1
+    100030: OxyGenTank1 1
+    100032: OxyGenTank1 2
+    100034: OxyGenTank10
+    100036: OxyGenTank10 1
+    100038: OxyGenTank10 2
+    100040: OxyGenTank11
+    100042: OxyGenTank11 1
+    100044: OxyGenTank11 2
+    100046: OxyGenTank12
+    100048: OxyGenTank12 1
+    100050: OxyGenTank12 2
+    100052: OxyGenTank13
+    100054: OxyGenTank13 1
+    100056: OxyGenTank13 2
+    100058: OxyGenTank14
+    100060: OxyGenTank14 1
+    100062: OxyGenTank14 2
+    100064: OxyGenTank15
+    100066: OxyGenTank15 1
+    100068: OxyGenTank15 2
+    100070: OxyGenTank16
+    100072: OxyGenTank16 1
+    100074: OxyGenTank16 2
+    100076: OxyGenTank17
+    100078: OxyGenTank17 1
+    100080: OxyGenTank17 2
+    100082: OxyGenTank18
+    100084: OxyGenTank18 1
+    100086: OxyGenTank18 2
+    100088: OxyGenTank19
+    100090: OxyGenTank19 1
+    100092: OxyGenTank19 2
+    100094: OxyGenTank2
+    100096: OxyGenTank2 1
+    100098: OxyGenTank2 2
+    100100: OxyGenTank20
+    100102: OxyGenTank20 1
+    100104: OxyGenTank20 2
+    100106: OxyGenTank21
+    100108: OxyGenTank21 1
+    100110: OxyGenTank21 2
+    100112: OxyGenTank22
+    100114: OxyGenTank22 1
+    100116: OxyGenTank22 2
+    100118: OxyGenTank23
+    100120: OxyGenTank23 1
+    100122: OxyGenTank23 2
+    100124: OxyGenTank24
+    100126: OxyGenTank24 1
+    100128: OxyGenTank24 2
+    100130: OxyGenTank3
+    100132: OxyGenTank3 1
+    100134: OxyGenTank3 2
+    100136: OxyGenTank4
+    100138: OxyGenTank4 1
+    100140: OxyGenTank4 2
+    100142: OxyGenTank5
+    100144: OxyGenTank5 1
+    100146: OxyGenTank5 2
+    100148: OxyGenTank6
+    100150: OxyGenTank6 1
+    100152: OxyGenTank6 2
+    100154: OxyGenTank7
+    100156: OxyGenTank7 1
+    100158: OxyGenTank7 2
+    100160: OxyGenTank8
+    100162: OxyGenTank8 1
+    100164: OxyGenTank8 2
+    100166: OxyGenTank9
+    100168: OxyGenTank9 1
+    100170: OxyGenTank9 2
+    100172: polySurface133
+    100174: polySurface134
+    100176: polySurface135
+    100178: polySurface136
+    100180: polySurface137
+    100182: polySurface138
+    100184: polySurface139
+    100186: polySurface140
+    100188: polySurface141
+    100190: polySurface142
+    100192: polySurface143
+    100194: polySurface144
+    100196: polySurface145
+    100198: polySurface146
+    100200: polySurface147
+    100202: polySurface148
+    100204: polySurface149
+    100206: polySurface150
+    100208: polySurface151
+    100210: polySurface152
+    100212: polySurface153
+    100214: polySurface154
+    100216: polySurface155
+    100218: polySurface156
+    100220: polySurface157
+    100222: polySurface158
+    100224: polySurface159
+    100226: polySurface160
+    100228: polySurface161
+    100230: polySurface162
+    100232: polySurface163
+    100234: polySurface164
+    100236: polySurface165
+    100238: polySurface166
+    100240: polySurface167
+    100242: polySurface168
+    100244: polySurface169
+    100246: polySurface170
+    100248: polySurface171
+    100250: polySurface172
+    100252: polySurface173
+    100254: polySurface174
+    100256: polySurface175
+    100258: polySurface176
+    100260: polySurface177
+    100262: polySurface178
+    100264: polySurface179
+    100266: polySurface180
+    100268: polySurface181
+    100270: polySurface182
+    400000: GasHolder
+    400002: GasHolder 1
+    400004: GasHolder 2
+    400006: GasTanks
+    400008: GasTanks 1
+    400010: GasTanks 2
+    400012: //RootNode
+    400014: GasUnit
+    400016: GasUnit1
+    400018: GasUnit2
+    400020: LDoor
+    400022: OxyGenTank
+    400024: OxyGenTank 1
+    400026: OxyGenTank 2
+    400028: OxyGenTank1
+    400030: OxyGenTank1 1
+    400032: OxyGenTank1 2
+    400034: OxyGenTank10
+    400036: OxyGenTank10 1
+    400038: OxyGenTank10 2
+    400040: OxyGenTank11
+    400042: OxyGenTank11 1
+    400044: OxyGenTank11 2
+    400046: OxyGenTank12
+    400048: OxyGenTank12 1
+    400050: OxyGenTank12 2
+    400052: OxyGenTank13
+    400054: OxyGenTank13 1
+    400056: OxyGenTank13 2
+    400058: OxyGenTank14
+    400060: OxyGenTank14 1
+    400062: OxyGenTank14 2
+    400064: OxyGenTank15
+    400066: OxyGenTank15 1
+    400068: OxyGenTank15 2
+    400070: OxyGenTank16
+    400072: OxyGenTank16 1
+    400074: OxyGenTank16 2
+    400076: OxyGenTank17
+    400078: OxyGenTank17 1
+    400080: OxyGenTank17 2
+    400082: OxyGenTank18
+    400084: OxyGenTank18 1
+    400086: OxyGenTank18 2
+    400088: OxyGenTank19
+    400090: OxyGenTank19 1
+    400092: OxyGenTank19 2
+    400094: OxyGenTank2
+    400096: OxyGenTank2 1
+    400098: OxyGenTank2 2
+    400100: OxyGenTank20
+    400102: OxyGenTank20 1
+    400104: OxyGenTank20 2
+    400106: OxyGenTank21
+    400108: OxyGenTank21 1
+    400110: OxyGenTank21 2
+    400112: OxyGenTank22
+    400114: OxyGenTank22 1
+    400116: OxyGenTank22 2
+    400118: OxyGenTank23
+    400120: OxyGenTank23 1
+    400122: OxyGenTank23 2
+    400124: OxyGenTank24
+    400126: OxyGenTank24 1
+    400128: OxyGenTank24 2
+    400130: OxyGenTank3
+    400132: OxyGenTank3 1
+    400134: OxyGenTank3 2
+    400136: OxyGenTank4
+    400138: OxyGenTank4 1
+    400140: OxyGenTank4 2
+    400142: OxyGenTank5
+    400144: OxyGenTank5 1
+    400146: OxyGenTank5 2
+    400148: OxyGenTank6
+    400150: OxyGenTank6 1
+    400152: OxyGenTank6 2
+    400154: OxyGenTank7
+    400156: OxyGenTank7 1
+    400158: OxyGenTank7 2
+    400160: OxyGenTank8
+    400162: OxyGenTank8 1
+    400164: OxyGenTank8 2
+    400166: OxyGenTank9
+    400168: OxyGenTank9 1
+    400170: OxyGenTank9 2
+    400172: polySurface133
+    400174: polySurface134
+    400176: polySurface135
+    400178: polySurface136
+    400180: polySurface137
+    400182: polySurface138
+    400184: polySurface139
+    400186: polySurface140
+    400188: polySurface141
+    400190: polySurface142
+    400192: polySurface143
+    400194: polySurface144
+    400196: polySurface145
+    400198: polySurface146
+    400200: polySurface147
+    400202: polySurface148
+    400204: polySurface149
+    400206: polySurface150
+    400208: polySurface151
+    400210: polySurface152
+    400212: polySurface153
+    400214: polySurface154
+    400216: polySurface155
+    400218: polySurface156
+    400220: polySurface157
+    400222: polySurface158
+    400224: polySurface159
+    400226: polySurface160
+    400228: polySurface161
+    400230: polySurface162
+    400232: polySurface163
+    400234: polySurface164
+    400236: polySurface165
+    400238: polySurface166
+    400240: polySurface167
+    400242: polySurface168
+    400244: polySurface169
+    400246: polySurface170
+    400248: polySurface171
+    400250: polySurface172
+    400252: polySurface173
+    400254: polySurface174
+    400256: polySurface175
+    400258: polySurface176
+    400260: polySurface177
+    400262: polySurface178
+    400264: polySurface179
+    400266: polySurface180
+    400268: polySurface181
+    400270: polySurface182
+    2100000: TruckZoneMaster
+    2100002: Gen_mirror
+    2100004: Glass
+    2300000: GasHolder
+    2300002: GasHolder 1
+    2300004: GasHolder 2
+    2300006: //RootNode
+    2300008: LDoor
+    2300010: OxyGenTank
+    2300012: OxyGenTank 2
+    2300014: OxyGenTank1
+    2300016: OxyGenTank1 2
+    2300018: OxyGenTank10
+    2300020: OxyGenTank10 2
+    2300022: OxyGenTank11
+    2300024: OxyGenTank11 2
+    2300026: OxyGenTank12
+    2300028: OxyGenTank12 2
+    2300030: OxyGenTank13
+    2300032: OxyGenTank13 2
+    2300034: OxyGenTank14
+    2300036: OxyGenTank14 2
+    2300038: OxyGenTank15
+    2300040: OxyGenTank15 2
+    2300042: OxyGenTank16
+    2300044: OxyGenTank16 2
+    2300046: OxyGenTank17
+    2300048: OxyGenTank17 2
+    2300050: OxyGenTank18
+    2300052: OxyGenTank18 2
+    2300054: OxyGenTank19
+    2300056: OxyGenTank19 2
+    2300058: OxyGenTank2
+    2300060: OxyGenTank2 2
+    2300062: OxyGenTank20
+    2300064: OxyGenTank20 2
+    2300066: OxyGenTank21
+    2300068: OxyGenTank21 2
+    2300070: OxyGenTank22
+    2300072: OxyGenTank22 2
+    2300074: OxyGenTank23
+    2300076: OxyGenTank23 2
+    2300078: OxyGenTank24
+    2300080: OxyGenTank24 2
+    2300082: OxyGenTank3
+    2300084: OxyGenTank3 2
+    2300086: OxyGenTank4
+    2300088: OxyGenTank4 2
+    2300090: OxyGenTank5
+    2300092: OxyGenTank5 2
+    2300094: OxyGenTank6
+    2300096: OxyGenTank6 2
+    2300098: OxyGenTank7
+    2300100: OxyGenTank7 2
+    2300102: OxyGenTank8
+    2300104: OxyGenTank8 2
+    2300106: OxyGenTank9
+    2300108: OxyGenTank9 2
+    2300110: polySurface133
+    2300112: polySurface134
+    2300114: polySurface135
+    2300116: polySurface136
+    2300118: polySurface137
+    2300120: polySurface138
+    2300122: polySurface139
+    2300124: polySurface140
+    2300126: polySurface141
+    2300128: polySurface142
+    2300130: polySurface143
+    2300132: polySurface144
+    2300134: polySurface145
+    2300136: polySurface146
+    2300138: polySurface147
+    2300140: polySurface148
+    2300142: polySurface149
+    2300144: polySurface150
+    2300146: polySurface151
+    2300148: polySurface152
+    2300150: polySurface153
+    2300152: polySurface154
+    2300154: polySurface155
+    2300156: polySurface156
+    2300158: polySurface157
+    2300160: polySurface158
+    2300162: polySurface159
+    2300164: polySurface160
+    2300166: polySurface161
+    2300168: polySurface162
+    2300170: polySurface163
+    2300172: polySurface164
+    2300174: polySurface165
+    2300176: polySurface166
+    2300178: polySurface167
+    2300180: polySurface168
+    2300182: polySurface169
+    2300184: polySurface170
+    2300186: polySurface171
+    2300188: polySurface172
+    2300190: polySurface173
+    2300192: polySurface174
+    2300194: polySurface175
+    2300196: polySurface176
+    2300198: polySurface177
+    2300200: polySurface178
+    2300202: polySurface179
+    2300204: polySurface180
+    2300206: polySurface181
+    2300208: polySurface182
+    3300000: GasHolder
+    3300002: GasHolder 1
+    3300004: GasHolder 2
+    3300006: //RootNode
+    3300008: LDoor
+    3300010: OxyGenTank
+    3300012: OxyGenTank 2
+    3300014: OxyGenTank1
+    3300016: OxyGenTank1 2
+    3300018: OxyGenTank10
+    3300020: OxyGenTank10 2
+    3300022: OxyGenTank11
+    3300024: OxyGenTank11 2
+    3300026: OxyGenTank12
+    3300028: OxyGenTank12 2
+    3300030: OxyGenTank13
+    3300032: OxyGenTank13 2
+    3300034: OxyGenTank14
+    3300036: OxyGenTank14 2
+    3300038: OxyGenTank15
+    3300040: OxyGenTank15 2
+    3300042: OxyGenTank16
+    3300044: OxyGenTank16 2
+    3300046: OxyGenTank17
+    3300048: OxyGenTank17 2
+    3300050: OxyGenTank18
+    3300052: OxyGenTank18 2
+    3300054: OxyGenTank19
+    3300056: OxyGenTank19 2
+    3300058: OxyGenTank2
+    3300060: OxyGenTank2 2
+    3300062: OxyGenTank20
+    3300064: OxyGenTank20 2
+    3300066: OxyGenTank21
+    3300068: OxyGenTank21 2
+    3300070: OxyGenTank22
+    3300072: OxyGenTank22 2
+    3300074: OxyGenTank23
+    3300076: OxyGenTank23 2
+    3300078: OxyGenTank24
+    3300080: OxyGenTank24 2
+    3300082: OxyGenTank3
+    3300084: OxyGenTank3 2
+    3300086: OxyGenTank4
+    3300088: OxyGenTank4 2
+    3300090: OxyGenTank5
+    3300092: OxyGenTank5 2
+    3300094: OxyGenTank6
+    3300096: OxyGenTank6 2
+    3300098: OxyGenTank7
+    3300100: OxyGenTank7 2
+    3300102: OxyGenTank8
+    3300104: OxyGenTank8 2
+    3300106: OxyGenTank9
+    3300108: OxyGenTank9 2
+    3300110: polySurface133
+    3300112: polySurface134
+    3300114: polySurface135
+    3300116: polySurface136
+    3300118: polySurface137
+    3300120: polySurface138
+    3300122: polySurface139
+    3300124: polySurface140
+    3300126: polySurface141
+    3300128: polySurface142
+    3300130: polySurface143
+    3300132: polySurface144
+    3300134: polySurface145
+    3300136: polySurface146
+    3300138: polySurface147
+    3300140: polySurface148
+    3300142: polySurface149
+    3300144: polySurface150
+    3300146: polySurface151
+    3300148: polySurface152
+    3300150: polySurface153
+    3300152: polySurface154
+    3300154: polySurface155
+    3300156: polySurface156
+    3300158: polySurface157
+    3300160: polySurface158
+    3300162: polySurface159
+    3300164: polySurface160
+    3300166: polySurface161
+    3300168: polySurface162
+    3300170: polySurface163
+    3300172: polySurface164
+    3300174: polySurface165
+    3300176: polySurface166
+    3300178: polySurface167
+    3300180: polySurface168
+    3300182: polySurface169
+    3300184: polySurface170
+    3300186: polySurface171
+    3300188: polySurface172
+    3300190: polySurface173
+    3300192: polySurface174
+    3300194: polySurface175
+    3300196: polySurface176
+    3300198: polySurface177
+    3300200: polySurface178
+    3300202: polySurface179
+    3300204: polySurface180
+    3300206: polySurface181
+    3300208: polySurface182
+    4300000: GasTruck
+    4300002: LDoor
+    4300004: polySurface133
+    4300006: polySurface134
+    4300008: polySurface135
+    4300010: polySurface136
+    4300012: polySurface137
+    4300014: polySurface138
+    4300016: polySurface139
+    4300018: polySurface140
+    4300020: polySurface141
+    4300022: polySurface142
+    4300024: polySurface143
+    4300026: polySurface144
+    4300028: polySurface145
+    4300030: polySurface146
+    4300032: polySurface147
+    4300034: polySurface148
+    4300036: polySurface149
+    4300038: polySurface150
+    4300040: polySurface151
+    4300042: polySurface152
+    4300044: polySurface153
+    4300046: polySurface154
+    4300048: polySurface155
+    4300050: polySurface156
+    4300052: polySurface157
+    4300054: polySurface158
+    4300056: polySurface159
+    4300058: polySurface160
+    4300060: polySurface161
+    4300062: polySurface162
+    4300064: polySurface163
+    4300066: polySurface164
+    4300068: polySurface165
+    4300070: polySurface166
+    4300072: polySurface167
+    4300074: polySurface168
+    4300076: polySurface169
+    4300078: polySurface170
+    4300080: polySurface171
+    4300082: polySurface172
+    4300084: polySurface173
+    4300086: polySurface174
+    4300088: polySurface175
+    4300090: polySurface176
+    4300092: polySurface177
+    4300094: polySurface178
+    4300096: polySurface179
+    4300098: polySurface180
+    4300100: polySurface181
+    4300102: polySurface182
+    4300104: GasHolder
+    4300106: OxyGenTank
+    4300108: OxyGenTank1
+    4300110: OxyGenTank2
+    4300112: OxyGenTank3
+    4300114: OxyGenTank4
+    4300116: OxyGenTank5
+    4300118: OxyGenTank6
+    4300120: OxyGenTank7
+    4300122: OxyGenTank8
+    4300124: OxyGenTank9
+    4300126: OxyGenTank10
+    4300128: OxyGenTank11
+    4300130: OxyGenTank12
+    4300132: OxyGenTank13
+    4300134: OxyGenTank14
+    4300136: OxyGenTank15
+    4300138: OxyGenTank16
+    4300140: OxyGenTank17
+    4300142: OxyGenTank18
+    4300144: OxyGenTank19
+    4300146: OxyGenTank20
+    4300148: OxyGenTank21
+    4300150: OxyGenTank22
+    4300152: OxyGenTank23
+    4300154: OxyGenTank24
+    4300156: GasHolder
+    4300158: OxyGenTank
+    4300160: OxyGenTank1
+    4300162: OxyGenTank2
+    4300164: OxyGenTank3
+    4300166: OxyGenTank4
+    4300168: OxyGenTank5
+    4300170: OxyGenTank6
+    4300172: OxyGenTank7
+    4300174: OxyGenTank8
+    4300176: OxyGenTank9
+    4300178: OxyGenTank10
+    4300180: OxyGenTank11
+    4300182: OxyGenTank12
+    4300184: OxyGenTank13
+    4300186: OxyGenTank14
+    4300188: OxyGenTank15
+    4300190: OxyGenTank16
+    4300192: OxyGenTank17
+    4300194: OxyGenTank18
+    4300196: OxyGenTank19
+    4300198: OxyGenTank20
+    4300200: OxyGenTank21
+    4300202: OxyGenTank22
+    4300204: OxyGenTank23
+    4300206: OxyGenTank24
+    4300208: GasHolder
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gen_mirror
+    second: {fileID: 2100000, guid: c0f6a8cf32c6638408ebfb5885787591, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: e47db907806add749a535067ee33b6e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TruckZoneMaster
+    second: {fileID: 2100000, guid: 015e5031d2957914da4d9f13223ff4ab, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 13
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
