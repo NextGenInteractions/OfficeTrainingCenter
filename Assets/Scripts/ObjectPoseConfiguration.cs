@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿// ObjectPoseConfiguration handles the poses of hands when snapping to objects.  
+// Allows poses to be rotated and slide based on the position of the tracked hands.
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,33 +9,37 @@ public class ObjectPoseConfiguration : MonoBehaviour {
 
     [Header("Hand Pose Meshes")]
     public GameObject leftHandPose;
-    public GameObject rightHandPose;
+    public GameObject rightHandPose;        //posed hand meshes that will be toggled out to replace the tracked hand meshes
 
-    [Header("Pose Freedom Settings")]
-    public bool poseFreedomRequired = false;
 
-    [Header("Pose Constraint Settings")]
-    public float positionalAdjustmentLimit = 0.4f;
-    public bool xDimension;
-    public bool yDimension;
-    public bool zDimension;
-    public float handRotationalOffsetAngle = 100.0f;
+// Use local axis gizmos to help in determining the proper vectors to use
+
+    [Header("Rotational Freedom Settings")]
+    public bool hasRotationFreedom;
+    public Transform rotationRoot;          //Transform that will be rotated
+    public Vector3 localRotationAxis;  //Axis of rotation, relative to this transform
+    public Vector3 referenceVector;    //vector to compare the tracked vector with, relative to this transform
+    public Vector3 trackedVector;      //vector relative to hand, compared with reference vector to determine angle to rotate "rotationRoot"
+                                       //   ex: if tracked/reference vectors are alined, rotation should be zero.
+
+
+    [Header("Linear Movement Settings")]
+    public bool hasLinearFreedom;
+    public Transform slideRoot;              //Transform that will be moved
+    public Vector3 slideAxis;           //Axis of linear movement, relative to this transform
+    public float minSlide, maxSlide;    //max/min distances, from starting point allong slide axis
+    Vector3 slideStartPos;              //tracks initial position
+
 
     private GameObject currentTrackedHand;
-
-    // Private variables for saving object position reference
-    private Vector3 savedHookPosition;
 
     /// <summary>
     /// Save the start position of the transform to move the hook later with tracked hand data
     /// </summary>
     private void Start()
     {
-        if(poseFreedomRequired)
-        {
-            savedHookPosition = transform.position;
-        }
-        
+        if(slideRoot != null)
+            slideStartPos = slideRoot.transform.position;
     }
 
     /// <summary>
@@ -41,40 +48,51 @@ public class ObjectPoseConfiguration : MonoBehaviour {
     /// </summary>
     private void Update()
     {
-        if(currentTrackedHand!=null && poseFreedomRequired)
+        if(currentTrackedHand != null)
         {
-            // Rotating the hand pose based on tracked hand approach
-            var targetPosition = currentTrackedHand.transform.position; // Getting current tracked hand from the trigger enter
-            targetPosition.y = transform.position.y;
-            transform.LookAt(targetPosition); // Current hook is configured to look the hand model and get the rotation to know the hand approach
-            transform.localRotation = transform.localRotation * Quaternion.Euler(0, handRotationalOffsetAngle, 0); // Adding a rotational offset to match the static pose to user apporach
-
-            // Positional dispalcement freedom with respect to the current tracked hand
-            if (yDimension)
+            if (hasRotationFreedom)
             {
-                // If the currentTrackedHand is in a range of area, then the pose is constrained in the y axis positionally
-                if (currentTrackedHand.transform.position.y <= savedHookPosition.y + positionalAdjustmentLimit && currentTrackedHand.transform.position.y > savedHookPosition.y - positionalAdjustmentLimit)
-                {
-                    transform.position = new Vector3(transform.position.x, currentTrackedHand.transform.position.y, transform.position.z);
-                }
+                //Get vectors is world space
+                Vector3 axis = transform.rotation * localRotationAxis;
+                            //Debug.DrawLine(transform.position, transform.position + axis); //debug
+                Vector3 reference = transform.rotation * referenceVector;
+                            //Debug.DrawLine(transform.position, transform.position + up);
+                Vector3 tracked = currentTrackedHand.transform.rotation * trackedVector;
+                            //Debug.DrawLine(transform.position, transform.position + tracked);
+
+
+                //find the direction rotated
+                float dot = Vector3.Dot( Vector3.Cross(reference, tracked) , axis );
+                float sign = Mathf.Sign(dot);
+
+                //find angle around rotation axis
+                float angle = Vector3.Angle(tracked, reference) * sign; 
+
+                rotationRoot.transform.localRotation = Quaternion.AngleAxis(angle, localRotationAxis);
             }
 
-            if (xDimension)
-            {// If the currentTrackedHand is in a range of area, then the pose is constrained in the x axis positionally
-                if (currentTrackedHand.transform.position.x <= savedHookPosition.x + positionalAdjustmentLimit && currentTrackedHand.transform.position.x > savedHookPosition.x - positionalAdjustmentLimit)
-                {
-                    transform.position = new Vector3(currentTrackedHand.transform.position.x, transform.position.y, transform.position.z);
-                }
+            if (hasLinearFreedom)
+            {
+                //Get vectors is world space
+                Vector3 target = currentTrackedHand.transform.position - slideStartPos;
+                            //Debug.DrawLine(transform.position, transform.position + target); //debug
+                Vector3 axis = transform.rotation * slideAxis;
+                            //Debug.DrawLine(transform.position, transform.position + axis); 
+
+                //get distance allong slide axis
+                float distance = Vector3.Dot(target, axis);
+                distance = Mathf.Clamp(distance, minSlide, maxSlide);
+
+                //set slide position relative to the initial position of the slide root
+                slideRoot.transform.position = axis * distance + slideStartPos;
             }
 
-            if (zDimension)
-            {// If the currentTrackedHand is in a range of area, then the pose is constrained in the z axis positionally
-                if (currentTrackedHand.transform.position.z <= savedHookPosition.z + positionalAdjustmentLimit && currentTrackedHand.transform.position.z > savedHookPosition.z - positionalAdjustmentLimit)
-                {
-                    transform.position = new Vector3(transform.position.x, transform.position.y, currentTrackedHand.transform.position.z);
-                }
-            }
         }
+
+
+
+
+
     }
 
     /// <summary>
@@ -84,16 +102,15 @@ public class ObjectPoseConfiguration : MonoBehaviour {
     private void OnTriggerStay(Collider handCollider)
     {
 
+        //Debug.Log(handCollider.gameObject.tag);
         if (handCollider.gameObject.tag == "left_hand")
         {
-            LeapPoseManager.leftHandPosed = true;
-            LeapPoseManager.objectTouched = transform.gameObject;
+            LeapPoseManager.getInstance().snap(transform.gameObject, false);
             currentTrackedHand = handCollider.gameObject;
         }
         else if (handCollider.gameObject.tag == "right_hand")
         {
-            LeapPoseManager.rightHandPosed = true;
-            LeapPoseManager.objectTouched = transform.gameObject;
+            LeapPoseManager.getInstance().snap(transform.gameObject, true);
             currentTrackedHand = handCollider.gameObject;
         }
     }
@@ -107,15 +124,19 @@ public class ObjectPoseConfiguration : MonoBehaviour {
 
         if (handCollider.gameObject.tag == "left_hand")
         {
-            LeapPoseManager.leftHandPosed = false;
-            LeapPoseManager.objectTouched = transform.gameObject;
+            LeapPoseManager.getInstance().unSnap(transform.gameObject, false);
             currentTrackedHand = null;
         }
         else if (handCollider.gameObject.tag == "right_hand")
         {
-            LeapPoseManager.rightHandPosed = false;
-            LeapPoseManager.objectTouched = transform.gameObject;
+            LeapPoseManager.getInstance().unSnap(transform.gameObject, true);
             currentTrackedHand = null;
         }
+    }
+
+    //Called by LeapPoseManager to cancel hand snapping
+    public void forceRelease()
+    {
+        currentTrackedHand = null;
     }
 }

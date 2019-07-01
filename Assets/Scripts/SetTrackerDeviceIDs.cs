@@ -10,6 +10,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class SetTrackerDeviceIDs : MonoBehaviour
 {
@@ -27,8 +30,11 @@ public class SetTrackerDeviceIDs : MonoBehaviour
     // Array of Trackers
     public Tracker [] trackers;
 
+    public bool loadAutomatically;
+
     void Start()
     {
+        loadIDs();
         // Initialize previous IDs to current IDs
         foreach (Tracker tracker in trackers)
         {
@@ -43,6 +49,11 @@ public class SetTrackerDeviceIDs : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKey(KeyCode.L))
+        { 
+            loadIDs();
+        }
+
         // If a device ID changed then update the referenced tracker with the new ID
         foreach (Tracker tracker in trackers)
         {
@@ -53,4 +64,75 @@ public class SetTrackerDeviceIDs : MonoBehaviour
             }
         }
     }
+
+
+    public void saveIDs()
+    {
+
+        ETrackedDeviceProperty prop = ETrackedDeviceProperty.Prop_SerialNumber_String;
+        var error = ETrackedPropertyError.TrackedProp_Success;
+        for(int i = 0; i < trackers.Length; i++)
+        {
+            var result = new System.Text.StringBuilder((int)64);
+            OpenVR.System.GetStringTrackedDeviceProperty((uint)trackers[i].deviceID, prop, result, 64, ref error);
+
+            //Debug.Log(result);
+
+            PlayerPrefs.SetString("TrackerIdnum" + i, result.ToString());
+        }
+
+    }
+
+    public void loadIDs()
+    {
+        ETrackedDeviceProperty prop = ETrackedDeviceProperty.Prop_SerialNumber_String;
+        var error = ETrackedPropertyError.TrackedProp_Success;
+        for(int i = 0; i < trackers.Length; i++)
+        {
+            string serialNum = PlayerPrefs.GetString("TrackerIdnum" + i);
+
+            for (uint index = 0; index < 16; index++)
+            {
+                var result = new System.Text.StringBuilder((int)64);
+                OpenVR.System.GetStringTrackedDeviceProperty(index, prop, result, 64, ref error);
+
+                //Debug.Log(result + " " + serialNum);
+                if (result.ToString().Contains(serialNum))
+                {
+                    trackers[i].deviceID = (SteamVR_TrackedObject.EIndex)index;
+    
+                }
+            }
+        }
+    }
+
+
+
+
+#if UNITY_EDITOR
+
+    [CustomEditor(typeof(SetTrackerDeviceIDs))]
+    public class SetTrackerDeviceIDsEditor : Editor
+    {
+
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+
+            if (EditorApplication.isPlaying)
+            {
+
+                if (GUILayout.Button("save"))
+                {
+                    ((SetTrackerDeviceIDs)(target)).saveIDs();
+                }
+                if (GUILayout.Button("load"))
+                {
+                    ((SetTrackerDeviceIDs)(target)).loadIDs();
+                }
+            }
+        }
+    }
+#endif
+
 }
