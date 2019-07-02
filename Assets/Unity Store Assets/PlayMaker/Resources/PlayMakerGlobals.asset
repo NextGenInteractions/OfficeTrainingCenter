@@ -21,18 +21,6 @@ MonoBehaviour:
       showInInspector: 0
       networkSync: 0
       value: 0
-    - useVariable: 1
-      name: MultiRAE_OutOfCase
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 0
-    - useVariable: 1
-      name: MultiRAE_MissionReady
-      tooltip: 
-      showInInspector: 0
-      networkSync: 0
-      value: 0
     boolVariables:
     - useVariable: 1
       name: Gas_1
@@ -160,6 +148,18 @@ MonoBehaviour:
       showInInspector: 0
       networkSync: 0
       value: 0
+    - useVariable: 1
+      name: MultiRAE_MissionReady
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: MultiRAE_OutOfCase
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
     stringVariables: []
     vector2Variables: []
     vector3Variables: []
@@ -180,3 +180,4 @@ MonoBehaviour:
   - Get Gaze 1
   - Get Gaze 3
   - Get Gaze 2
+  - Turn on MultiRAE
